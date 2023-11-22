@@ -1,0 +1,11 @@
+django
+django_elasticsearch_dsl
+django-elasticsearch-dsl-drf
+django-extensions
+django-stubs[compatible-mypy]
+djangorestframework
+djangorestframework-stubs[compatible-mypy]
+elasticsearch
+mysqlclient
+python-decouple
+setuptools

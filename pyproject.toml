@@ -1,0 +1,57 @@
+[tool.poetry]
+name = "cnpj_insight"
+description = ""
+version = "0.1.0"
+authors = ["William Sena <wllsena@protonmail.com>"]
+readme = "README.org"
+license = ""
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+django = "^4.2.7"
+django-elasticsearch-dsl = "^8.0"
+django-elasticsearch-dsl-drf = "^0.22.5"
+django-extensions = "^3.2.3"
+django-stubs = {extras = ["compatible-mypy"], version = "^4.2.6"}
+djangorestframework = "^3.14.0"
+djangorestframework-stubs = {extras = ["compatible-mypy"], version = "^3.14.4"}
+elasticsearch = "^8.11.0"
+mysqlclient = "^2.2.0"
+python-decouple = "^3.8"
+setuptools = "^69.0.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.yapf]
+based_on_style = "pep8"
+column_limit = 100
+
+[tool.black]
+line-length = 100
+
+[tool.prettier]
+line_length = 100
+
+[tool.flake8]
+max-line-length = 100
+ignore = ["C0114", "C0115", "C0116", "R0903"]
+
+[tool.pylint]
+max-line-length = 100
+disable = ["C0114", "C0115", "C0116", "R0903"]
+
+[tool.isort]
+line_length = 100
+default_section = "THIRDPARTY"
+known_first_party = "scalascrap"
+known_django = "django"
+sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
+ignore_missing_imports = true
+
+[tool.django-stubs]
+django_settings_module = "scalascrap.settings"
