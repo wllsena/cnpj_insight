@@ -9,3 +9,4 @@ elasticsearch
 mysqlclient
 python-decouple
 setuptools
+tqdm

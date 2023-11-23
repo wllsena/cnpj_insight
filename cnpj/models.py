@@ -23,7 +23,7 @@ REPRESENTANTE_LEGAL_LENGTH = 11
 
 class Paises(Model):
     codigo = PositiveSmallIntegerField(primary_key=True)
-    descricao = TextField(null=True, default=None)
+    descricao = TextField()
 
     def __str__(self):
         return f"{self.codigo}"
@@ -31,7 +31,7 @@ class Paises(Model):
 
 class Municipios(Model):
     codigo = PositiveSmallIntegerField(primary_key=True)
-    descricao = TextField(null=True, default=None)
+    descricao = TextField()
 
     def __str__(self):
         return f"{self.codigo}"
@@ -39,7 +39,7 @@ class Municipios(Model):
 
 class Qualificaoes(Model):
     codigo = PositiveSmallIntegerField(primary_key=True)
-    descricao = TextField(null=True, default=None)
+    descricao = TextField()
 
     def __str__(self):
         return f"{self.codigo}"
@@ -47,7 +47,7 @@ class Qualificaoes(Model):
 
 class Naturezas(Model):
     codigo = PositiveSmallIntegerField(primary_key=True)
-    descricao = TextField(null=True, default=None)
+    descricao = TextField()
 
     def __str__(self):
         return f"{self.codigo}"
@@ -55,7 +55,7 @@ class Naturezas(Model):
 
 class CNAEs(Model):
     codigo = PositiveIntegerField(primary_key=True)
-    descricao = TextField(null=True, default=None)
+    descricao = TextField()
 
     def __str__(self):
         return f"{self.codigo}"
@@ -63,7 +63,7 @@ class CNAEs(Model):
 
 class Motivos(Model):
     codigo = PositiveSmallIntegerField(primary_key=True)
-    descricao = TextField(null=True, default=None)
+    descricao = TextField()
 
     def __str__(self):
         return f"{self.codigo}"
@@ -71,15 +71,13 @@ class Motivos(Model):
 
 class Empresas(Model):
     cnpj_basico = PositiveIntegerField(primary_key=True)
-    razao_social = CharField(max_length=RAZAO_SOCIAL_LENGTH, null=True, default=None, db_index=True)
+    razao_social = CharField(max_length=RAZAO_SOCIAL_LENGTH, db_index=True)
     natureza_juridica = ForeignKey(Naturezas, related_name="empresas", on_delete=PROTECT)
     qualificacao_resposavel = ForeignKey(Qualificaoes, related_name="empresas", on_delete=PROTECT)
     capital_social = FloatField()
     porte_empresa = PositiveSmallIntegerField(null=True, default=None)
     ente_federativo_responsavel = TextField(null=True, default=None)
-    razao_social_limpa = TextField(
-        max_length=RAZAO_SOCIAL_LENGTH, null=True, default=None, db_index=True
-    )
+    razao_social_limpa = TextField(max_length=RAZAO_SOCIAL_LENGTH, db_index=True)
 
     def __str__(self):
         return f"{self.cnpj_basico}"
@@ -93,7 +91,7 @@ class Estabelicimentos(Model):
     matriz_filial = PositiveSmallIntegerField()
     nome_fantasia = TextField(null=True, default=None)
     situacao_cadastral = PositiveSmallIntegerField()
-    data_situacao_cadastral = DateField(null=True, default=None)
+    data_situacao_cadastral = DateField()
     motivo_situacao_cadastral = ForeignKey(
         Motivos, related_name="estabelicimentos", on_delete=PROTECT
     )
@@ -101,7 +99,7 @@ class Estabelicimentos(Model):
     pais = ForeignKey(
         Paises, null=True, default=None, related_name="estabelicimentos", on_delete=PROTECT
     )
-    data_inicio_atividade = DateField(null=True, default=None)
+    data_inicio_atividade = DateField()
     cnae_fiscal_principal = ForeignKey(CNAEs, related_name="estabelicimentos", on_delete=PROTECT)
     cnae_fiscal_secundaria = TextField(null=True, default=None)
     tipo_logradouro = TextField(null=True, default=None)
@@ -130,11 +128,11 @@ class Estabelicimentos(Model):
 class Simples(Model):
     cnpj_basico = ForeignKey(Empresas, related_name="simples", primary_key=True, on_delete=PROTECT)
     opcao_simples = BooleanField()
-    data_opcao_simples = DateField(null=True, default=None)
-    data_exclusao_simples = DateField(null=True, default=None)
+    data_opcao_simples = DateField()
+    data_exclusao_simples = DateField()
     opcao_mei = BooleanField()
-    data_opcao_mei = DateField(null=True, default=None)
-    data_exclusao_mei = DateField(null=True, default=None)
+    data_opcao_mei = DateField()
+    data_exclusao_mei = DateField()
 
     def __str__(self):
         return f"{self.cnpj_basico}"
@@ -147,8 +145,10 @@ class Socios(Model):
     cnpj_cpf_socio = CharField(max_length=CPNJ_CPF_SOCIO_LENGTH, null=True, default=None)
     qualificacao_socio = ForeignKey(Qualificaoes, related_name="socios", on_delete=PROTECT)
     data_entrada_sociedade = DateField()
-    pais = ForeignKey(Paises, null=True, default=None, related_name="socios", on_delete=PROTECT)
-    representante_legal = CharField(max_length=REPRESENTANTE_LEGAL_LENGTH, null=True, default=None)
+    pais = ForeignKey(Paises, related_name="socios", null=True, default=None, on_delete=PROTECT)
+    representante_legal = CharField(
+        max_length=REPRESENTANTE_LEGAL_LENGTH,
+    )
     nome_representante = TextField(null=True, default=None)
     qualificacao_representante_legal = ForeignKey(
         Qualificaoes,
