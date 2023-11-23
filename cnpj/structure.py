@@ -53,12 +53,13 @@ def foreign_key(model: Type[Model], key: str) -> Callable[[Any], Model | int | N
     def get(value: Any, return_pk: bool = False) -> Model | int | None:
         if value is None or value.strip().lower() in ["", "null", "none"]:
             return None
-        elif return_pk:
-            return int(value)
-        else:
-            instance, _ = model.objects.get_or_create(**{key: value})
 
-            return instance
+        if return_pk:
+            return int(value)
+
+        instance, _ = model.objects.get_or_create(**{key: value})
+
+        return instance
 
     return get
 
