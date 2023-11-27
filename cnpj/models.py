@@ -77,7 +77,6 @@ class Empresas(Model):
     capital_social = FloatField()
     porte_empresa = PositiveSmallIntegerField(null=True, default=None)
     ente_federativo_responsavel = TextField(null=True, default=None)
-    razao_social_limpa = TextField(max_length=RAZAO_SOCIAL_LENGTH, db_index=True)
 
     def __str__(self):
         return f"{self.cnpj_basico}"
