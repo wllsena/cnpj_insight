@@ -1,9 +1,12 @@
 import csv
 from glob import glob
+from json import load
 from os import path
 from typing import Any, Callable, List, Tuple
 
 from tqdm import tqdm
+
+from cnpj.test import load_csv_to_sqlite
 
 from .structure import (
     BASE_COLUMNS,
