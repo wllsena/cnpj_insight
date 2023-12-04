@@ -15,7 +15,7 @@ from .models import (
     Municipios,
     Naturezas,
     Paises,
-    Qualificaoes,
+    Qualificacoes,
     Simples,
     Socios,
 )
@@ -102,7 +102,7 @@ def load_estabelecimentos(
 def load_dataset(dataset_path: str) -> None:
     load_base(path.join(dataset_path, "*PAIS*"), Paises, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*MUNIC"), Municipios, BASE_COLUMNS)
-    load_base(path.join(dataset_path, "*QUALS*"), Qualificaoes, BASE_COLUMNS)
+    load_base(path.join(dataset_path, "*QUALS*"), Qualificacoes, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*NATJU*"), Naturezas, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*CNAE*"), CNAEs, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*MOTI*"), Motivos, BASE_COLUMNS)

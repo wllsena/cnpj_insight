@@ -63,7 +63,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name="Qualificaoes",
+            name="Qualificacoes",
             fields=[
                 ("codigo", models.PositiveSmallIntegerField(primary_key=True, serialize=False)),
                 ("descricao", models.TextField(default=None, null=True)),
@@ -182,7 +182,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.PROTECT,
                 related_name="empresas",
-                to="cnpj.qualificaoes",
+                to="cnpj.qualificacoes",
             ),
         ),
         migrations.CreateModel(
@@ -227,7 +227,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
                         related_name="socios_representante",
-                        to="cnpj.qualificaoes",
+                        to="cnpj.qualificacoes",
                     ),
                 ),
                 (
@@ -235,7 +235,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.PROTECT,
                         related_name="socios",
-                        to="cnpj.qualificaoes",
+                        to="cnpj.qualificacoes",
                     ),
                 ),
             ],

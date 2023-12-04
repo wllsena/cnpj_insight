@@ -1,5 +1,5 @@
+import mysql.connector
 import pandas as pd
-from sqlalchemy import create_engine, text
 from tqdm import tqdm
 
 db_config = {
@@ -11,22 +11,23 @@ db_config = {
 
 
 def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=1000000):
-    print(f"Loading {csv_file_path} to {table_name}...")
+    print(f"Loading {csv_file_path} to {table_name} in chunks of {chunksize} rows")
 
-    engine = create_engine(
-        f"mysql+mysqlconnector://{db_config['user']}:{db_config['password']}@{db_config['host']}/{db_config['database']}",
-        echo=False,
-    )
+    with mysql.connector.connect(**db_config) as connection:
+        with connection.cursor() as cursor:
+            cursor.execute("SET FOREIGN_KEY_CHECKS=0;")
 
-    with engine.connect() as conn:
-        conn.execute(text("SET FOREIGN_KEY_CHECKS=0;"))
+            for chunk in tqdm(pd.read_csv(csv_file_path, chunksize=chunksize, low_memory=False)):
+                cols = ",".join("`{}`".format(col) for col in chunk.columns)
+                vals = ",".join(["%s"] * len(chunk.columns))
+                insert_query = f"INSERT INTO {table_name} ({cols}) VALUES ({vals})"
+                data = [tuple(x) for x in chunk.to_numpy()]
 
-        for chunk in tqdm(pd.read_csv(csv_file_path, chunksize=chunksize, low_memory=False)):
-            chunk.to_sql(table_name, conn, if_exists="append", index=False)
+                cursor.executemany(insert_query, data)
+                connection.commit()
 
-        conn.execute(text("SET FOREIGN_KEY_CHECKS=1;"))
-
-    engine.dispose()
+            cursor.execute("SET FOREIGN_KEY_CHECKS=1;")
+            connection.commit()
 
 
 load_csv_to_mysql("./clean_dataset/paises.csv", db_config, "cnpj_paises")

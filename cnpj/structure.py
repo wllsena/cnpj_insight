@@ -2,7 +2,7 @@ from typing import Any, Callable, Type
 
 from django.db.models import Model
 
-from .models import CNAEs, Empresas, Motivos, Municipios, Naturezas, Paises, Qualificaoes
+from .models import CNAEs, Empresas, Motivos, Municipios, Naturezas, Paises, Qualificacoes
 
 #
 
@@ -72,7 +72,7 @@ EMPRESA_COLUMNS = [
     ("cnpj_basico", integer),
     ("razao_social", char),
     ("natureza_juridica", foreign_key(Naturezas, "codigo")),
-    ("qualificacao_resposavel", foreign_key(Qualificaoes, "codigo")),
+    ("qualificacao_resposavel", foreign_key(Qualificacoes, "codigo")),
     ("capital_social", float_),
     ("porte_empresa", integer),
     ("ente_federativo_responsavel", text),
@@ -123,12 +123,12 @@ SOCIO_COLUMNS = [
     ("identificador_socio", integer),
     ("nome_socio", text),
     ("cnpj_cpf_socio", char),
-    ("qualificacao_socio", foreign_key(Qualificaoes, "codigo")),
+    ("qualificacao_socio", foreign_key(Qualificacoes, "codigo")),
     ("data_entrada_sociedade", date),
     ("pais", foreign_key(Paises, "codigo")),
     ("representante_legal", char),
     ("nome_representante", text),
-    ("qualificacao_representante_legal", foreign_key(Qualificaoes, "codigo")),
+    ("qualificacao_representante_legal", foreign_key(Qualificacoes, "codigo")),
     ("faixa_etaria", integer),
 ]
 

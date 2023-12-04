@@ -79,7 +79,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "fgvcnpj257",
-        "USER": "fgvcnpj257",
+        "USER": "fgvcnpj257@cnpjinsight257.mariadb.database.azure.com",
         "PASSWORD": "CNPJinsight257",
         "HOST": "cnpjinsight257.mariadb.database.azure.com",
         "PORT": "3306",

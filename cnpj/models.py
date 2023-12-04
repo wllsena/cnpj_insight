@@ -37,7 +37,7 @@ class Municipios(Model):
         return f"{self.codigo}"
 
 
-class Qualificaoes(Model):
+class Qualificacoes(Model):
     codigo = PositiveSmallIntegerField(primary_key=True)
     descricao = TextField(null=True, default=None)
 
@@ -73,7 +73,7 @@ class Empresas(Model):
     cnpj_basico = PositiveIntegerField(primary_key=True)
     razao_social = CharField(max_length=RAZAO_SOCIAL_LENGTH, null=True, default=None, db_index=True)
     natureza_juridica = ForeignKey(Naturezas, related_name="empresas", on_delete=PROTECT)
-    qualificacao_resposavel = ForeignKey(Qualificaoes, related_name="empresas", on_delete=PROTECT)
+    qualificacao_resposavel = ForeignKey(Qualificacoes, related_name="empresas", on_delete=PROTECT)
     capital_social = FloatField()
     porte_empresa = PositiveSmallIntegerField(null=True, default=None)
     ente_federativo_responsavel = TextField(null=True, default=None)
@@ -145,13 +145,13 @@ class Socios(Model):
     identificador_socio = PositiveSmallIntegerField()
     nome_socio = CharField(max_length=SOCIO_LENGTH, null=True, default=None, db_index=True)
     cnpj_cpf_socio = CharField(max_length=CPNJ_CPF_SOCIO_LENGTH, null=True, default=None)
-    qualificacao_socio = ForeignKey(Qualificaoes, related_name="socios", on_delete=PROTECT)
+    qualificacao_socio = ForeignKey(Qualificacoes, related_name="socios", on_delete=PROTECT)
     data_entrada_sociedade = DateField()
     pais = ForeignKey(Paises, null=True, default=None, related_name="socios", on_delete=PROTECT)
     representante_legal = CharField(max_length=REPRESENTANTE_LEGAL_LENGTH, null=True, default=None)
     nome_representante = TextField(null=True, default=None)
     qualificacao_representante_legal = ForeignKey(
-        Qualificaoes,
+        Qualificacoes,
         related_name="socios_representante",
         on_delete=PROTECT,
     )
