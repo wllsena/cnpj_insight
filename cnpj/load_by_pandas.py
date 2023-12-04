@@ -11,6 +11,8 @@ db_config = {
 
 
 def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=1000000):
+    print(f"Loading {csv_file_path} to {table_name}...")
+
     engine = create_engine(
         f"mysql+mysqlconnector://{db_config['user']}:{db_config['password']}@{db_config['host']}/{db_config['database']}",
         echo=False,
@@ -27,14 +29,13 @@ def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=1000000):
     engine.dispose()
 
 
-# load_csv_to_mysql("./clean_dataset/paises.csv", db_config, "cnpj_paises")
-# load_csv_to_mysql("./clean_dataset/municipios.csv", db_config, "cnpj_municipios")
-# load_csv_to_mysql("./clean_dataset/qualificacoes.csv", db_config, "cnpj_qualificacoes")
-# load_csv_to_mysql("./clean_dataset/naturezas.csv", db_config, "cnpj_naturezas")
-# load_csv_to_mysql("./clean_dataset/cnaes.csv", db_config, "cnpj_cnaes")
-# load_csv_to_mysql("./clean_dataset/motivos.csv", db_config, "cnpj_motivos")
-# load_csv_to_mysql("./clean_dataset/empresas.csv", db_config, "cnpj_empresas")
-
+load_csv_to_mysql("./clean_dataset/paises.csv", db_config, "cnpj_paises")
+load_csv_to_mysql("./clean_dataset/municipios.csv", db_config, "cnpj_municipios")
+load_csv_to_mysql("./clean_dataset/qualificacoes.csv", db_config, "cnpj_qualificacoes")
+load_csv_to_mysql("./clean_dataset/naturezas.csv", db_config, "cnpj_naturezas")
+load_csv_to_mysql("./clean_dataset/cnaes.csv", db_config, "cnpj_cnaes")
+load_csv_to_mysql("./clean_dataset/motivos.csv", db_config, "cnpj_motivos")
+load_csv_to_mysql("./clean_dataset/empresas.csv", db_config, "cnpj_empresas")
 load_csv_to_mysql("./clean_dataset/estabelecimentos.csv", db_config, "cnpj_estabelecimentos")
 load_csv_to_mysql("./clean_dataset/simples.csv", db_config, "cnpj_simples")
 load_csv_to_mysql("./clean_dataset/socios.csv", db_config, "cnpj_socios")
