@@ -77,6 +77,22 @@ WSGI_APPLICATION = "cnpj_insight.wsgi.application"
 
 DATABASES = {
     "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "fgvcnpj257",
+        "USER": "fgvcnpj257",
+        "PASSWORD": "CNPJinsight257",
+        "HOST": "cnpjinsight257.mariadb.database.azure.com",
+        "PORT": "3306",
+        "CONN_MAX_AGE": None,
+        "OPTIONS": {
+            "ssl": {},
+            "charset": "utf8mb4",
+        },
+    }
+}
+
+DATABASES_ = {
+    "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
