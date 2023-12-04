@@ -10,19 +10,31 @@ db_config = {
 }
 
 
-def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=1000000):
+def convert_types(data):
+    for col in data.select_dtypes(include=["int64"]).columns:
+        data[col] = data[col].astype("int").astype(object).where(data[col].notnull(), None)
+
+    return data
+
+
+def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=100000):
     print(f"Loading {csv_file_path} to {table_name} in chunks of {chunksize} rows")
 
     with mysql.connector.connect(**db_config) as connection:
         with connection.cursor() as cursor:
             cursor.execute("SET FOREIGN_KEY_CHECKS=0;")
 
-            for chunk in tqdm(pd.read_csv(csv_file_path, chunksize=chunksize, low_memory=False)):
-                cols = ",".join("`{}`".format(col) for col in chunk.columns)
-                vals = ",".join(["%s"] * len(chunk.columns))
-                insert_query = f"INSERT INTO {table_name} ({cols}) VALUES ({vals})"
-                data = [tuple(x) for x in chunk.to_numpy()]
+            sample_chunk = next(pd.read_csv(csv_file_path, chunksize=1))
+            cols = ",".join(f"`{col}`" for col in sample_chunk.columns)
+            vals = ",".join(["%s"] * len(sample_chunk.columns))
+            insert_query = f"INSERT INTO {table_name} ({cols}) VALUES ({vals})"
 
+            for chunk in tqdm(pd.read_csv(csv_file_path, chunksize=chunksize, low_memory=False)):
+                chunk = convert_types(chunk)
+                data = [
+                    tuple(None if pd.isna(val) else val for val in row)
+                    for row in chunk.to_records(index=False)
+                ]
                 cursor.executemany(insert_query, data)
                 connection.commit()
 
