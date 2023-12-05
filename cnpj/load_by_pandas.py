@@ -17,7 +17,7 @@ def convert_types(data):
     return data
 
 
-def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=100000):
+def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=1000000):
     print(f"Loading {csv_file_path} to {table_name} in chunks of {chunksize} rows")
 
     with mysql.connector.connect(**db_config) as connection:
@@ -27,7 +27,7 @@ def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=100000):
             sample_chunk = next(pd.read_csv(csv_file_path, chunksize=1))
             cols = ",".join(f"`{col}`" for col in sample_chunk.columns)
             vals = ",".join(["%s"] * len(sample_chunk.columns))
-            insert_query = f"INSERT INTO {table_name} ({cols}) VALUES ({vals})"
+            insert_query = f"INSERT IGNORE INTO {table_name} ({cols}) VALUES ({vals})"
 
             for chunk in tqdm(pd.read_csv(csv_file_path, chunksize=chunksize, low_memory=False)):
                 chunk = convert_types(chunk)
