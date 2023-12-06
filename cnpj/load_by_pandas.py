@@ -1,3 +1,5 @@
+import sqlite3
+
 import mysql.connector
 import pandas as pd
 from tqdm import tqdm
@@ -42,13 +44,32 @@ def load_csv_to_mysql(csv_file_path, db_config, table_name, chunksize=1000000):
             connection.commit()
 
 
-load_csv_to_mysql("./clean_dataset/paises.csv", db_config, "cnpj_paises")
-load_csv_to_mysql("./clean_dataset/municipios.csv", db_config, "cnpj_municipios")
-load_csv_to_mysql("./clean_dataset/qualificacoes.csv", db_config, "cnpj_qualificacoes")
-load_csv_to_mysql("./clean_dataset/naturezas.csv", db_config, "cnpj_naturezas")
-load_csv_to_mysql("./clean_dataset/cnaes.csv", db_config, "cnpj_cnaes")
-load_csv_to_mysql("./clean_dataset/motivos.csv", db_config, "cnpj_motivos")
-load_csv_to_mysql("./clean_dataset/empresas.csv", db_config, "cnpj_empresas")
-load_csv_to_mysql("./clean_dataset/estabelecimentos.csv", db_config, "cnpj_estabelecimentos")
-load_csv_to_mysql("./clean_dataset/simples.csv", db_config, "cnpj_simples")
-load_csv_to_mysql("./clean_dataset/socios.csv", db_config, "cnpj_socios")
+def load_csv_to_sqlite(csv_file_path, db_file_path, table_name, chunksize=1000000):
+    print(f"Loading {csv_file_path} to {table_name} in chunks of {chunksize} rows")
+
+    with sqlite3.connect(db_file_path) as connection:
+        for chunk in tqdm(pd.read_csv(csv_file_path, chunksize=chunksize, low_memory=False)):
+            chunk.to_sql(table_name, connection, if_exists="replace", index=False)
+
+
+# load_csv_to_mysql("./clean_dataset/paises.csv", db_config, "cnpj_paises")
+# load_csv_to_mysql("./clean_dataset/municipios.csv", db_config, "cnpj_municipios")
+# load_csv_to_mysql("./clean_dataset/qualificacoes.csv", db_config, "cnpj_qualificacoes")
+# load_csv_to_mysql("./clean_dataset/naturezas.csv", db_config, "cnpj_naturezas")
+# load_csv_to_mysql("./clean_dataset/cnaes.csv", db_config, "cnpj_cnaes")
+# load_csv_to_mysql("./clean_dataset/motivos.csv", db_config, "cnpj_motivos")
+# load_csv_to_mysql("./clean_dataset/empresas.csv", db_config, "cnpj_empresas")
+# load_csv_to_mysql("./clean_dataset/estabelecimentos.csv", db_config, "cnpj_estabelecimentos")
+# load_csv_to_mysql("./clean_dataset/simples.csv", db_config, "cnpj_simples")
+# load_csv_to_mysql("./clean_dataset/socios.csv", db_config, "cnpj_socios")
+
+load_csv_to_sqlite("./clean_dataset/paises.csv", "../db.sqlite3", "cnpj_paises")
+load_csv_to_sqlite("./clean_dataset/municipios.csv", "../db.sqlite3", "cnpj_municipios")
+load_csv_to_sqlite("./clean_dataset/qualificacoes.csv", "../db.sqlite3", "cnpj_qualificacoes")
+load_csv_to_sqlite("./clean_dataset/naturezas.csv", "../db.sqlite3", "cnpj_naturezas")
+load_csv_to_sqlite("./clean_dataset/cnaes.csv", "../db.sqlite3", "cnpj_cnaes")
+load_csv_to_sqlite("./clean_dataset/motivos.csv", "../db.sqlite3", "cnpj_motivos")
+load_csv_to_sqlite("./clean_dataset/empresas.csv", "../db.sqlite3", "cnpj_empresas")
+load_csv_to_sqlite("./clean_dataset/estabelecimentos.csv", "../db.sqlite3", "cnpj_estabelecimentos")
+load_csv_to_sqlite("./clean_dataset/simples.csv", "../db.sqlite3", "cnpj_simples")
+load_csv_to_sqlite("./clean_dataset/socios.csv", "../db.sqlite3", "cnpj_socios")
