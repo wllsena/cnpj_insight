@@ -10,7 +10,7 @@ from tqdm import tqdm
 from .models import (
     CNAEs,
     Empresas,
-    Estabelicimentos,
+    Estabelecimentos,
     Motivos,
     Municipios,
     Naturezas,
@@ -108,7 +108,7 @@ def load_dataset(dataset_path: str) -> None:
     load_base(path.join(dataset_path, "*MOTI*"), Motivos, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*EMPRE*"), Empresas, EMPRESA_COLUMNS)
     load_estabelecimentos(
-        path.join(dataset_path, "*ESTABELE*"), Estabelicimentos, ESTABELECIMENTO_COLUMNS
+        path.join(dataset_path, "*ESTABELE*"), Estabelecimentos, ESTABELECIMENTO_COLUMNS
     )
     load_base(path.join(dataset_path, "*SIMPLES*"), Simples, SIMPLES_COLUMNS)
     load_base(path.join(dataset_path, "*SOCIO*"), Socios, SOCIO_COLUMNS)

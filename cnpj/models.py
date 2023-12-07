@@ -85,7 +85,7 @@ class Empresas(Model):
         return f"{self.cnpj_basico}"
 
 
-class Estabelicimentos(Model):
+class Estabelecimentos(Model):
     cnpj_basico_ordem = PositiveBigIntegerField(primary_key=True)
     cnpj_basico = ForeignKey(Empresas, related_name="estabelicimentos", on_delete=PROTECT)
     cnpj_ordem = PositiveSmallIntegerField()
