@@ -19,8 +19,8 @@ from django.urls import path, include
 from cnpj.views import *
 
 urlpatterns = [
-    path("", home, name="home"),
     path("admin/", admin.site.urls),
+    path("", include("cnpj.urls")),
 ]
 
 

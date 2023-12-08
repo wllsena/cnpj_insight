@@ -1,41 +1,23 @@
-{% load static %}
+{% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cnpj Insight</title>
+{% block title %}CNPJ Insight{% endblock %}
 
-    <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css">
-
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
-    {% comment %} 
-    Make a navbar with bootstrap
-    {% endcomment %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'home' %}">Cnpj Insight</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-                aria-controls="navbarColor01" aria-expanded="false" aria-label="Alterna navegação">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-    </nav>
-
+{% block content %} 
+    
     {% comment %}
     Make a container with bootstrap and a centralized input query (just like google)
     {% endcomment %}
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mt-5 mb-5">
+                <h1 class="text-center mt-3">CNPJ Insight</h1>
+            <form action="{% url 'search_results' %}" method="get">
                 <div class="input-group mb-3 mt-3">
                     <input type="text" class="form-control" placeholder="Digite o CNPJ" aria-label="Recipient's username"
-                        aria-describedby="button-addon2" id="cnpj">
-                    <button class="btn btn-outline-primary" type="button" id="button-addon2" onclick="search()">Pesquisar</button>
+                        aria-describedby="button-addon2" id="cnpj" name="q">
+                    <button class="btn btn-outline-primary" type="submit" id="button-addon2">Pesquisar</button>
                 </div>
+            </form>
             </div>
         </div>
 
@@ -44,7 +26,10 @@
         {% endcomment %}
         
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mt-5 mb-5">
+                {% comment %} Título {% endcomment %}
+                <h2 class="text-center">Conheça algumas empresas</h2>
+                <div class="table-responsive">
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
@@ -78,6 +63,6 @@
                     </tbody>
                 </table>
             </div>
+            </div>
     </div>
-</body>
-</html>
+{% endblock %}

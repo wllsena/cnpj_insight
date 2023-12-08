@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Resultados - CNPJ Insight{% endblock %}
+
+{% block content %} 
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5 mb-5">
+            {% comment %} Título {% endcomment %}
+            <h2 class="text-center">Resultado</h2>
+            <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">CNPJ</th>
+                        <th scope="col">Nome Fanstasia</th>
+                        {% comment %} <th scope="col">Atividade Principal</th> {% endcomment %}
+                        {% comment %} <th scope="col">Situação</th> {% endcomment %}
+                        {% comment %} <th scope="col">Data de Abertura</th> {% endcomment %}
+                        {% comment %} <th scope="col">Capital Social</th> {% endcomment %}
+                        <th scope="col">CEP</th>
+                        <th scope="col">UF</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Telefone</th>
+                    </tr>
+                </thead>
+                <tbody id="table">
+                    {% for estabelecimento in estabelecimentos_list %}
+                    <tr>
+                        <td>{{ estabelecimento.cnpj_basico_id }}</td>
+                        <td>{{ estabelecimento.nome_fantasia }}</td>
+                        {% comment %} <td>{{ estabelecimento.atividade_principal }}</td> {% endcomment %}
+                        {% comment %} <td>{{ estabelecimento.situacao }}</td> {% endcomment %}
+                        {% comment %} <td>{{ estabelecimento.data_abertura }}</td> {% endcomment %}
+                        {% comment %} <td>{{ estabelecimento.capital_social }}</td> {% endcomment %}
+                        <td>{{ estabelecimento.cep }}</td>
+                        <td>{{ estabelecimento.uf }}</td>
+                        <td>{{ estabelecimento.correio_eletronico }}</td>
+                        <td>{{ estabelecimento.telefone1 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+</div>
+
+{% endblock %}
