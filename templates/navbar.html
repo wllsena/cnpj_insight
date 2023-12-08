@@ -6,7 +6,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         {% if user.is_authenticated %}
-        <p>Olá, {{ user.username }}! <a class="text-white"  href="{% url 'logout' %}">Deseja sair?</a></p>
+        <p>Olá, {{ user.username }}! Visite seu <a class="text-white"  href="{% url 'profile' %}">perfil</a>. <a class="text-white"  href="{% url 'logout' %}">Deseja sair?</a></p>
         {% else %}
         <p>Olá, visitante. <a class="text-white" href="{% url 'login' %}">Entre</a> ou <a class="text-white" href="{% url 'register' %}">Cadastre-se</a>.</p>
         {% endif %}

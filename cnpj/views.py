@@ -32,6 +32,9 @@ def analysis(request, pk):
     context = {
         'estabelecimento': estabelecimento,
     }
+    if request.user.is_authenticated:
+        request.user.account.search_history.append(estabelecimento.cnpj_basico_id)
+        request.user.account.save()
     
     return render(request, 'details.html', context)
 
@@ -46,3 +49,9 @@ def register(response):
         form = RegisterForm()
 
     return render(response, "registration/register.html", {"form":form})
+
+def profile(response):
+    if response.user.is_authenticated:
+        search_history = response.user.account.search_history
+        estabelecimentos = Estabelecimentos.objects.filter(cnpj_basico_id__in=search_history)
+    return render(response, "profile.html", {"estabelecimentos":estabelecimentos})

@@ -10,7 +10,13 @@ from django.db.models import (
     PositiveIntegerField,
     PositiveSmallIntegerField,
     TextField,
+    JSONField,
+    OneToOneField,
+    CASCADE
 )
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 RAZAO_SOCIAL_LENGTH = 150
 SOCIO_LENGTH = 150
@@ -159,9 +165,27 @@ class Socios(Model):
 
     class Meta:
         unique_together = [("cnpj_basico", "nome_socio")]
+        verbose_name = "Sócio"
+        verbose_name_plural = "Sócios"
 
     def __str__(self):
         return f"{self.cnpj_basico}({self.nome_socio})"
 
-
-#
+class Account(Model):
+    user = OneToOneField(User, on_delete=CASCADE)
+    # search history with list of empresas
+    search_history = JSONField(null=True, default=list())
+    # favorite list with list of empresas
+    favorite_list = JSONField(null=True, default=list())
+    
+    def __str__(self):
+        return self.user.username
+    
+    class Meta:
+        verbose_name = 'Conta'
+        verbose_name_plural = 'Contas'
+        
+@receiver(post_save, sender=User)
+def create_user_account(sender, instance, created, **kwargs):
+    if created:
+        Account.objects.create(user=instance)
