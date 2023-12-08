@@ -6,8 +6,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h1> Análise da empresa {{ estabelecimento.nome_fantasia }} </h1>
+        <div class="col-md-12 mt-5 mb-3">
+            <h1> Análise da empresa: {{ estabelecimento.nome_fantasia }} </h1>
 
             <h2> Dados da empresa </h2>
 
@@ -18,16 +18,7 @@
 
         </div>
 </div>
+</div>
 
-
-{% comment %} 
-
-<td>{{ estabelecimento.cnpj_basico_id }}</td>
-                        <td>{{ estabelecimento.nome_fantasia }}</td>
-                        <td>{{ estabelecimento.cep }}</td>
-                        <td>{{ estabelecimento.uf }}</td>
-                        <td>{{ estabelecimento.correio_eletronico }}</td>
-                        <td>{{ estabelecimento.telefone1 }}</td>
-{% endcomment %}
 {% endblock %}
 ```

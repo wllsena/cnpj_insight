@@ -2,10 +2,12 @@ django_elasticsearch_dsl
 django-elasticsearch-dsl-drf
 django-extensions
 django-stubs[compatible-mypy]
-django==4.1
+django
 djangorestframework
 djangorestframework-stubs[compatible-mypy]
 elasticsearch
 python-decouple
 setuptools
 tqdm
+django-bootstrap-form 
+django-bootstrap-v5
