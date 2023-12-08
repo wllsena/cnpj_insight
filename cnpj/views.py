@@ -25,3 +25,11 @@ def search_results(request):
     }
     
     return render(request, 'search_results.html', context)
+
+def analysis(request, pk):
+    estabelecimento = Estabelecimentos.objects.filter(cnpj_basico_id=pk)[0]
+    context = {
+        'estabelecimento': estabelecimento,
+    }
+    
+    return render(request, 'details.html', context)

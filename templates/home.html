@@ -43,12 +43,13 @@
                             <th scope="col">UF</th>
                             <th scope="col">Email</th>
                             <th scope="col">Telefone</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody id="table">
                         {% for estabelecimento in estabelecimentos %}
                         <tr>
-                            <td>{{ estabelecimento.cnpj_basico_id }}</td>
+                            <td>{{ estabelecimento.cnpj_basico_id }}/000{{ estabelecimento.cnpj_ordem }}-{{ estabelecimento.cnpj_dv }}</td>
                             <td>{{ estabelecimento.nome_fantasia }}</td>
                             {% comment %} <td>{{ estabelecimento.atividade_principal }}</td> {% endcomment %}
                             {% comment %} <td>{{ estabelecimento.situacao }}</td> {% endcomment %}
@@ -58,6 +59,7 @@
                             <td>{{ estabelecimento.uf }}</td>
                             <td>{{ estabelecimento.correio_eletronico }}</td>
                             <td>{{ estabelecimento.telefone1 }}</td>
+                            <td><a href="{% url 'analysis' estabelecimento.cnpj_basico_id %}" class="btn btn-primary">Analisar</a></td>
                         </tr>
                         {% endfor %}
                     </tbody>
