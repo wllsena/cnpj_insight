@@ -1,0 +1,40 @@
+SDLC
+
+Simulação: Planejamento, Análise e Design do Sistema
+- O grupo pode refazer os entregáveis submetidos na A1, desde que a submissão seja realizada 
+	através de uma resposta do e-mail original.
+>>> Adicionar os diagramas de Casos de Uso, Classe e Pacote.
+- Opcional: Diagrama de Componentes
+- Opcional: Diagrama de Sequência
+>>> Entrega através da página da aplicação no GitHub
+
+Simulação: Desenvolvimento
+>>> Entrega através de repositório GitHub
+- Histórico detalhado de commits
+>>> Elaboração da interface utilizando TKinter
+>>> Ao menos dois casos de uso completos por cada integrante do grupo.
+- Opcional: Utilização de persistência em BD na nuvem
+- Opcional: Utilização de Docker para instanciar o BD
+>>> O código deve ser desenvolvido com o apoio de padrões de projeto: 1-2 de criação, 1-2 
+	estruturais e 2-4 padrões de comportamento (mínimo de 6 padrões)
+	
+Simulação: Teste (... e Qualidade de Software)
+>>> Código comentado, com identificadores significativos e type hint
+>>> Código documentado (DocString. PEP 257)
+>>> Código limpo e organizado em módulos (PEP 8)
+>>> Evidência de utilização de Revisão de Código - pode ser informal (pull request)
+>>> Tratamento de exceções com uso de exceções UDT (User-Defined Data Type)
+>>> DocTest para unidades simples
+>>> Testes unitários utilizando técnicas de caixa-preta
+>>> Evidência de utilização de TDD - para cada integrante, duas unidades devem ser 
+desenvolvidas com TDD (RED-GREEN: utilizar comentários para deixar cada estado do 
+código. Commit antes e depois do REFACTOR)
+>>> Um relatório em PDF com a cobertura do código deve ser fornecido na página da aplicação 
+no GitHub
+- Opcional: Utilizar alguma ferramenta de verificação de qualidade
+
+Simulação: Implantação
+- Não será simulada esta fase
+
+Simulação: Manutenção
+- Não será simulada esta fase
