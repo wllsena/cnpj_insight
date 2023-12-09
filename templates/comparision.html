@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} Comparação das empresas {{ first_estabelecimento.nome_fantasia }} e {{ second_estabelecimento.nome_fantasia }} {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5 mb-3">
+            <h2> Análise da empresa: {{ first_estabelecimento.nome_fantasia }} </h2>
+
+            <h3> Dados da empresa </h3>
+
+            <li>
+                <strong> CNPJ: </strong> {{ first_estabelecimento.cnpj_basico_id }}/000{{ first_estabelecimento.cnpj_ordem }}-{{ first_estabelecimento.cnpj_dv }}
+
+            </li>
+
+            <a href="{% url 'search_compare' first_estabelecimento.cnpj_basico_id %}" class="btn btn-primary">Comparar {{ first_estabelecimento.nome_fantasia }} com outra empresa.</a>
+
+            <h2> Análise da empresa: {{ second_estabelecimento.nome_fantasia }} </h2>
+
+            <h3> Dados da empresa </h3>
+
+            <li>
+                <strong> CNPJ: </strong> {{ second_estabelecimento.cnpj_basico_id }}/000{{ second_estabelecimento.cnpj_ordem }}-{{ second_estabelecimento.cnpj_dv }}
+
+            </li>
+            
+            <a href="{% url 'search_compare' second_estabelecimento.cnpj_basico_id %}" class="btn btn-primary">Comparar {{ second_estabelecimento.nome_fantasia }} com outra empresa.</a>
+
+        </div>
+</div>
+</div>
+
+{% endblock %}
+```

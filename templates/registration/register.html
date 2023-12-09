@@ -18,6 +18,10 @@
           <button type="submit" class="btn btn-success">Registrar</button>
           <input type="hidden" name="next" value="{{ next }}">
         </form>
+
+        <p class="mt-3"> Já tem uma conta? <a href="{% url 'login' %}">Entre</a></p>
+
+        <p> Ao criar uma conta, você concorda em ter seus dados e seu histórico de busca registrado em nosso banco de dados. </p>
         </div>
     </div>
 </div>
