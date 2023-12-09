@@ -4,54 +4,61 @@
 
 {% block content %} 
 
-
 <div class="container">
     <h1 class="text-center mt-5 mb-5">Detalhes da empresa: {{ empresas.razao_social }}</h1>
     <div class="row">
         <div class="col-md-6">
             <h2>Dados da Empresa</h2>
             <div class="details">
-                <p><strong>CNPJ Completo:</strong> {{ estabelecimentos.cnpj_completo }}</p>
-                <p><strong>Razão Social:</strong> {{ empresas.razao_social }}</p>
-                <p><strong>Natureza Jurídica:</strong> {{ empresas.natureza_juridica.descricao }}</p>
-                <p><strong>Qualificação do Responsável:</strong> {{ empresas.qualificacao_responsavel.descricao }}</p>
-                <p><strong>Capital Social:</strong> {{ empresas.capital_social }}</p>
-                <p><strong>Porte da Empresa:</strong> {{ empresas.porte_empresa }}</p>
-                <p><strong>Ente Federativo Responsável:</strong> {{ empresas.ente_federativo_responsavel }}</p>
-                <p><strong>Razão Social Limpa:</strong> {{ empresas.razao_social_limpa }}</p>
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>CNPJ Completo:</strong> {{ estabelecimentos.cnpj_completo }}</li>
+                    <li class="list-group-item"><strong>Razão Social:</strong> {{ empresas.razao_social }}</li>
+                    <li class="list-group-item"><strong>Natureza Jurídica:</strong> {{ empresas.natureza_juridica.descricao }}</li>
+                    <li class="list-group-item"><strong>Qualificação do Responsável:</strong> {{ empresas.qualificacao_responsavel.descricao }}</li>
+                    <li class="list-group-item"><strong>Capital Social:</strong> {{ empresas.capital_social }}</li>
+                    <li class="list-group-item"><strong>Porte da Empresa:</strong> {{ empresas.porte_empresa }}</li>
+                    <li class="list-group-item"><strong>Ente Federativo Responsável:</strong> {{ empresas.ente_federativo_responsavel }}</li>
+                    <li class="list-group-item"><strong>Razão Social Limpa:</strong> {{ empresas.razao_social_limpa }}</li>
+                </ul>
             </div>
-            <a href="{% url 'search_compare' empresas.cnpj_basico %}" class="btn btn-primary"> Comparar com outra empresa.</a>
+            <a href="{% url 'search_compare' empresas.cnpj_basico %}" class="btn btn-primary mt-3"> Comparar com outra empresa.</a>
         </div>
         
         <div class="col-md-6">
             <h2>Estabelecimentos</h2>
                 <div class="details">
-                    <p><strong>Nome Fantasia:</strong> {{ estabelecimentos.nome_fantasia }}</p>
-                    <p><strong>Situação Cadastral:</strong> {{ estabelecimentos.situacao_cadastral }}</p>
-                    <p><strong>Data Situação Cadastral:</strong> {{ estabelecimentos.data_situacao_cadastral }}</p>
-                    <p><strong>Motivo Situação Cadastral:</strong> {{ estabelecimentos.motivo_situacao_cadastral.descricao }}</p>
-                    <p><strong>Nome Cidade Exterior:</strong> {{ estabelecimentos.nome_cidade_exterior }}</p>
-                    <p><strong>País:</strong> {{ estabelecimentos.pais }}</p>
-                    <p><strong>Data Início Atividade:</strong> {{ estabelecimentos.data_inicio_atividade }}</p>
-                    <p><strong>CNAE Fiscal Principal:</strong> {{ estabelecimentos.cnae_fiscal_principal.descricao }}</p>
-                    <p><strong>CNAE Fiscal Secundária:</strong> {{ estabelecimentos.cnae_fiscal_secundaria }}</p>
-                    <p><strong>Tipo Logradouro:</strong> {{ estabelecimentos.tipo_logradouro }}</p>
-                    <p><strong>Logradouro:</strong> {{ estabelecimentos.logradouro }}</p>
-                    <p><strong>Número:</strong> {{ estabelecimentos.numero }}</p>
-                    <p><strong>Complemento:</strong> {{ estabelecimentos.complemento }}</p>
-                    <p><strong>Bairro:</strong> {{ estabelecimentos.bairro }}</p>
-                    <p><strong>CEP:</strong> {{ estabelecimentos.cep }}</p>
-                    <p><strong>UF:</strong> {{ estabelecimentos.uf }}</p>
-                    <p><strong>Município:</strong> {{ estabelecimentos.municipio.descricao }}</p>
-                    <p><strong>DDD1:</strong> {{ estabelecimentos.ddd1 }}</p>
-                    <p><strong>Telefone1:</strong> {{ estabelecimentos.telefone1 }}</p>
-                    <p><strong>DDD2:</strong> {{ estabelecimentos.ddd2 }}</p>
-                    <p><strong>Telefone2:</strong> {{ estabelecimentos.telefone2 }}</p>
-                    <p><strong>DDD Fax:</strong> {{ estabelecimentos.ddd_fax }}</p>
-                    <p><strong>Fax:</strong> {{ estabelecimentos.fax }}</p>
-                    <p><strong>Correio Eletrônico:</strong> {{ estabelecimentos.correio_eletronico }}</p>
-                    <p><strong>Situação Especial:</strong> {{ estabelecimentos.situacao_especial }}</p>
-                    <p><strong>Data Situação Especial:</strong> {{ estabelecimentos.data_situacao_especial }}</p>
+                    {% if estabelecimentos%}
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Nome Fantasia:</strong> {{ estabelecimentos.nome_fantasia }}</li>
+                        <li class="list-group-item"><strong>Situação Cadastral:</strong> {{ estabelecimentos.situacao_cadastral }}</li>
+                        <li class="list-group-item"><strong>Data Situação Cadastral:</strong> {{ estabelecimentos.data_situacao_cadastral }}</li>
+                        <li class="list-group-item"><strong>Motivo Situação Cadastral:</strong> {{ estabelecimentos.motivo_situacao_cadastral.descricao }}</li>
+                        <li class="list-group-item"><strong>Nome Cidade Exterior:</strong> {{ estabelecimentos.nome_cidade_exterior }}</li>
+                        <li class="list-group-item"><strong>País:</strong> {{ estabelecimentos.pais }}</li>
+                        <li class="list-group-item"><strong>Data Início Atividade:</strong> {{ estabelecimentos.data_inicio_atividade }}</li>
+                        <li class="list-group-item"><strong>CNAE Fiscal Principal:</strong> {{ estabelecimentos.cnae_fiscal_principal.descricao }}</li>
+                        <li class="list-group-item"><strong>CNAE Fiscal Secundária:</strong> {{ estabelecimentos.cnae_fiscal_secundaria }}</li>
+                        <li class="list-group-item"><strong>Tipo Logradouro:</strong> {{ estabelecimentos.tipo_logradouro }}</li>
+                        <li class="list-group-item"><strong>Logradouro:</strong> {{ estabelecimentos.logradouro }}</li>
+                        <li class="list-group-item"><strong>Número:</strong> {{ estabelecimentos.numero }}</li>
+                        <li class="list-group-item"><strong>Complemento:</strong> {{ estabelecimentos.complemento }}</li>
+                        <li class="list-group-item"><strong>Bairro:</strong> {{ estabelecimentos.bairro }}</li>
+                        <li class="list-group-item"><strong>CEP:</strong> {{ estabelecimentos.cep }}</li>
+                        <li class="list-group-item"><strong>UF:</strong> {{ estabelecimentos.uf }}</li>
+                        <li class="list-group-item"><strong>Município:</strong> {{ estabelecimentos.municipio.descricao }}</li>
+                        <li class="list-group-item"><strong>DDD1:</strong> {{ estabelecimentos.ddd1 }}</li>
+                        <li class="list-group-item"><strong>Telefone1:</strong> {{ estabelecimentos.telefone1 }}</li>
+                        <li class="list-group-item"><strong>DDD2:</strong> {{ estabelecimentos.ddd2 }}</li>
+                        <li class="list-group-item"><strong>Telefone2:</strong> {{ estabelecimentos.telefone2 }}</li>
+                        <li class="list-group-item"><strong>DDD Fax:</strong> {{ estabelecimentos.ddd_fax }}</li>
+                        <li class="list-group-item"><strong>Fax:</strong> {{ estabelecimentos.fax }}</li>
+                        <li class="list-group-item"><strong>Correio Eletrônico:</strong> {{ estabelecimentos.correio_eletronico }}</li>
+                        <li class="list-group-item"><strong>Situação Especial:</strong> {{ estabelecimentos.situacao_especial }}</li>
+                        <li class="list-group-item"><strong>Data Situação Especial:</strong> {{ estabelecimentos.data_situacao_especial }}</li>
+                    </ul>
+                    {% else %}
+                    <p>Não há estabelecimentos cadastrados para esta empresa nesse banco de dados.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>

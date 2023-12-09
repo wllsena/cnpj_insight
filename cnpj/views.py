@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import RegisterForm
 from django.db.models import Q
-
 from .models import (
     CNAEs,
     Empresas,
@@ -14,16 +13,6 @@ from .models import (
     Simples,
     Socios,
 )
-
-
-# class HomePageView(TemplateView):
-#     template_name = 'home.html'
-#     estabelecimentos = Estabelecimentos.objects.order_by('?')[:10]
-    
-
-# class SearchResultsView(ListView):
-#     model = City
-#     template_name = 'search_results.html'
 
 # Create home view
 def home(request):
@@ -47,7 +36,13 @@ def search_results(request):
 
 def analysis(request, pk):
     empresas = Empresas.objects.get(cnpj_basico=pk)
-    estabelecimentos = Estabelecimentos.objects.get(cnpj_basico_id=pk)
+    estabelecimentos = Estabelecimentos.objects.all()
+
+    if estabelecimentos.filter(cnpj_basico_id=pk).exists():
+        estabelecimentos = estabelecimentos.filter(cnpj_basico_id=pk).get()
+    else:
+        estabelecimentos = None
+
     context = {
         'empresas': empresas,
         'estabelecimentos': estabelecimentos,
@@ -61,12 +56,13 @@ def analysis(request, pk):
 
 
 def register(response):
+
     if response.method == "POST":
         form = RegisterForm(response.POST)
+
         if form.is_valid():
             form.save()
             return redirect("/accounts/login")
-
     else:
         form = RegisterForm()
 
@@ -87,11 +83,11 @@ def search_compare(request, pk):
     context = {
         'first_empresa': first_empresa,
     }
+
     if request.GET.get('q'):
         query = request.GET.get('q')
         empresas_list = Empresas.objects.filter( Q(cnpj_basico__icontains=query) | Q(razao_social__icontains=query) )
         context['empresas_list'] = empresas_list
-    
     
     return render(request, 'search_compare.html', context)
 
@@ -102,4 +98,5 @@ def comparision(request, pk, pk2):
         'first_empresa': first_empresa,
         'second_empresa': second_empresa,
     }
+
     return render(request, 'comparision.html', context)
