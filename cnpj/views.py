@@ -79,8 +79,27 @@ def profile(response):
     if response.user.is_authenticated:
         search_history = response.user.account.search_history
         estabelecimentos = Estabelecimentos.objects.filter(cnpj_basico_id__in=search_history)
-        context = {
-            'estabelecimentos': estabelecimentos,
-        }
+        
+    return render(response, "profile.html", {"estabelecimentos":estabelecimentos})
 
-    return render(response, "profile.html", context)
+def search_compare(request, pk):
+    first_estabelecimento = Estabelecimentos.objects.filter(cnpj_basico_id=pk)[0]
+    context = {
+        'first_estabelecimento': first_estabelecimento,
+    }
+    if request.GET.get('q'):
+        query = request.GET.get('q')
+        estabelecimentos_list = Estabelecimentos.objects.filter( Q(cnpj_basico_id__icontains=query) | Q(nome_fantasia__icontains=query) )
+        context['estabelecimentos_list'] = estabelecimentos_list
+    
+    
+    return render(request, 'search_compare.html', context)
+
+def comparision(request, pk, pk2):
+    first_estabelecimento = Estabelecimentos.objects.filter(cnpj_basico_id=pk)[0]
+    second_estabelecimento = Estabelecimentos.objects.filter(cnpj_basico_id=pk2)[0]
+    context = {
+        'first_estabelecimento': first_estabelecimento,
+        'second_estabelecimento': second_estabelecimento,
+    }
+    return render(request, 'comparision.html', context)

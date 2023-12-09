@@ -95,6 +95,9 @@
             <p><strong>Correio Eletrônico:</strong> {{ estabelecimentos.correio_eletronico }}</p>
             <p><strong>Situação Especial:</strong> {{ estabelecimentos.situacao_especial }}</p>
             <p><strong>Data Situação Especial:</strong> {{ estabelecimentos.data_situacao_especial }}</p>
+          
+            <a href="{% url 'search_compare' estabelecimento.cnpj_basico_id %}" class="btn btn-primary">Comparar</a>
+
         </div>
 </section>
 
