@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
-from .models import *
+from .models import Paises, Municipios, Qualificacoes, Naturezas, CNAEs, Estabelecimentos, Motivos, Account
 
 # Register your models here.
 @admin.register(Paises)

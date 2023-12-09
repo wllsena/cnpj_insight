@@ -1,3 +1,7 @@
+django-bootstrap-form 
+django-bootstrap-v5
+django-dbbackup
+django-crontab
 django_elasticsearch_dsl
 django-elasticsearch-dsl-drf
 django-extensions
@@ -6,8 +10,7 @@ django
 djangorestframework
 djangorestframework-stubs[compatible-mypy]
 elasticsearch
+flake8
 python-decouple
 setuptools
 tqdm
-django-bootstrap-form 
-django-bootstrap-v5

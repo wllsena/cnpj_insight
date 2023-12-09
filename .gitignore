@@ -1,3 +1,4 @@
+*.pem
 *.pyc
 *~
 __pycache__
@@ -5,3 +6,5 @@ __pycache__
 .DS_Store
 cnpj/dataset/*
 cnpj/clean_dataset/*
+cnpj/migrations
+*.dump
