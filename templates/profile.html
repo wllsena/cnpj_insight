@@ -24,25 +24,23 @@
             <table class="table table-hover table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">CNPJ</th>
-                        <th scope="col">Nome Fanstasia</th>
-                        <th scope="col">CEP</th>
-                        <th scope="col">UF</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Telefone</th>
+                        <th scope="col">CNPJ Basico</th>
+                        <th scope="col">Razao Social</th>
+                        <th scope="col">Nat. Juridica</th>
+                        <th scope="col">Cap. Social</th>
+                        <th scope="col">Porte</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody id="table">
-                    {% for estabelecimento in estabelecimentos %}
+                    {% for empresa in empresas %}
                     <tr>
-                        <td>{{ estabelecimento.cnpj_basico_id }}/000{{ estabelecimento.cnpj_ordem }}-{{ estabelecimento.cnpj_dv }}</td>
-                        <td>{{ estabelecimento.nome_fantasia }}</td>
-                        <td>{{ estabelecimento.cep }}</td>
-                        <td>{{ estabelecimento.uf }}</td>
-                        <td>{{ estabelecimento.correio_eletronico }}</td>
-                        <td>{{ estabelecimento.telefone1 }}</td>
-                        <td><a href="{% url 'analysis' estabelecimento.cnpj_basico_id %}" class="btn btn-primary">Analisar</a></td>
+                        <td>{{ empresa.cnpj_basico }}</td>
+                        <td>{{ empresa.razao_social }}</td>
+                        <td>{{ empresa.natureza_juridica.descricao }}</td>
+                        <td>{{ empresa.capital_social }}</td>
+                        <td>{{ empresa.porte_empresa }}</td>
+                        <td><a href="{% url 'analysis' empresa.cnpj_basico %}" class="btn btn-primary">Analisar</a></td>
                     </tr>
                     {% endfor %}
                 </tbody>

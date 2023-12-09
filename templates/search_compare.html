@@ -10,15 +10,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 mt-5 mb-5">
-                <h1 class="text-center mt-3">Comparar com {{ first_estabelecimento.nome_fantasia }}</h1>
-            <form action="{% url 'search_compare' first_estabelecimento.cnpj_basico_id %}" method="get">
+                <h1 class="text-center mt-3">Comparar com {{ first_empresa.razao_social }}</h1>
+            <form action="{% url 'search_compare' first_empresa.cnpj_basico %}" method="get">
                 <div class="input-group mb-3 mt-3">
                     <input type="text" class="form-control" placeholder="Digite o CNPJ ou Nome Fantasia que você deseja comparar" aria-label="Recipient's username"
                         aria-describedby="button-addon2" id="cnpj" name="q">
                     <button class="btn btn-outline-primary" type="submit" id="button-addon2">Pesquisar</button>
                 </div>
             </form>
-            <a href="{% url 'analysis' first_estabelecimento.cnpj_basico_id %}" class="btn btn-primary">Voltar</a>
+            <a href="{% url 'analysis' first_empresa.cnpj_basico %}" class="btn btn-primary">Voltar</a>
             </div>
         </div>
 
@@ -27,37 +27,35 @@
         {% endcomment %}
         <div class="row">
             <div class="col-md-12 mt-5 mb-5">
-                {% if estabelecimentos_list %}
+                {% if empresas_list %}
                 <h2 class="text-center">Resultado</h2>
                 <div class="table-responsive">
-                <table class="table table-hover table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">CNPJ</th>
-                            <th scope="col">Nome Fanstasia</th>
-                            <th scope="col">CEP</th>
-                            <th scope="col">UF</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Telefone</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody id="table">
-                        {% for estabelecimento in estabelecimentos_list %}
-                        <tr>
-                            <td>{{ estabelecimento.cnpj_basico_id }}/000{{ estabelecimento.cnpj_ordem }}-{{ estabelecimento.cnpj_dv }}</td>
-                            <td>{{ estabelecimento.nome_fantasia }}</td>
-                            <td>{{ estabelecimento.cep }}</td>
-                            <td>{{ estabelecimento.uf }}</td>
-                            <td>{{ estabelecimento.correio_eletronico }}</td>
-                            <td>{{ estabelecimento.telefone1 }}</td>
-                            <td><a href="{% url 'comparision' first_estabelecimento.cnpj_basico_id estabelecimento.cnpj_basico_id %}" class="btn btn-primary">Comparar</a></td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% endif %}
-            </div>
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">CNPJ Basico</th>
+                                <th scope="col">Razao Social</th>
+                                <th scope="col">Nat. Juridica</th>
+                                <th scope="col">Cap. Social</th>
+                                <th scope="col">Porte</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="table">
+                            {% for empresa in empresas_list %}
+                            <tr>
+                                <td>{{ empresa.cnpj_basico }}</td>
+                                <td>{{ empresa.razao_social }}</td>
+                                <td>{{ empresa.natureza_juridica.descricao }}</td>
+                                <td>{{ empresa.capital_social }}</td>
+                                <td>{{ empresa.porte_empresa }}</td>
+                                <td><a href="{% url 'comparision' first_empresa.cnpj_basico empresa.cnpj_basico %}" class="btn btn-primary">Comparar</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

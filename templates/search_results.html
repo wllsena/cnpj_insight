@@ -24,33 +24,33 @@
             {% comment %} Título {% endcomment %}
             <h2 class="text-center">Resultado</h2>
             <div class="table-responsive">
-            <table class="table table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">CNPJ Basico</th>
-                        <th scope="col">Razao Social</th>
-                        <th scope="col">Nat. Juridica</th>
-                        <th scope="col">Cap. Social</th>
-                        <th scope="col">Porte</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody id="table">
-                    {% for empresa in empresas_list %}
-                    <tr>
-                        <td>{{ empresa.cnpj_basico }}</td>
-                        <td>{{ empresa.razao_social }}</td>
-                        <td>{{ empresa.natureza_juridica.descricao }}</td>
-                        <td>{{ empresa.capital_social }}</td>
-                        <td>{{ empresa.porte_empresa }}</td>
-                        <td><a href="{% url 'analysis' empresa.cnpj_basico %}" class="btn btn-primary">Analisar</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">CNPJ Basico</th>
+                            <th scope="col">Razao Social</th>
+                            <th scope="col">Nat. Juridica</th>
+                            <th scope="col">Cap. Social</th>
+                            <th scope="col">Porte</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table">
+                        {% for empresa in empresas_list %}
+                        <tr>
+                            <td>{{ empresa.cnpj_basico }}</td>
+                            <td>{{ empresa.razao_social }}</td>
+                            <td>{{ empresa.natureza_juridica.descricao }}</td>
+                            <td>{{ empresa.capital_social }}</td>
+                            <td>{{ empresa.porte_empresa }}</td>
+                            <td><a href="{% url 'analysis' empresa.cnpj_basico %}" class="btn btn-primary">Analisar</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 {% endblock %}
