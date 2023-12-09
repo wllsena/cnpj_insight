@@ -1,0 +1,22 @@
+{% extends "../base.html" %}
+{% load bootstrap %}
+
+{% block title %} Logout {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6 mt-5 justify-content-center">
+
+        <h1>Você saiu. </h1>
+        <p>Esperamos que tenha gostado do nosso site. Até a próxima!</p>
+        
+        <a href="{% url 'home' %}" class="btn btn-primary">Voltar para a página inicial</a> ou <a href="{% url 'login' %}" class="btn btn-primary">Fazer login</a>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

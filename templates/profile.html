@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block title %} Perfil {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-12 mt-5 justify-content-center">
+
+        {% if user.is_authenticated %}
+        <h1 class="mb-5">Perfil de {{ user.username }}</h1>
+        
+        <h4> Suas informações: </h4>
+        {% comment %} <p> Nome: {{ user.first_name }} </p>
+        <p> Sobrenome: {{ user.last_name }} </p> {% endcomment %}
+        <p> Email: {{ user.email }} </p>
+
+        <h4> Seus histórico de buscas: </h4>
+        
+        <div class="table-responsive">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">CNPJ</th>
+                        <th scope="col">Nome Fanstasia</th>
+                        <th scope="col">CEP</th>
+                        <th scope="col">UF</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody id="table">
+                    {% for estabelecimento in estabelecimentos %}
+                    <tr>
+                        <td>{{ estabelecimento.cnpj_basico_id }}/000{{ estabelecimento.cnpj_ordem }}-{{ estabelecimento.cnpj_dv }}</td>
+                        <td>{{ estabelecimento.nome_fantasia }}</td>
+                        <td>{{ estabelecimento.cep }}</td>
+                        <td>{{ estabelecimento.uf }}</td>
+                        <td>{{ estabelecimento.correio_eletronico }}</td>
+                        <td>{{ estabelecimento.telefone1 }}</td>
+                        <td><a href="{% url 'analysis' estabelecimento.cnpj_basico_id %}" class="btn btn-primary">Analisar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <h1> Você não está logado </h1>
+        <a href="{% url 'login' %}"> Faça login </a>
+        {% endif %}
+        
+        </div>
+    </div>
+</div>
+
+{% endblock %}

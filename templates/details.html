@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Análise da empresa {{ estabelecimento.nome_fantasia }} {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 mt-5 mb-3">
+            <h1> Análise da empresa: {{ estabelecimento.nome_fantasia }} </h1>
+
+            <h2> Dados da empresa </h2>
+
+            <li>
+                <strong> CNPJ: </strong> {{ estabelecimento.cnpj_basico_id }}/000{{ estabelecimento.cnpj_ordem }}-{{ estabelecimento.cnpj_dv }}
+
+            </li>
+
+        </div>
+</div>
+</div>
+
+{% endblock %}
+```

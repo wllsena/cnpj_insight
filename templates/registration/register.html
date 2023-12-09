@@ -1,0 +1,25 @@
+{% extends "../base.html" %}
+{% load bootstrap %}
+
+{% block title %} Registro {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-6 mt-5 justify-content-center">
+        <h1>Registro</h1>
+        
+        
+        <form method="post" action="{% url 'register' %}">
+          {% csrf_token %}
+          {{ form | bootstrap }}
+          <button type="submit" class="btn btn-success">Registrar</button>
+          <input type="hidden" name="next" value="{{ next }}">
+        </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

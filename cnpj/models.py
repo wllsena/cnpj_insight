@@ -10,7 +10,13 @@ from django.db.models import (
     PositiveIntegerField,
     PositiveSmallIntegerField,
     TextField,
+    JSONField,
+    OneToOneField,
+    CASCADE
 )
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 RAZAO_SOCIAL_LENGTH = 150
 SOCIO_LENGTH = 150
@@ -86,23 +92,23 @@ class Empresas(Model):
 
 
 class Estabelecimentos(Model):
-    cnpj_basico_ordem = PositiveBigIntegerField(primary_key=True)
-    cnpj_basico = ForeignKey(Empresas, related_name="estabelicimentos", on_delete=PROTECT)
+    cnpj_basico_id = PositiveBigIntegerField(primary_key=True)
+    # cnpj_basico = ForeignKey(Empresas, related_name="estabelecimentos", on_delete=PROTECT)
     cnpj_ordem = PositiveSmallIntegerField()
     cnpj_dv = PositiveSmallIntegerField()
     matriz_filial = PositiveSmallIntegerField()
     nome_fantasia = TextField(null=True, default=None)
     situacao_cadastral = PositiveSmallIntegerField()
-    data_situacao_cadastral = DateField(null=True, default=None)
+    # data_situacao_cadastral = DateField(null=True, default=None)
     motivo_situacao_cadastral = ForeignKey(
-        Motivos, related_name="estabelicimentos", on_delete=PROTECT
+        Motivos, related_name="estabelecimentos", on_delete=PROTECT
     )
     nome_cidade_exterior = TextField(null=True, default=None)
     pais = ForeignKey(
-        Paises, null=True, default=None, related_name="estabelicimentos", on_delete=PROTECT
+        Paises, null=True, default=None, related_name="estabelecimentos", on_delete=PROTECT
     )
-    data_inicio_atividade = DateField(null=True, default=None)
-    cnae_fiscal_principal = ForeignKey(CNAEs, related_name="estabelicimentos", on_delete=PROTECT)
+    # data_inicio_atividade = DateField(null=True, default=None)
+    cnae_fiscal_principal = ForeignKey(CNAEs, related_name="estabelecimentos", on_delete=PROTECT)
     cnae_fiscal_secundaria = TextField(null=True, default=None)
     tipo_logradouro = TextField(null=True, default=None)
     logradouro = TextField(null=True, default=None)
@@ -111,7 +117,7 @@ class Estabelecimentos(Model):
     bairro = TextField(null=True, default=None)
     cep = TextField(null=True, default=None)
     uf = CharField(max_length=UF_LENGTH)
-    municipio = ForeignKey(Municipios, related_name="estabelicimentos", on_delete=PROTECT)
+    municipio = ForeignKey(Municipios, related_name="estabelecimentos", on_delete=PROTECT)
     ddd1 = TextField(null=True, default=None)
     telefone1 = TextField(null=True, default=None)
     ddd2 = TextField(null=True, default=None)
@@ -120,11 +126,11 @@ class Estabelecimentos(Model):
     fax = TextField(null=True, default=None)
     correio_eletronico = TextField(null=True, default=None)
     situacao_especial = TextField(null=True, default=None)
-    data_situacao_especial = DateField(null=True, default=None)
-    obs = TextField(null=True, default=None)
+    # data_situacao_especial = DateField(null=True, default=None)
+    # obs = TextField(null=True, default=None)
 
     def __str__(self):
-        return f"{self.cnpj_basico_ordem}"
+        return f"{self.cnpj_basico_id}"
 
 
 class Simples(Model):
@@ -159,9 +165,27 @@ class Socios(Model):
 
     class Meta:
         unique_together = [("cnpj_basico", "nome_socio")]
+        verbose_name = "Sócio"
+        verbose_name_plural = "Sócios"
 
     def __str__(self):
         return f"{self.cnpj_basico}({self.nome_socio})"
 
-
-#
+class Account(Model):
+    user = OneToOneField(User, on_delete=CASCADE)
+    # search history with list of empresas
+    search_history = JSONField(null=True, default=list())
+    # favorite list with list of empresas
+    favorite_list = JSONField(null=True, default=list())
+    
+    def __str__(self):
+        return self.user.username
+    
+    class Meta:
+        verbose_name = 'Conta'
+        verbose_name_plural = 'Contas'
+        
+@receiver(post_save, sender=User)
+def create_user_account(sender, instance, created, **kwargs):
+    if created:
+        Account.objects.create(user=instance)
