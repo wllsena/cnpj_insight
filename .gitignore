@@ -1,7 +1,7 @@
 *.pyc
 *~
 __pycache__
-db.sqlite3
+*.sqlite3
 .DS_Store
 cnpj/dataset/*
 cnpj/clean_dataset/*

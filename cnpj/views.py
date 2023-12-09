@@ -35,21 +35,16 @@ def search_results(request):
 
 
 def analysis(request, pk):
-    empresas = Empresas.objects.get(cnpj_basico=pk)
-    estabelecimentos = Estabelecimentos.objects.all()
-
-    if estabelecimentos.filter(cnpj_basico_id=pk).exists():
-        estabelecimentos = estabelecimentos.filter(cnpj_basico_id=pk).get()
-    else:
-        estabelecimentos = None
+    empresa = Empresas.objects.get(cnpj_basico=pk)
+    estabelecimentos = Estabelecimentos.objects.filter(cnpj_basico_id=pk)
 
     context = {
-        'empresas': empresas,
+        'empresa': empresa,
         'estabelecimentos': estabelecimentos,
     }
 
     if request.user.is_authenticated:
-        request.user.account.search_history.append(empresas.cnpj_basico)
+        request.user.account.search_history.append(empresa.cnpj_basico)
         request.user.account.save()
     
     return render(request, 'details.html', context)
