@@ -76,7 +76,7 @@ class Motivos(Model):
 
 
 class Empresas(Model):
-    cnpj_basico = PositiveIntegerField(primary_key=True)
+    cnpj_basico = PositiveBigIntegerField(primary_key=True)
     razao_social = CharField(max_length=RAZAO_SOCIAL_LENGTH, null=True, default=None, db_index=True)
     natureza_juridica = ForeignKey(Naturezas, related_name="empresas", on_delete=PROTECT)
     qualificacao_resposavel = ForeignKey(Qualificacoes, related_name="empresas", on_delete=PROTECT)
@@ -93,13 +93,12 @@ class Empresas(Model):
 
 class Estabelecimentos(Model):
     cnpj_basico_id = PositiveBigIntegerField(primary_key=True)
-    # cnpj_basico = ForeignKey(Empresas, related_name="estabelecimentos", on_delete=PROTECT)
     cnpj_ordem = PositiveSmallIntegerField()
     cnpj_dv = PositiveSmallIntegerField()
     matriz_filial = PositiveSmallIntegerField()
     nome_fantasia = TextField(null=True, default=None)
     situacao_cadastral = PositiveSmallIntegerField()
-    # data_situacao_cadastral = DateField(null=True, default=None)
+    data_situacao_cadastral = DateField(null=True, default=None)
     motivo_situacao_cadastral = ForeignKey(
         Motivos, related_name="estabelecimentos", on_delete=PROTECT
     )
@@ -107,7 +106,7 @@ class Estabelecimentos(Model):
     pais = ForeignKey(
         Paises, null=True, default=None, related_name="estabelecimentos", on_delete=PROTECT
     )
-    # data_inicio_atividade = DateField(null=True, default=None)
+    data_inicio_atividade = DateField(null=True, default=None)
     cnae_fiscal_principal = ForeignKey(CNAEs, related_name="estabelecimentos", on_delete=PROTECT)
     cnae_fiscal_secundaria = TextField(null=True, default=None)
     tipo_logradouro = TextField(null=True, default=None)
@@ -126,8 +125,8 @@ class Estabelecimentos(Model):
     fax = TextField(null=True, default=None)
     correio_eletronico = TextField(null=True, default=None)
     situacao_especial = TextField(null=True, default=None)
-    # data_situacao_especial = DateField(null=True, default=None)
-    # obs = TextField(null=True, default=None)
+    data_situacao_especial = DateField(null=True, default=None)
+    cnpj_completo = TextField(null=True, default=None)
 
     def __str__(self):
         return f"{self.cnpj_basico_id}"
