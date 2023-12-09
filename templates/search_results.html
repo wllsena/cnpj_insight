@@ -7,6 +7,20 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12 mt-5 mb-5">
+        <form action="{% url 'search_results' %}" method="get">
+            <div class="input-group mb-3 mt-3">
+                <input type="text" class="form-control" placeholder="Digite o CNPJ ou Nome Fantasia que você deseja buscar" aria-label="Recipient's username"
+                    aria-describedby="button-addon2" id="cnpj" name="q">
+                <button class="btn btn-outline-primary" type="submit" id="button-addon2">Pesquisar</button>
+            </div>
+        </form>
+        <a href="{% url 'home' %}" class="btn btn-primary">Voltar</a>
+        <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
+        </div>
+    </div> 
+
+    <div class="row">
+        <div class="col-md-12 mt-5 mb-5">
             {% comment %} Título {% endcomment %}
             <h2 class="text-center">Resultado</h2>
             <div class="table-responsive">
@@ -37,8 +51,6 @@
                 </tbody>
             </table>
         </div>
-        <a href="{% url 'home' %}" class="btn btn-primary">Voltar</a>
-        <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
     </div>
 </div>
 </div>
