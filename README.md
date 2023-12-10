@@ -53,3 +53,41 @@ sudo docker-compose down -v
 | 10 | Usuário do sistema        | Acessar meu histórico de pesquisas                                 | Revisitar empresas e análises que consultei anteriormente                                                      | Média      | Feito  | 6                      | Visualização fácil do histórico, revisitar empresas listadas.                      |
 
 Access the sheet with the user stories and use cases in: [https://docs.google.com/spreadsheets/d/15gOOOYpY2VHKhWmfb38dpLy1Z02NmH_nlopBd-CqTgw/edit?usp=sharing](https://docs.google.com/spreadsheets/d/15gOOOYpY2VHKhWmfb38dpLy1Z02NmH_nlopBd-CqTgw/edit?usp=sharing)
+
+## Coverage
+
+See in detail the coverage in [coverage_report.pdf](./coverage_report.pdf).
+
+```
+Name                        Stmts   Miss  Cover   Missing
+---------------------------------------------------------
+cnpj/__init__.py                0      0   100%
+cnpj/admin.py                  60      0   100%
+cnpj/apps.py                    4      0   100%
+cnpj/cron.py                    6      6     0%   1-9
+cnpj/documents.py              15      0   100%
+cnpj/forms.py                   8      0   100%
+cnpj/models.py                124     12    90%   36, 45, 54, 63, 74, 83, 104, 149, 164, 203, 230-231
+cnpj/structure.py              41     41     0%   1-142
+cnpj/tests/__init__.py          0      0   100%
+cnpj/tests/test_forms.py        0      0   100%
+cnpj/tests/test_models.py       0      0   100%
+cnpj/tests/test_urls.py        25      0   100%
+cnpj/tests/test_views.py       69      0   100%
+cnpj/urls.py                    3      0   100%
+cnpj/utils.py                  83     71    14%   61-90, 117-197, 212-286
+cnpj/views.py                  72     23    68%   124-147, 173-180, 216-222, 282-291, 337-349
+cnpj_insight/__init__.py        0      0   100%
+cnpj_insight/asgi.py            9      9     0%   10-34
+cnpj_insight/settings.py       29      0   100%
+cnpj_insight/urls.py            4      0   100%
+cnpj_insight/wsgi.py            4      4     0%   10-14
+manage.py                      12      2    83%   12-13
+media/__init__.py               0      0   100%
+static/__init__.py              0      0   100%
+staticfiles/__init__.py         0      0   100%
+templates/__init__.py           0      0   100%
+---------------------------------------------------------
+TOTAL                         568    168    70%
+
+```
