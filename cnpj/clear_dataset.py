@@ -1,12 +1,9 @@
 import csv
 from glob import glob
-from json import load
 from os import path
 from typing import Any, Callable, List, Tuple
 
 from tqdm import tqdm
-
-from cnpj.test import load_csv_to_sqlite
 
 from .structure import (
     BASE_COLUMNS,
@@ -16,29 +13,34 @@ from .structure import (
     SOCIO_COLUMNS,
 )
 
-#
-
 
 def clear_files(
     dataset_path: str,
     target_path: str,
     columns: List[Tuple[str, Callable[[Any, bool], Any]]],
 ) -> None:
-    with open(target_path, "w") as csv_file_w:
-        writer = csv.writer(csv_file_w, delimiter=",")
+    """Clear files and write to target path.
+
+    Args:
+        dataset_path (str): Path to the dataset.
+        target_path (str): Path to the target file.
+        columns (List[Tuple[str, Callable[[Any, bool], Any]]]): List of columns.
+    """
+    with open(target_path, "w") as csv_file_writer:
+        writer = csv.writer(csv_file_writer, delimiter=",")
 
         header = [
-            column + "_id" if type_.__name__ == "get" else column for column, type_ in columns
+            f"{column}_id" if type_.__name__ == "get" else column for column, type_ in columns
         ]
         writer.writerow(header)
 
         files = sorted(glob(dataset_path))
 
-        for file_ in files:
-            print(f"clear {dataset_path}, file {file_}")
+        for file in files:
+            print(f"Clearing {dataset_path}, file {file}")
 
-            with open(file_, "r", encoding="latin1") as csv_file_r:
-                reader = csv.reader(csv_file_r, delimiter=";")
+            with open(file, "r", encoding="latin1") as csv_file_reader:
+                reader = csv.reader(csv_file_reader, delimiter=";")
 
                 for row in tqdm(reader):
                     data = [type_(value, True) for (_, type_), value in zip(columns, row)]
@@ -46,6 +48,12 @@ def clear_files(
 
 
 def clear_dataset(dataset_path: str, target_path: str) -> None:
+    """Clear dataset and write to target path.
+
+    Args:
+        dataset_path (str): Path to the dataset.
+        target_path (str): Path to the target file.
+    """
     clear_files(
         path.join(dataset_path, "*PAIS*"),
         path.join(target_path, "paises.csv"),
@@ -86,18 +94,13 @@ def clear_dataset(dataset_path: str, target_path: str) -> None:
         path.join(target_path, "estabelecimentos.csv"),
         ESTABELECIMENTO_COLUMNS,
     )
-
     clear_files(
         path.join(dataset_path, "*SIMPLES*"),
         path.join(target_path, "simples.csv"),
         SIMPLES_COLUMNS,
     )
-
     clear_files(
         path.join(dataset_path, "*SOCIO*"),
         path.join(target_path, "socios.csv"),
         SOCIO_COLUMNS,
     )
-
-
-#

@@ -17,6 +17,7 @@ from django.db.models import (
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from typing import Optional, List
 
 RAZAO_SOCIAL_LENGTH = 150
 SOCIO_LENGTH = 150
@@ -24,58 +25,62 @@ UF_LENGTH = 2
 CPNJ_CPF_SOCIO_LENGTH = 14
 REPRESENTANTE_LEGAL_LENGTH = 11
 
-#
-
-
 class Paises(Model):
+    """Model representing countries."""
     codigo = PositiveSmallIntegerField(primary_key=True)
     descricao = TextField(null=True, default=None)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.codigo}"
 
 
 class Municipios(Model):
+    """Model representing municipalities."""
     codigo = PositiveSmallIntegerField(primary_key=True)
     descricao = TextField(null=True, default=None)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.codigo}"
 
 
 class Qualificacoes(Model):
+    """Model representing qualifications."""
     codigo = PositiveSmallIntegerField(primary_key=True)
     descricao = TextField(null=True, default=None)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.codigo}"
 
 
 class Naturezas(Model):
+    """Model representing legal natures."""
     codigo = PositiveSmallIntegerField(primary_key=True)
     descricao = TextField(null=True, default=None)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.codigo}"
 
 
 class CNAEs(Model):
+    """Model representing CNAEs (National Classification of Economic Activities)."""
     codigo = PositiveIntegerField(primary_key=True)
     descricao = TextField(null=True, default=None)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.codigo}"
 
 
 class Motivos(Model):
+    """Model representing reasons."""
     codigo = PositiveSmallIntegerField(primary_key=True)
     descricao = TextField(null=True, default=None)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.codigo}"
 
 
 class Empresas(Model):
+    """Model representing companies."""
     cnpj_basico = PositiveBigIntegerField(primary_key=True)
     razao_social = CharField(max_length=RAZAO_SOCIAL_LENGTH, null=True, default=None, db_index=True)
     natureza_juridica = ForeignKey(Naturezas, related_name="empresas", on_delete=PROTECT)
@@ -87,11 +92,12 @@ class Empresas(Model):
         max_length=RAZAO_SOCIAL_LENGTH, null=True, default=None, db_index=True
     )
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.cnpj_basico}"
 
 
 class Estabelecimentos(Model):
+    """Model representing establishments."""
     cnpj_basico_id = PositiveBigIntegerField(primary_key=True)
     cnpj_ordem = PositiveSmallIntegerField()
     cnpj_dv = PositiveSmallIntegerField()
@@ -133,6 +139,7 @@ class Estabelecimentos(Model):
 
 
 class Simples(Model):
+    """Model representing Simples."""
     cnpj_basico = ForeignKey(Empresas, related_name="simples", primary_key=True, on_delete=PROTECT)
     opcao_simples = BooleanField()
     data_opcao_simples = DateField(null=True, default=None)
@@ -146,6 +153,7 @@ class Simples(Model):
 
 
 class Socios(Model):
+    """Model representing partners."""
     cnpj_basico = ForeignKey(Empresas, related_name="socios", on_delete=PROTECT)
     identificador_socio = PositiveSmallIntegerField()
     nome_socio = CharField(max_length=SOCIO_LENGTH, null=True, default=None, db_index=True)
@@ -163,28 +171,43 @@ class Socios(Model):
     faixa_etaria = PositiveSmallIntegerField()
 
     class Meta:
+        """
+        Meta class for Socios model.
+        unique_together: Fields that should be unique together.
+        verbose_name: Human readable singular name for the model.
+        verbose_name_plural: Human readable plural name for the model.
+        """
         unique_together = [("cnpj_basico", "nome_socio")]
         verbose_name = "Sócio"
         verbose_name_plural = "Sócios"
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.cnpj_basico}({self.nome_socio})"
 
 class Account(Model):
-    user = OneToOneField(User, on_delete=CASCADE)
-    # search history with list of empresas
-    search_history = JSONField(null=True, default=list())
-    # favorite list with list of empresas
-    favorite_list = JSONField(null=True, default=list())
-    
-    def __str__(self):
+    """
+    Model representing a user account.
+    """
+    user: OneToOneField[User] = OneToOneField(User, on_delete=CASCADE)
+    search_history: JSONField[List[str]] = JSONField(null=True, default=list)
+    favorite_list: JSONField[List[str]] = JSONField(null=True, default=list)
+
+    def __str__(self) -> str:
         return self.user.username
-    
+
     class Meta:
+        """
+        Meta class for Account model.
+        verbose_name: Human readable singular name for the model.
+        verbose_name_plural: Human readable plural name for the model.
+        """
         verbose_name = 'Conta'
         verbose_name_plural = 'Contas'
         
 @receiver(post_save, sender=User)
-def create_user_account(sender, instance, created, **kwargs):
+def create_user_account(sender: Model, instance: User, created: bool, **kwargs: Optional[dict]) -> None:
+    """
+    Create a user account when a new user is created.
+    """
     if created:
         Account.objects.create(user=instance)

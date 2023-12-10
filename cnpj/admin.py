@@ -1,79 +1,96 @@
+from typing import Tuple, Type
 from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from .models import *
 
-# Register your models here.
 @admin.register(Paises)
 class PaisesAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'descricao')
-    search_fields = ('codigo', 'descricao')
-    list_filter = ('codigo', 'descricao')
-    ordering = ('codigo', 'descricao')
-    list_per_page = 10
-    
+    """Admin interface for Paises model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10
+
+
 @admin.register(Municipios)
 class MunicipiosAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'descricao')
-    search_fields = ('codigo', 'descricao')
-    list_filter = ('codigo', 'descricao')
-    ordering = ('codigo', 'descricao')
-    list_per_page = 10
-    
+    """Admin interface for Municipios model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10
+
+
 @admin.register(Qualificacoes)
 class QualificacoesAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'descricao')
-    search_fields = ('codigo', 'descricao')
-    list_filter = ('codigo', 'descricao')
-    ordering = ('codigo', 'descricao')
-    list_per_page = 10
-    
+    """Admin interface for Qualificacoes model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10
+
+
 @admin.register(Naturezas)
 class NaturezasAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'descricao')
-    search_fields = ('codigo', 'descricao')
-    list_filter = ('codigo', 'descricao')
-    ordering = ('codigo', 'descricao')
-    list_per_page = 10
-    
+    """Admin interface for Naturezas model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10
+
+
 @admin.register(CNAEs)
 class CNAEsAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'descricao')
-    search_fields = ('codigo', 'descricao')
-    list_filter = ('codigo', 'descricao')
-    ordering = ('codigo', 'descricao')
-    list_per_page = 10
-    
+    """Admin interface for CNAEs model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10
+
+
 @admin.register(Estabelecimentos)
 class EstabelecimentosAdmin(admin.ModelAdmin):
-    list_display = ('cnpj_basico_id', 'nome_fantasia', 'municipio')
-    # list_filter = ('cnpj', 'razao_social', 'nome_fantasia', 'situacao_cadastral', 'data_situacao_cadastral', 'motivo_situacao_cadastral', 'nome_cidade_exterior', 'codigo_natureza_juridica')
-    # ordering = ('cnpj', 'razao_social', 'nome_fantasia', 'situacao_cadastral', 'data_situacao_cadastral', 'motivo_situacao_cadastral', 'nome_cidade_exterior', 'codigo_natureza_juridica')
-    list_per_page = 10
-    
-# @admin.register(Empresas)
-# class EmpresasAdmin(admin.ModelAdmin):
-#     list_display = ('cnpj', 'razao_social', 'nome_fantasia', 'situacao_cadastral', 'data_situacao_cadastral', 'motivo_situacao_cadastral', 'nome_cidade_exterior', 'codigo_natureza_juridica', 'data_inicio_atividade', 'cnae_fiscal', 'tipo_logradouro', 'logradouro', 'numero', 'complemento', 'bairro', 'cep', 'uf', 'codigo_municipio', 'municipio', 'ddd_1', 'telefone_1', 'ddd_2', 'telefone_2', 'ddd_fax', 'fax', 'correio_eletronico', 'qualificacao_responsavel', 'capital_social', 'porte', 'opcao_pelo_simples', 'data_opcao_pelo_simples', 'data_exclusao_do_simples', 'opcao_pelo_mei', 'situacao_especial', 'data_situacao_especial')
-#     search_fields = ('cnpj', 'razao_social', 'nome_fantasia', 'situacao_cadastral', 'data_situacao_cadastral', 'motivo_situacao_cadastral', 'nome_cidade_exterior', 'codigo_natureza_juridica', 'data_inicio_atividade', 'cnae_fiscal', 'tipo_logradouro', 'logradouro', 'numero', 'complemento', 'bairro', 'cep', 'uf', 'codigo_municipio', 'municipio', 'ddd_1', 'telefone_1', 'ddd_2', 'telefone_2', 'ddd_fax', 'fax', 'correio_eletronico', 'qualificacao_responsavel', 'capital_social', 'porte', 'opcao_pelo_simples', 'data_opcao_pelo_simples', 'data_exclusao_do_simples', 'opcao_pelo_mei', 'situacao_especial', 'data_situacao_especial')
-    # list_filter = ('cnpj', 'razao_social', 'nome_fantasia', 'situacao_cadastral', 'data_situacao_cadastral', 'motivo_situacao_cadastral', 'nome_cidade_exterior', 'codigo_natureza_juridica')
-    
+    """Admin interface for Estabelecimentos model."""
+
+    list_display: Tuple[str, str, str] = ('cnpj_basico_id', 'nome_fantasia', 'municipio')
+    list_per_page: int = 10
+
+
 @admin.register(Motivos)
 class MotivosAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'descricao')
-    search_fields = ('codigo', 'descricao')
-    list_filter = ('codigo', 'descricao')
-    ordering = ('codigo', 'descricao')
-    list_per_page = 10
-    
-    
+    """Admin interface for Motivos model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10
+
+
 class AccountInline(admin.StackedInline):
-    model = Account
-    can_delete = False
-    verbose_name_plural = 'Contas'
-    
-    
+    """Admin interface for Account model."""
+
+    model: Type[Model] = Account
+    can_delete: bool = False
+    verbose_name_plural: str = 'Contas'
+
+
 class CustomizedUserAdmin(UserAdmin):
-    inlines = (AccountInline, )
-    
+    """Admin interface for User model with Account inline."""
+
+    inlines: Tuple[Type[AccountInline], ...] = (AccountInline, )
+
+
 admin.site.unregister(User)
 admin.site.register(User, CustomizedUserAdmin)
