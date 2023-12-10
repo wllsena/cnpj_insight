@@ -1,15 +1,27 @@
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render, redirect
-from .forms import UserRegistrationForm
-from django.db.models import Q, QuerySet
-from .models import Empresas, Estabelecimentos
-from django.contrib.auth.models import User
-from django.forms import Form
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import RegisterForm
+from django.db.models import Q
+from .models import (
+    CNAEs,
+    Empresas,
+    Estabelecimentos,
+    Motivos,
+    Municipios,
+    Naturezas,
+    Paises,
+    Qualificacoes,
+    Simples,
+    Socios,
+)
 
-def home(request: HttpRequest) -> HttpResponse:
-    """
-    Display a random selection of 10 companies on the home page.
-    """
+from .utils import (
+    calculate_dv_cnpj,
+    econodata_scrapping,
+    confiability_score
+)
+
+# Create home view
+def home(request):
     empresas: QuerySet = Empresas.objects.order_by('?')[:10]
     context: dict= {
         'empresas': empresas,
@@ -46,16 +58,16 @@ def search_results(request: HttpRequest) -> HttpResponse:
     
     return render(request, 'search_results.html', context)
 
-def analysis(request: HttpRequest, pk: int) -> HttpResponse:
-    """
-    Display details of a company and its establishments based on the given primary key.
-    """
-    empresa: Empresas = Empresas.objects.get(cnpj_basico=pk)
-    estabelecimentos: QuerySet = Estabelecimentos.objects.filter(cnpj_basico_id=pk)
+
+def analysis(request, pk):
+    empresa = Empresas.objects.get(cnpj_basico=pk)
+    estabelecimentos = Estabelecimentos.objects.filter(cnpj_basico_id=pk)
 
     context: dict= {
         'empresa': empresa,
         'estabelecimentos': estabelecimentos,
+        'scrapping': scrapping,
+        'confiability': confiability,
     }
 
     if request.user.is_authenticated:
@@ -91,24 +103,12 @@ def register(response: HttpRequest) -> HttpResponse:
 """
 def profile(response):
 
-    search_history = response.user.account.search_history
-    empresas = Empresas.objects.filter(cnpj_basico__in=search_history)
-        
-    return render(response, "profile.html", {"empresas": empresas})
-"""
-
-def profile(response: HttpRequest) -> HttpResponse:
-    """
-    Display the profile page with the user's search history.
-    """
     if response.user.is_authenticated:
-        search_history: list= response.user.account.search_history
-        empresas: QuerySet = Empresas.objects.filter(cnpj_basico__in=search_history)
+        search_history = response.user.account.search_history
+        empresas = Empresas.objects.filter(cnpj_basico__in=search_history)
         
-    return render(response, "profile.html", {"empresas": empresas})
+    return render(response, "profile.html", {"empresas":empresas})
 
-
-"""
 def search_compare(request, pk):
 
     first_empresa = Empresas.objects.filter(cnpj_basico=pk).first()
@@ -143,16 +143,14 @@ def search_compare(request: HttpRequest, pk: int) -> HttpResponse:
     
     return render(request, 'search_compare.html', context)
 
-
-def comparison(request: HttpRequest, pk1: int, pk2: int) -> HttpResponse:
-    """
-    Compare two companies based on their primary keys.
-    """
-    first_empresa: Empresas = Empresas.objects.filter(cnpj_basico=pk1).first()
-    second_empresa: Empresas = Empresas.objects.filter(cnpj_basico=pk2).first()
-    context: dict= {
+def comparision(request, pk, pk2):
+    first_empresa = Empresas.objects.filter(cnpj_basico=pk)[0]
+    second_empresa = Empresas.objects.filter(cnpj_basico=pk2)[0]
+    context = {
         'first_empresa': first_empresa,
         'second_empresa': second_empresa,
+        'first_empresa_scrapping': first_empresa_scrapping,
+        'second_empresa_scrapping': second_empresa_scrapping,
     }
 
-    return render(request, 'comparison.html', context)
+    return render(request, 'comparision.html', context)

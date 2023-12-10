@@ -26,6 +26,9 @@ mkdocstrings = {version = "^0.24.0", extras = ["python"]}
 django-dbbackup = "^4.0.2"
 django-crontab = "^0.7.1"
 flake8 = "^6.1.0"
+lxml = "^4.9.3"
+numpy = "^1.26.2"
+beautifulsoup4 = "^4.12.2"
 
 [build-system]
 requires = ["poetry-core"]
