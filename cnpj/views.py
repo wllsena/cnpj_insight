@@ -1,6 +1,6 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from .forms import UserRegistrationForm
 from django.db.models import Q, QuerySet
 from .models import Empresas, Estabelecimentos
 from django.contrib.auth.models import User
@@ -55,13 +55,13 @@ def register(response: HttpRequest) -> HttpResponse:
     Handle user registration.
     """
     if response.method == "POST":
-        form: Form = RegisterForm(response.POST)
+        form: Form = UserRegistrationForm(response.POST)
 
         if form.is_valid():
             form.save()
             return redirect("/accounts/login")
     else:
-        form = RegisterForm()
+        form = UserRegistrationForm()
 
     return render(response, "registration/register.html", {"form": form})
 

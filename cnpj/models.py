@@ -189,8 +189,8 @@ class Account(Model):
     Model representing a user account.
     """
     user: OneToOneField[User] = OneToOneField(User, on_delete=CASCADE)
-    search_history: JSONField[List[str]] = JSONField(null=True, default=list)
-    favorite_list: JSONField[List[str]] = JSONField(null=True, default=list)
+    search_history: JSONField = JSONField(null=True, default=list)
+    favorite_list: JSONField = JSONField(null=True, default=list)
 
     def __str__(self) -> str:
         return self.user.username
