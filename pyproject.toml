@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 beautifulsoup4 = "^4.12.2"
+coverage = "^7.3.2"
 django-bootstrap-form = "^3.4"
 django-bootstrap-v5 = "^1.0.11"
 django-dbbackup = "^4.0.2"
@@ -30,7 +31,6 @@ python-decouple = "^3.8"
 pylint-django = "^2.5.5"
 setuptools = "^69.0.2"
 tqdm = "^4.66.1"
-
 
 
 [build-system]

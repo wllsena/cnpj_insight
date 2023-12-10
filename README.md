@@ -10,14 +10,14 @@ Just let the database file in the root folder of the project. If you want to sta
 
 ## Production
 ```bash
-sudo docker-compose -f docker-compose.prod.yml up --build
+docker-compose -f docker-compose.prod.yml up --build
 ```
 
 Access: http://localhost:1337
 
 ## Development
 ```bash
-sudo docker-compose -f docker-compose.yml up --build
+docker-compose -f docker-compose.yml up --build
 ```
 
 Access: http://localhost:8000
@@ -25,7 +25,7 @@ Access: http://localhost:8000
 In order to run the tests you need to run the following command:
 
 ```bash
-sudo docker-compose -f docker-compose.yml run --rm web python manage.py test
+docker-compose -f docker-compose.yml run --rm web python manage.py test
 ```
 
 If you have any problems with the docker-compose, try to using the branch `dockerless`.
@@ -34,7 +34,7 @@ If you have any problems with the docker-compose, try to using the branch `docke
 ## Stop
 
 ```bash
-sudo docker-compose down -v
+docker-compose down -v
 ```
 
 ## User stories
