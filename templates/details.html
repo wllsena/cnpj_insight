@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %}Detalhes da empresa {{ empresa.razao_social }}{% endblock %}
+{% block title %}
+{% if empresa %}
+Detalhes da empresa {{ empresa.razao_social }}
+{% else %}
+Empresa não encontrada
+{% endif %}
+{% endblock %}
 
 {% block content %} 
 
@@ -35,6 +41,7 @@
 </style>
 
 <div class="container">
+    {% if empresa %}
     <h1 class="text-center mt-5 mb-5">{{ empresa.razao_social }}</h1>
     <div class="row mb-5">
         <div class="col-md-6">
@@ -124,6 +131,10 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <h1 class="text-center mt-5 mb-5">Empresa não encontrada</h1>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3 mb-3 "> Voltar</a>
+    {% endif %}
 </div>
 
 {% endblock %}

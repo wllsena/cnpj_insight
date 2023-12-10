@@ -124,60 +124,75 @@ def econodata_scrapping(cnpj_base: int) -> dict:
     soup = BeautifulSoup(website.content, 'html.parser')
 
     dom = etree.HTML(str(soup), parser=etree.HTMLParser(encoding='utf-8'))
-
-    # find element with id="__nuxt"
-
-    empresa_data = {
-        "cnpj_completo": dom.xpath(
-            '//*[@id="receita-section"]/div[2]/div[2]/div[1]/div/div[2]/p'
-        )[0].text,
-        "nome_fantasia": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[1]/div/div/div[3]/div[2]/h1'
-        )[0].text,
-        "atividade_economica": dom.xpath(
-            '//*[@id="detalhes-section"]/div[2]/div[2]/div[1]/div[2]/\
-                div[2]/div/div/div/div[1]/u/a'
-        )[0].text,
-        "porte": dom.xpath(
-            '//*[@id="detalhes-section"]/div[2]/div[2]/div[3]/div[2]/div[2]/p'
-        )[0].text,
-        "cnae": dom.xpath(
-            '//*[@id="detalhes-section"]/div[2]/div[2]/div[2]/div[2]/\
-                div[2]/div/div/u/a'
-        )[0].text,
-        "n_funcionarios": dom.xpath(
-            '//*[@id="detalhes-section"]/div[2]/div[2]/div[4]/div[2]/div[2]/p'
-        )[0].text,
-        "data_abertura": dom.xpath(
-            '//*[@id="receita-section"]/div[2]/div[2]/div[4]/div/div[2]/p'
-        )[0].text,
-        "situacao": dom.xpath(
-            '//*[@id="receita-section"]/div[2]/div[2]/div[6]/div/div[2]/p'
-        )[0].text,
-        "natureza": dom.xpath(
-            '//*[@id="receita-section"]/div[2]/div[2]/div[5]/div/div[2]/p'
-        )[0].text,
-        "cep": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[4]/span'
-        )[0].text,
-        "rua": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[1]/span'
-        )[0].text,
-        "bairro": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[2]/span'
-        )[0].text,
-        "cidade": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[3]/span'
-        )[0].text,
-        "pais": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[5]/span'
-        )[0].text
-    }
+    try:
+        empresa_data = {
+            "cnpj_completo": dom.xpath(
+                '//*[@id="receita-section"]/div[2]/div[2]/div[1]/div/div[2]/p'
+            )[0].text,
+            "nome_fantasia": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[1]/div/div/div[3]/div[2]/h1'
+            )[0].text,
+            "atividade_economica": dom.xpath(
+                '//*[@id="detalhes-section"]/div[2]/div[2]/div[1]/div[2]/\
+                    div[2]/div/div/div/div[1]/u/a'
+            )[0].text,
+            "porte": dom.xpath(
+                '//*[@id="detalhes-section"]/div[2]/div[2]/div[3]/div[2]/div[2]/p'
+            )[0].text,
+            "cnae": dom.xpath(
+                '//*[@id="detalhes-section"]/div[2]/div[2]/div[2]/div[2]/\
+                    div[2]/div/div/u/a'
+            )[0].text,
+            "n_funcionarios": dom.xpath(
+                '//*[@id="detalhes-section"]/div[2]/div[2]/div[4]/div[2]/div[2]/p'
+            )[0].text,
+            "data_abertura": dom.xpath(
+                '//*[@id="receita-section"]/div[2]/div[2]/div[4]/div/div[2]/p'
+            )[0].text,
+            "situacao": dom.xpath(
+                '//*[@id="receita-section"]/div[2]/div[2]/div[6]/div/div[2]/p'
+            )[0].text,
+            "natureza": dom.xpath(
+                '//*[@id="receita-section"]/div[2]/div[2]/div[5]/div/div[2]/p'
+            )[0].text,
+            "cep": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[4]/span'
+            )[0].text,
+            "rua": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[1]/span'
+            )[0].text,
+            "bairro": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[2]/span'
+            )[0].text,
+            "cidade": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[3]/span'
+            )[0].text,
+            "pais": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[5]/span'
+            )[0].text
+        }
+    except IndexError:
+        empresa_data = {
+            "cnpj_completo": None,
+            "nome_fantasia": None,
+            "atividade_economica": None,
+            "porte": None,
+            "cnae": None,
+            "n_funcionarios": None,
+            "data_abertura": None,
+            "situacao": None,
+            "natureza": None,
+            "cep": None,
+            "rua": None,
+            "bairro": None,
+            "cidade": None,
+            "pais": None,
+        }
 
     return empresa_data
 
@@ -197,6 +212,9 @@ def confiability_score(cnpj_base: int) -> str:
     empresa_data_econo: dict = econodata_scrapping(cnpj_base)
     empresa_data_gov: Union[dict, None] = \
         Empresas.objects.filter(cnpj_basico=cnpj_base).values().first()
+
+    if empresa_data_gov is None:
+        return "Baixo"
 
     # Get today's date
     today: datetime.date = datetime.date.today()
