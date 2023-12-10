@@ -1,50 +1,50 @@
-import datetime
 import re
+import datetime
 import requests
 import numpy as np
-from bs4 import BeautifulSoup
 from lxml import etree
 from .models import Empresas
+from bs4 import BeautifulSoup
 
-import numpy as np
+"""
+Versão 0
+def calcular_dv_cnpj(cnpj_base):
+    # Peso para o cálculo do DV
+    peso = np.array([5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2])
 
-# Versão 0
-# def calcular_dv_cnpj(cnpj_base):
-#     # Peso para o cálculo do DV
-#     peso = np.array([5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2])
+    if isinstance(cnpj_base, int):
+        cnpj_base = str(cnpj_base)
 
-#     if isinstance(cnpj_base, int):
-#         cnpj_base = str(cnpj_base)
+    cnpj_base = cnpj_base + "0001"
 
-#     cnpj_base = cnpj_base + "0001"
-
-#     cnpj_base = np.array(list(cnpj_base), dtype=int)
+    cnpj_base = np.array(list(cnpj_base), dtype=int)
     
-#     # Calcula o primeiro dígito verificador
-#     soma = np.sum(cnpj_base * peso)
-#     resto = soma % 11
-#     dv1 = 0 if resto < 2 else 11 - resto
+    # Calcula o primeiro dígito verificador
+    soma = np.sum(cnpj_base * peso)
+    resto = soma % 11
+    dv1 = 0 if resto < 2 else 11 - resto
     
-#     # Adiciona o primeiro DV ao CNPJ base
-#     cnpj_com_dv1 = np.concatenate((cnpj_base, np.array([dv1])))
+    # Adiciona o primeiro DV ao CNPJ base
+    cnpj_com_dv1 = np.concatenate((cnpj_base, np.array([dv1])))
     
-#     # Atualiza o peso para o cálculo do segundo DV
-#     peso = np.array([6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2])
+    # Atualiza o peso para o cálculo do segundo DV
+    peso = np.array([6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2])
     
-#     # Calcula o segundo dígito verificador
-#     soma = np.sum(cnpj_com_dv1 * peso)
-#     resto = soma % 11
-#     dv2 = 0 if resto < 2 else 11 - resto
+    # Calcula o segundo dígito verificador
+    soma = np.sum(cnpj_com_dv1 * peso)
+    resto = soma % 11
+    dv2 = 0 if resto < 2 else 11 - resto
 
-#     result = np.concatenate((cnpj_com_dv1, np.array([dv2])))
+    result = np.concatenate((cnpj_com_dv1, np.array([dv2])))
 
-#     # pass result to string
-#     result = "".join(str(x) for x in result)
+    # pass result to string
+    result = "".join(str(x) for x in result)
     
-#     # Retorna o CNPJ completo com os dois dígitos verificadores
-#     return result
+    # Retorna o CNPJ completo com os dois dígitos verificadores
+    return result
+"""
 
-def calculate_dv_cnpj(cnpj_base: int) -> str:
+def calculate_dv_cnpj(cnpj_base) -> str:
     """
     Calculates the verification digits (DV) for a given CNPJ base.
 
@@ -123,7 +123,7 @@ def econodata_scrapping(cnpj_base: int) -> dict:
 
     soup = BeautifulSoup(website.content, 'html.parser')
 
-    dom = etree.HTML(str(soup))
+    dom = etree.HTML(str(soup), parser=etree.HTMLParser(encoding='utf-8'))
 
     # find element with id="__nuxt"
 

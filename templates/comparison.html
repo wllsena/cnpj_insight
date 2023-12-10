@@ -34,6 +34,13 @@
                 <li class="list-group-item"><strong>Cidade:</strong> {{ first_empresa_scrapping.cidade }}</li>
                 <li class="list-group-item"><strong>País:</strong> {{ first_empresa_scrapping.pais }}</li>  
             </ul>
+            {% if first_empresa_confiability == "Baixo" %}
+            <h2>Confiabilidade: <div class="confidence-circle red text-center">Baixa</div></h2> 
+            {% elif first_empresa_confiability == "Médio" %}
+            <h2>Confiabilidade: <div class="confidence-circle yellow text-center">Média</div></h2> 
+            {% else %}
+            <h2>Confiabilidade: <div class="confidence-circle green text-center">Alta</div></h2> 
+            {% endif %}
             <a href="{% url 'search_compare' first_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ first_empresa.razao_social }} com outra empresa.</a>
         
         </div>
@@ -66,6 +73,14 @@
                 <li class="list-group-item"><strong>Cidade:</strong> {{ second_empresa_scrapping.cidade }}</li>
                 <li class="list-group-item"><strong>País:</strong> {{ second_empresa_scrapping.pais }}</li>                        
             </ul>
+
+            {% if second_empresa_confiability == "Baixo" %}
+            <h2>Confiabilidade: <div class="confidence-circle red text-center">Baixa</div></h2> 
+            {% elif second_empresa_confiability == "Médio" %}
+            <h2>Confiabilidade: <div class="confidence-circle yellow text-center">Média</div></h2> 
+            {% else %}
+            <h2>Confiabilidade: <div class="confidence-circle green text-center">Alta</div></h2> 
+            {% endif %}
             
             <a href="{% url 'search_compare' second_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ second_empresa.razao_social }} com outra empresa.</a>    
             
