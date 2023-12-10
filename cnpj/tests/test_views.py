@@ -35,15 +35,13 @@ class TestViews(TestCase):
         client = Client()
 
         non_existing_pk = 999
-        # print(reverse('analysis', args=[non_existing_pk]))
 
-        with self.assertRaises(Empresas.DoesNotExist):
-            response = client.get(reverse('analysis', args=[non_existing_pk]))
-            self.assertEquals(response.status_code, 200)
-            self.assertTemplateUsed(response, 'analysis.html')
-            self.assertTemplateUsed(response, 'base.html')
-            self.assertTemplateUsed(response, 'navbar.html')
-            self.assertTemplateUsed(response, 'footer.html')
+        response = client.get(reverse('analysis', args=[non_existing_pk]))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'details.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')
 
     def test_register_GET(self):
         client = Client()

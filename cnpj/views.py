@@ -114,7 +114,11 @@ def analysis(request, pk: int) -> HttpResponse:
     """
 
     # Fetch the company information from the database
-    empresa: Empresas = Empresas.objects.get(cnpj_basico=pk)
+    empresa: Empresas | None = \
+        Empresas.objects.filter(cnpj_basico=pk).first()
+        
+    if empresa is None:
+        return render(request, 'details.html', {})
 
     # Fetch related establishments from the database
     estabelecimentos: QuerySet = \
