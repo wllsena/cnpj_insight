@@ -1,0 +1,3438 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" /><link rel="canonical" href="https://wllsena.github.io/cnpj_insight/" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>CNPJ Insight</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="assets/_mkdocstrings.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Welcome to the CNPJ Insight project!";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = "/cnpj_insight/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> CNPJ Insight
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Welcome to the CNPJ Insight project!</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-run">How to run</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#production">Production</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#development">Development</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#api-reference">API Reference</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#admin">Admin</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin">admin</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.AccountInline">AccountInline</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.CNAEsAdmin">CNAEsAdmin</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.CustomizedUserAdmin">CustomizedUserAdmin</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.EstabelecimentosAdmin">EstabelecimentosAdmin</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.MotivosAdmin">MotivosAdmin</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.MunicipiosAdmin">MunicipiosAdmin</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.NaturezasAdmin">NaturezasAdmin</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.PaisesAdmin">PaisesAdmin</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.admin.QualificacoesAdmin">QualificacoesAdmin</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#apps">Apps</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.apps">apps</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.apps.CnpjConfig">CnpjConfig</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#documents">Documents</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.documents">documents</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.documents.EmpresasDocument">EmpresasDocument</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#forms">Forms</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.forms">forms</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.forms.UserRegistrationForm">UserRegistrationForm</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#models">Models</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models">models</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Account">Account</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.CNAEs">CNAEs</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Empresas">Empresas</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Estabelecimentos">Estabelecimentos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Motivos">Motivos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Municipios">Municipios</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Naturezas">Naturezas</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Paises">Paises</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Qualificacoes">Qualificacoes</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Simples">Simples</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Socios">Socios</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.create_user_account">create_user_account()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#structure">Structure</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.structure">structure</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.structure.boolean">boolean()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.structure.char">char()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.structure.date">date()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.structure.float_">float_()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.structure.foreign_key">foreign_key()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.structure.integer">integer()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.structure.text">text()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#tests">Tests</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.tests">tests</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#utils">Utils</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.utils">utils</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.utils.calculate_dv_cnpj">calculate_dv_cnpj()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.utils.confiability_score">confiability_score()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.utils.econodata_scrapping">econodata_scrapping()</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#views">Views</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.views">views</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.views.analysis">analysis()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.views.comparison">comparison()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.views.home">home()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.views.profile">profile()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.views.register">register()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.views.search_compare">search_compare()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.views.search_results">search_results()</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">CNPJ Insight</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Welcome to the CNPJ Insight project!</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="welcome-to-the-cnpj-insight-project">Welcome to the CNPJ Insight project!</h1>
+<h2 id="how-to-run">How to run</h2>
+<h3 id="production">Production</h3>
+<pre><code class="language-bash">sudo docker-compose -f docker-compose.prod.yml up --build
+</code></pre>
+<p>Access: <a href="http://localhost:1337">http://localhost:1337</a></p>
+<h3 id="development">Development</h3>
+<pre><code class="language-bash">sudo docker-compose -f docker-compose.yml up --build
+</code></pre>
+<p>Access: <a href="http://localhost:8000">http://localhost:8000</a></p>
+<h2 id="api-reference">API Reference</h2>
+<h3 id="admin">Admin</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.admin"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.AccountInline" class="doc doc-heading">
+          <code>AccountInline</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.admin.StackedInline">StackedInline</span></code></p>
+
+  
+      <p>Admin interface for Account model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">class AccountInline(admin.StackedInline):
+    """Admin interface for Account model."""
+
+    model: Type[Model] = Account
+    can_delete: bool = False
+    verbose_name_plural: str = 'Contas'</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.CNAEsAdmin" class="doc doc-heading">
+          <code>CNAEsAdmin</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.admin.ModelAdmin">ModelAdmin</span></code></p>
+
+  
+      <p>Admin interface for CNAEs model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">@admin.register(CNAEs)
+class CNAEsAdmin(admin.ModelAdmin):
+    """Admin interface for CNAEs model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.CustomizedUserAdmin" class="doc doc-heading">
+          <code>CustomizedUserAdmin</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.auth.admin.UserAdmin">UserAdmin</span></code></p>
+
+  
+      <p>Admin interface for User model with Account inline.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">class CustomizedUserAdmin(UserAdmin):
+    """Admin interface for User model with Account inline."""
+
+    inlines: Tuple[Type[AccountInline], ...] = (AccountInline, )</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.EstabelecimentosAdmin" class="doc doc-heading">
+          <code>EstabelecimentosAdmin</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.admin.ModelAdmin">ModelAdmin</span></code></p>
+
+  
+      <p>Admin interface for Estabelecimentos model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">@admin.register(Estabelecimentos)
+class EstabelecimentosAdmin(admin.ModelAdmin):
+    """Admin interface for Estabelecimentos model."""
+
+    list_display: Tuple[str, str, str] = ('cnpj_basico_id', 'nome_fantasia',
+                                          'municipio')
+    list_per_page: int = 10</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.MotivosAdmin" class="doc doc-heading">
+          <code>MotivosAdmin</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.admin.ModelAdmin">ModelAdmin</span></code></p>
+
+  
+      <p>Admin interface for Motivos model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">@admin.register(Motivos)
+class MotivosAdmin(admin.ModelAdmin):
+    """Admin interface for Motivos model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.MunicipiosAdmin" class="doc doc-heading">
+          <code>MunicipiosAdmin</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.admin.ModelAdmin">ModelAdmin</span></code></p>
+
+  
+      <p>Admin interface for Municipios model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">@admin.register(Municipios)
+class MunicipiosAdmin(admin.ModelAdmin):
+    """Admin interface for Municipios model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.NaturezasAdmin" class="doc doc-heading">
+          <code>NaturezasAdmin</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.admin.ModelAdmin">ModelAdmin</span></code></p>
+
+  
+      <p>Admin interface for Naturezas model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">@admin.register(Naturezas)
+class NaturezasAdmin(admin.ModelAdmin):
+    """Admin interface for Naturezas model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.PaisesAdmin" class="doc doc-heading">
+          <code>PaisesAdmin</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.admin.ModelAdmin">ModelAdmin</span></code></p>
+
+  
+      <p>Admin interface for Paises model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">@admin.register(Paises)
+class PaisesAdmin(admin.ModelAdmin):
+    """Admin interface for Paises model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.admin.QualificacoesAdmin" class="doc doc-heading">
+          <code>QualificacoesAdmin</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.admin.ModelAdmin">ModelAdmin</span></code></p>
+
+  
+      <p>Admin interface for Qualificacoes model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/admin.py</code></summary>
+              <pre class="highlight"><code class="language-python">@admin.register(Qualificacoes)
+class QualificacoesAdmin(admin.ModelAdmin):
+    """Admin interface for Qualificacoes model."""
+
+    list_display: Tuple[str, str] = ('codigo', 'descricao')
+    search_fields: Tuple[str, str] = ('codigo', 'descricao')
+    list_filter: Tuple[str, str] = ('codigo', 'descricao')
+    ordering: Tuple[str, str] = ('codigo', 'descricao')
+    list_per_page: int = 10</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div><h3 id="apps">Apps</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.apps"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.apps.CnpjConfig" class="doc doc-heading">
+          <code>CnpjConfig</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.apps.AppConfig">AppConfig</span></code></p>
+
+  
+      <p>Configuration for the Cnpj application.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/apps.py</code></summary>
+              <pre class="highlight"><code class="language-python">class CnpjConfig(AppConfig):
+    """Configuration for the Cnpj application."""
+
+    default_auto_field: str = 'django.db.models.BigAutoField'
+    name: str = 'cnpj'</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div><h3 id="documents">Documents</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.documents"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.documents.EmpresasDocument" class="doc doc-heading">
+          <code>EmpresasDocument</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django_elasticsearch_dsl.Document">Document</span></code></p>
+
+  
+      <p>Document class for Empresas model.</p>
+<p>This class represents a document that will be stored in Elasticsearch.
+It includes the index name and settings, and the fields that will be
+included in the document.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/documents.py</code></summary>
+              <pre class="highlight"><code class="language-python">@registry.register_document
+class EmpresasDocument(Document):
+    """Document class for Empresas model.
+
+    This class represents a document that will be stored in Elasticsearch.
+    It includes the index name and settings, and the fields that will be
+    included in the document.
+    """
+
+    class Index:
+        """Index class for EmpresasDocument.
+
+        This class includes the name of the index 
+        in Elasticsearch and its settings.
+        """
+
+        name: str = "empresas"
+        settings: dict = {"number_of_shards": 1, "number_of_replicas": 1}
+
+    class Django:
+        """Django class for EmpresasDocument.
+
+        This class includes the model that the document
+        represents and the fields that will be included
+        in the document.
+        """
+
+        model: type = Empresas
+        fields: List[str] = ["razao_social_limpa"]</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h5 id="cnpj.documents.EmpresasDocument.Django" class="doc doc-heading">
+          <code>Django</code>
+
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Django class for EmpresasDocument.</p>
+<p>This class includes the model that the document
+represents and the fields that will be included
+in the document.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/documents.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Django:
+    """Django class for EmpresasDocument.
+
+    This class includes the model that the document
+    represents and the fields that will be included
+    in the document.
+    """
+
+    model: type = Empresas
+    fields: List[str] = ["razao_social_limpa"]</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h5 id="cnpj.documents.EmpresasDocument.Index" class="doc doc-heading">
+          <code>Index</code>
+
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Index class for EmpresasDocument.</p>
+<p>This class includes the name of the index 
+in Elasticsearch and its settings.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/documents.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Index:
+    """Index class for EmpresasDocument.
+
+    This class includes the name of the index 
+    in Elasticsearch and its settings.
+    """
+
+    name: str = "empresas"
+    settings: dict = {"number_of_shards": 1, "number_of_replicas": 1}</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div><h3 id="forms">Forms</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.forms"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.forms.UserRegistrationForm" class="doc doc-heading">
+          <code>UserRegistrationForm</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.contrib.auth.forms.UserCreationForm">UserCreationForm</span></code></p>
+
+  
+      <p>Form for registering a new user.</p>
+<p>Inherits from UserCreationForm and adds an email field.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/forms.py</code></summary>
+              <pre class="highlight"><code class="language-python">class UserRegistrationForm(UserCreationForm):
+    """Form for registering a new user.
+
+    Inherits from UserCreationForm and adds an email field.
+    """
+    email: forms.EmailField = forms.EmailField()
+
+    class Meta:
+        model: type = User
+        fields: list[str] = ["username", "email", "password1", "password2"]</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div><h3 id="models">Models</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.models"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Account" class="doc doc-heading">
+          <code>Account</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing a user account.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Account(Model):
+    """
+    Model representing a user account.
+    """
+    user: OneToOneField[User] = OneToOneField(User, on_delete=CASCADE)
+    search_history: JSONField = JSONField(null=True, default=list)
+    favorite_list: JSONField = JSONField(null=True, default=list)
+
+    class Meta:
+        """
+        Meta class for Account model.
+        verbose_name: Human readable singular name for the model.
+        verbose_name_plural: Human readable plural name for the model.
+        """
+        verbose_name = 'Conta'
+        verbose_name_plural = 'Contas'</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h5 id="cnpj.models.Account.Meta" class="doc doc-heading">
+          <code>Meta</code>
+
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Meta class for Account model.
+verbose_name: Human readable singular name for the model.
+verbose_name_plural: Human readable plural name for the model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Meta:
+    """
+    Meta class for Account model.
+    verbose_name: Human readable singular name for the model.
+    verbose_name_plural: Human readable plural name for the model.
+    """
+    verbose_name = 'Conta'
+    verbose_name_plural = 'Contas'</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.CNAEs" class="doc doc-heading">
+          <code>CNAEs</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing CNAEs (National Classification
+of Economic Activities).</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class CNAEs(Model):
+    """Model representing CNAEs (National Classification
+    of Economic Activities).
+    """
+    codigo = PositiveIntegerField(primary_key=True)
+    descricao = TextField(null=True, default=None)
+
+    def __str__(self) -&gt; str:
+        return f"{self.codigo}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Empresas" class="doc doc-heading">
+          <code>Empresas</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing companies.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Empresas(Model):
+    """Model representing companies."""
+    cnpj_basico = PositiveBigIntegerField(primary_key=True)
+    razao_social = CharField(max_length=RAZAO_SOCIAL_LENGTH,
+                             null=True, default=None, db_index=True)
+    natureza_juridica = ForeignKey(Naturezas, related_name="empresas",
+                                   on_delete=PROTECT)
+    qualificacao_resposavel = ForeignKey(Qualificacoes,
+                                         related_name="empresas",
+                                         on_delete=PROTECT)
+    capital_social = FloatField()
+    porte_empresa = PositiveSmallIntegerField(null=True, default=None)
+    ente_federativo_responsavel = TextField(null=True, default=None)
+    razao_social_limpa = TextField(
+        max_length=RAZAO_SOCIAL_LENGTH, null=True, default=None, db_index=True
+    )
+
+    def __str__(self) -&gt; str:
+        return f"{self.cnpj_basico}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Estabelecimentos" class="doc doc-heading">
+          <code>Estabelecimentos</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing establishments.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Estabelecimentos(Model):
+    """Model representing establishments."""
+    cnpj_basico_id = PositiveBigIntegerField(primary_key=True)
+    cnpj_ordem = PositiveSmallIntegerField()
+    cnpj_dv = PositiveSmallIntegerField()
+    matriz_filial = PositiveSmallIntegerField()
+    nome_fantasia = TextField(null=True, default=None)
+    situacao_cadastral = PositiveSmallIntegerField()
+    data_situacao_cadastral = DateField(null=True, default=None)
+    motivo_situacao_cadastral = ForeignKey(
+        Motivos, related_name="estabelecimentos", on_delete=PROTECT
+    )
+    nome_cidade_exterior = TextField(null=True, default=None)
+    pais = ForeignKey(
+        Paises, null=True, default=None, related_name="estabelecimentos",
+        on_delete=PROTECT
+    )
+    data_inicio_atividade = DateField(null=True, default=None)
+    cnae_fiscal_principal = ForeignKey(CNAEs, related_name="estabelecimentos",
+                                       on_delete=PROTECT)
+    cnae_fiscal_secundaria = TextField(null=True, default=None)
+    tipo_logradouro = TextField(null=True, default=None)
+    logradouro = TextField(null=True, default=None)
+    numero = TextField(null=True, default=None)
+    complemento = TextField(null=True, default=None)
+    bairro = TextField(null=True, default=None)
+    cep = TextField(null=True, default=None)
+    uf = CharField(max_length=UF_LENGTH)
+    municipio = ForeignKey(Municipios, related_name="estabelecimentos",
+                           on_delete=PROTECT)
+    ddd1 = TextField(null=True, default=None)
+    telefone1 = TextField(null=True, default=None)
+    ddd2 = TextField(null=True, default=None)
+    telefone2 = TextField(null=True, default=None)
+    ddd_fax = TextField(null=True, default=None)
+    fax = TextField(null=True, default=None)
+    correio_eletronico = TextField(null=True, default=None)
+    situacao_especial = TextField(null=True, default=None)
+    data_situacao_especial = DateField(null=True, default=None)
+    cnpj_completo = TextField(null=True, default=None)
+
+    def __str__(self):
+        return f"{self.cnpj_basico_id}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Motivos" class="doc doc-heading">
+          <code>Motivos</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing reasons.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Motivos(Model):
+    """Model representing reasons."""
+    codigo = PositiveSmallIntegerField(primary_key=True)
+    descricao = TextField(null=True, default=None)
+
+    def __str__(self) -&gt; str:
+        return f"{self.codigo}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Municipios" class="doc doc-heading">
+          <code>Municipios</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing municipalities.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Municipios(Model):
+    """Model representing municipalities."""
+    codigo = PositiveSmallIntegerField(primary_key=True)
+    descricao = TextField(null=True, default=None)
+
+    def __str__(self) -&gt; str:
+        return f"{self.codigo}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Naturezas" class="doc doc-heading">
+          <code>Naturezas</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing legal natures.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Naturezas(Model):
+    """Model representing legal natures."""
+    codigo = PositiveSmallIntegerField(primary_key=True)
+    descricao = TextField(null=True, default=None)
+
+    def __str__(self) -&gt; str:
+        return f"{self.codigo}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Paises" class="doc doc-heading">
+          <code>Paises</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing countries.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Paises(Model):
+    """Model representing countries."""
+    codigo = PositiveSmallIntegerField(primary_key=True)
+    descricao = TextField(null=True, default=None)
+
+    def __str__(self) -&gt; str:
+        return f"{self.codigo}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Qualificacoes" class="doc doc-heading">
+          <code>Qualificacoes</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing qualifications.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Qualificacoes(Model):
+    """Model representing qualifications."""
+    codigo = PositiveSmallIntegerField(primary_key=True)
+    descricao = TextField(null=True, default=None)
+
+    def __str__(self) -&gt; str:
+        return f"{self.codigo}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Simples" class="doc doc-heading">
+          <code>Simples</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing Simples.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Simples(Model):
+    """Model representing Simples."""
+    cnpj_basico = ForeignKey(Empresas, related_name="simples",
+                             primary_key=True, on_delete=PROTECT)
+    opcao_simples = BooleanField()
+    data_opcao_simples = DateField(null=True, default=None)
+    data_exclusao_simples = DateField(null=True, default=None)
+    opcao_mei = BooleanField()
+    data_opcao_mei = DateField(null=True, default=None)
+    data_exclusao_mei = DateField(null=True, default=None)
+
+    def __str__(self):
+        return f"{self.cnpj_basico}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.Socios" class="doc doc-heading">
+          <code>Socios</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.db.models.Model">Model</span></code></p>
+
+  
+      <p>Model representing partners.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Socios(Model):
+    """Model representing partners."""
+    cnpj_basico = ForeignKey(Empresas, related_name="socios",
+                             on_delete=PROTECT)
+    identificador_socio = PositiveSmallIntegerField()
+    nome_socio = CharField(max_length=SOCIO_LENGTH, null=True, default=None,
+                           db_index=True)
+    cnpj_cpf_socio = CharField(max_length=CPNJ_CPF_SOCIO_LENGTH, null=True,
+                               default=None)
+    qualificacao_socio = ForeignKey(Qualificacoes, related_name="socios",
+                                    on_delete=PROTECT)
+    data_entrada_sociedade = DateField()
+    pais = ForeignKey(Paises, null=True, default=None, related_name="socios",
+                      on_delete=PROTECT)
+    representante_legal = CharField(max_length=REPRESENTANTE_LEGAL_LENGTH,
+                                    null=True, default=None)
+    nome_representante = TextField(null=True, default=None)
+    qualificacao_representante_legal = ForeignKey(
+        Qualificacoes,
+        related_name="socios_representante",
+        on_delete=PROTECT,
+    )
+    faixa_etaria = PositiveSmallIntegerField()
+
+    class Meta:
+        """
+        Meta class for Socios model.
+        unique_together: Fields that should be unique together.
+        verbose_name: Human readable singular name for the model.
+        verbose_name_plural: Human readable plural name for the model.
+        """
+        unique_together = [("cnpj_basico", "nome_socio")]
+        verbose_name = "Sócio"
+        verbose_name_plural = "Sócios"
+
+    def __str__(self) -&gt; str:
+        return f"{self.cnpj_basico}({self.nome_socio})"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h5 id="cnpj.models.Socios.Meta" class="doc doc-heading">
+          <code>Meta</code>
+
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+
+  
+      <p>Meta class for Socios model.
+unique_together: Fields that should be unique together.
+verbose_name: Human readable singular name for the model.
+verbose_name_plural: Human readable plural name for the model.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class Meta:
+    """
+    Meta class for Socios model.
+    unique_together: Fields that should be unique together.
+    verbose_name: Human readable singular name for the model.
+    verbose_name_plural: Human readable plural name for the model.
+    """
+    unique_together = [("cnpj_basico", "nome_socio")]
+    verbose_name = "Sócio"
+    verbose_name_plural = "Sócios"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.models.create_user_account" class="doc doc-heading">
+          <code class="highlight language-python">create_user_account(sender, instance, created, **kwargs)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Create a user account when a new user is created.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/models.py</code></summary>
+            <pre class="highlight"><code class="language-python">@receiver(post_save, sender=User)
+def create_user_account(sender: Model, instance: User, created: bool,
+                        **kwargs: Optional[dict]) -&gt; None:
+    """
+    Create a user account when a new user is created.
+    """
+    if created:
+        Account.objects.create(user=instance)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div><h3 id="structure">Structure</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.structure"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.structure.boolean" class="doc doc-heading">
+          <code class="highlight language-python">boolean(value, _=False)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert value to boolean if possible, else return None.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/structure.py</code></summary>
+            <pre class="highlight"><code class="language-python">def boolean(value: Any, _: bool = False) -&gt; Optional[bool]:
+    """Convert value to boolean if possible, else return None."""
+
+    if value is None or value.strip().lower() in ["", "null", "none"]:
+        return None
+
+    return value.strip().lower() in ["s", "sim", "y", "yes", "t", "true", "1"]</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.structure.char" class="doc doc-heading">
+          <code class="highlight language-python">char(value, _=False)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert value to string if possible, else return None.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/structure.py</code></summary>
+            <pre class="highlight"><code class="language-python">def char(value: Any, _: bool = False) -&gt; Optional[str]:
+    """Convert value to string if possible, else return None."""
+
+    if value is None or value.strip().lower() in ["", "null", "none"]:
+        return None
+
+    return value.strip()</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.structure.date" class="doc doc-heading">
+          <code class="highlight language-python">date(value, _=False)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert value to date string if possible, else return None.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/structure.py</code></summary>
+            <pre class="highlight"><code class="language-python">def date(value: Any, _: bool = False) -&gt; Optional[str]:
+    """Convert value to date string if possible, else return None."""
+
+    if value is None or value.strip().lower() in\
+            ["", "null", "none", "0", "00000000"]:
+
+        return None
+    return value.strip()</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.structure.float_" class="doc doc-heading">
+          <code class="highlight language-python">float_(value, _=False)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert value to float if possible, else return None.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/structure.py</code></summary>
+            <pre class="highlight"><code class="language-python">def float_(value: Any, _: bool = False) -&gt; Optional[float]:
+    """Convert value to float if possible, else return None."""
+
+    if value is None or value.strip().lower() in ["", "null", "none"]:
+        return None
+
+    return float(value.replace(",", "."))</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.structure.foreign_key" class="doc doc-heading">
+          <code class="highlight language-python">foreign_key(model, key)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Return a function that gets or creates a model instance.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/structure.py</code></summary>
+            <pre class="highlight"><code class="language-python">def foreign_key(model: Type[Model], key: str) -&gt;\
+     Callable[[Any], Optional[Union[Model, int]]]:
+
+    """Return a function that gets or creates a model instance."""
+
+    def get(value: Any,
+            return_pk: bool = False) -&gt; Optional[Union[Model, int]]:
+
+        if value is None or value.strip().lower() in ["", "null", "none"]:
+            return None
+
+        if return_pk:
+            return int(value)
+
+        # Get or create a model instance using the provided key
+        instance, _ = model.objects.get_or_create(**{key: value})
+
+        return instance
+
+    return get</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.structure.integer" class="doc doc-heading">
+          <code class="highlight language-python">integer(value, _=False)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert value to integer if possible, else return None.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/structure.py</code></summary>
+            <pre class="highlight"><code class="language-python">def integer(value: Any, _: bool = False) -&gt; Optional[int]:
+    """Convert value to integer if possible, else return None."""
+
+    if value is None or value.strip().lower() in ["", "null", "none"]:
+        return None
+
+    return int(value)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.structure.text" class="doc doc-heading">
+          <code class="highlight language-python">text(value, _=False)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert value to string if possible, else return None.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/structure.py</code></summary>
+            <pre class="highlight"><code class="language-python">def text(value: Any, _: bool = False) -&gt; Optional[str]:
+    """Convert value to string if possible, else return None."""
+
+    if value is None or value.strip().lower() in ["", "null", "none"]:
+        return None
+
+    return value.strip()</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div><h3 id="tests">Tests</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.tests"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  </div>
+
+</div><h3 id="utils">Utils</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.utils"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.utils.calculate_dv_cnpj" class="doc doc-heading">
+          <code class="highlight language-python">calculate_dv_cnpj(cnpj_base)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Calculates the verification digits (DV) for a given CNPJ base.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cnpj_base</code></b>
+                  (<code>int</code>)
+              –
+              <div class="doc-md-description">
+                <p>The CNPJ base to calculate the DV for.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>str</code></b>(                <code>str</code>
+)            –
+            <div class="doc-md-description">
+              <p>The complete CNPJ with the two verification digits.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/utils.py</code></summary>
+            <pre class="highlight"><code class="language-python">def calculate_dv_cnpj(cnpj_base: int) -&gt; str:
+    """
+    Calculates the verification digits (DV) for a given CNPJ base.
+
+    Args:
+        cnpj_base (int): The CNPJ base to calculate the DV for.
+
+    Returns:
+        str: The complete CNPJ with the two verification digits.
+    """
+    # Weight for DV calculation
+    weight: np.ndarray = np.array([5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2])
+
+    if isinstance(cnpj_base, int):
+        cnpj_base = str(cnpj_base)
+
+    cnpj_base: np.ndarray = np.array(list(cnpj_base + "0001"), dtype=int)
+
+    # Calculate the first verification digit
+    sum_: int = np.sum(cnpj_base * weight)
+    remainder: int = sum_ % 11
+    dv1: int = 0 if remainder &lt; 2 else 11 - remainder
+
+    # Add the first DV to the CNPJ base
+    cnpj_with_dv1: np.ndarray = np.concatenate((cnpj_base, np.array([dv1])))
+
+    # Update the weight for the calculation of the second DV
+    weight = np.array([6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2])
+
+    # Calculate the second verification digit
+    sum_: int = np.sum(cnpj_with_dv1 * weight)
+    remainder: int = sum_ % 11
+    dv2: int = 0 if remainder &lt; 2 else 11 - remainder
+
+    result: np.ndarray = np.concatenate((cnpj_with_dv1, np.array([dv2])))
+
+    # Convert result to string
+    result_str: str = "".join(str(x) for x in result)
+
+    # Return the complete CNPJ with the two verification digits
+    return result_str</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.utils.confiability_score" class="doc doc-heading">
+          <code class="highlight language-python">confiability_score(cnpj_base)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Calculate the reliability score of a company based on its CNPJ.</p>
+<p>Parameters:
+cnpj_base (int): The base CNPJ of the company.</p>
+<p>Returns:
+str: The reliability score of the company, categorized as
+"Baixo" (Low), "Médio" (Medium), or "Alto" (High).</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/utils.py</code></summary>
+            <pre class="highlight"><code class="language-python">def confiability_score(cnpj_base: int) -&gt; str:
+    """
+    Calculate the reliability score of a company based on its CNPJ.
+
+    Parameters:
+    cnpj_base (int): The base CNPJ of the company.
+
+    Returns:
+    str: The reliability score of the company, categorized as
+    "Baixo" (Low), "Médio" (Medium), or "Alto" (High).
+    """
+
+    empresa_data_econo: dict = econodata_scrapping(cnpj_base)
+    empresa_data_gov: Union[dict, None] = \
+        Empresas.objects.filter(cnpj_basico=cnpj_base).values().first()
+
+    # Get today's date
+    today: datetime.date = datetime.date.today()
+
+    # Get the company date of creation
+    opening_date_str: str = empresa_data_econo['data_abertura']
+    opening_date: datetime.date = \
+        datetime.datetime.strptime(opening_date_str, '%d/%m/%Y').date()
+
+    # Difference in days between today and the company's opening date
+    degree_1: int = (today - opening_date).days
+
+    capital: float = empresa_data_gov['capital_social']
+
+    port: float = empresa_data_gov['porte_empresa']
+
+    # Get the number of employees
+    no_employees_str: str = empresa_data_econo['n_funcionarios']
+    no_employees_list: list = re.findall(r'\d+', no_employees_str)
+    no_employees: int = max(map(int, no_employees_list), default=0)
+
+    # Make a score based on the company age
+    if degree_1 &lt;= 365:
+        degree_1 = 1
+    elif degree_1 &lt;= 365*3:
+        degree_1 = 2
+    elif degree_1 &lt;= 365*5:
+        degree_1 = 3
+    elif degree_1 &lt;= 365*10:
+        degree_1 = 4
+    else:
+        degree_1 = 5
+
+    # Make a score based on the number of employees
+    if no_employees &lt;= 10:
+        degree_2 = 1
+    elif no_employees &lt;= 100:
+        degree_2 = 2
+    elif no_employees &lt;= 1000:
+        degree_2 = 3
+    elif no_employees &lt;= 5000:
+        degree_2 = 4
+    else:
+        degree_2 = 5
+
+    # Make a score based on the company capital
+    if capital &lt;= 100:
+        degree_3 = 1
+    elif capital &lt;= 1000:
+        degree_3 = 2
+    elif capital &lt;= 10000:
+        degree_3 = 3
+    elif capital &lt;= 100000:
+        degree_3 = 4
+    else:
+        degree_3 = 5
+
+    # Calculate the overall score
+    score: float = (degree_1 + degree_2 + degree_3 + port) / 4
+
+    # Categorize the score
+    if score &lt; 2:
+        result = "Baixo"
+    elif score &lt; 3.5:
+        result = "Médio"
+    else:
+        result = "Alto"
+
+    return result</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.utils.econodata_scrapping" class="doc doc-heading">
+          <code class="highlight language-python">econodata_scrapping(cnpj_base)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Scrapes data from the Econodata website based on the provided CNPJ number.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>cnpj_base</code></b>
+                  (<code>int</code>)
+              –
+              <div class="doc-md-description">
+                <p>The base CNPJ number.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>dict</code></b>(                <code>dict</code>
+)            –
+            <div class="doc-md-description">
+              <p>A dictionary containing the scraped data, including:
+- cnpj_completo (str): The complete CNPJ number.
+- nome_fantasia (str): The company's trading name.
+- atividade_economica (str): The company's economic activity.
+- porte (str): The company's size.
+- cnae (str): The company's CNAE code.
+- n_funcionarios (str): The number of employees in the company.
+- data_abertura (str): The company's date of establishment.
+- situacao (str): The company's status.
+- natureza (str): The company's nature.
+- cep (str): The company's postal code.
+- rua (str): The company's street address.
+- bairro (str): The company's neighborhood.
+- cidade (str): The company's city.
+- pais (str): The company's country.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/utils.py</code></summary>
+            <pre class="highlight"><code class="language-python">def econodata_scrapping(cnpj_base: int) -&gt; dict:
+    """
+    Scrapes data from the Econodata website based on the provided CNPJ number.
+
+    Args:
+        cnpj_base (int): The base CNPJ number.
+
+    Returns:
+        dict: A dictionary containing the scraped data, including:
+            - cnpj_completo (str): The complete CNPJ number.
+            - nome_fantasia (str): The company's trading name.
+            - atividade_economica (str): The company's economic activity.
+            - porte (str): The company's size.
+            - cnae (str): The company's CNAE code.
+            - n_funcionarios (str): The number of employees in the company.
+            - data_abertura (str): The company's date of establishment.
+            - situacao (str): The company's status.
+            - natureza (str): The company's nature.
+            - cep (str): The company's postal code.
+            - rua (str): The company's street address.
+            - bairro (str): The company's neighborhood.
+            - cidade (str): The company's city.
+            - pais (str): The company's country.
+    """
+    cnpj_completo = calculate_dv_cnpj(cnpj_base)
+
+    website = requests.get(
+        f"https://www.econodata.com.br/consulta-empresa/{cnpj_completo}",
+        timeout=10
+        )
+
+    soup = BeautifulSoup(website.content, 'html.parser')
+
+    dom = etree.HTML(str(soup), parser=etree.HTMLParser(encoding='utf-8'))
+
+    # find element with id="__nuxt"
+
+    empresa_data = {
+        "cnpj_completo": dom.xpath(
+            '//*[@id="receita-section"]/div[2]/div[2]/div[1]/div/div[2]/p'
+        )[0].text,
+        "nome_fantasia": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[1]/div/div/div[3]/div[2]/h1'
+        )[0].text,
+        "atividade_economica": dom.xpath(
+            '//*[@id="detalhes-section"]/div[2]/div[2]/div[1]/div[2]/\
+                div[2]/div/div/div/div[1]/u/a'
+        )[0].text,
+        "porte": dom.xpath(
+            '//*[@id="detalhes-section"]/div[2]/div[2]/div[3]/div[2]/div[2]/p'
+        )[0].text,
+        "cnae": dom.xpath(
+            '//*[@id="detalhes-section"]/div[2]/div[2]/div[2]/div[2]/\
+                div[2]/div/div/u/a'
+        )[0].text,
+        "n_funcionarios": dom.xpath(
+            '//*[@id="detalhes-section"]/div[2]/div[2]/div[4]/div[2]/div[2]/p'
+        )[0].text,
+        "data_abertura": dom.xpath(
+            '//*[@id="receita-section"]/div[2]/div[2]/div[4]/div/div[2]/p'
+        )[0].text,
+        "situacao": dom.xpath(
+            '//*[@id="receita-section"]/div[2]/div[2]/div[6]/div/div[2]/p'
+        )[0].text,
+        "natureza": dom.xpath(
+            '//*[@id="receita-section"]/div[2]/div[2]/div[5]/div/div[2]/p'
+        )[0].text,
+        "cep": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                div[2]/div[2]/div[4]/span'
+        )[0].text,
+        "rua": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                div[2]/div[2]/div[1]/span'
+        )[0].text,
+        "bairro": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                div[2]/div[2]/div[2]/span'
+        )[0].text,
+        "cidade": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                div[2]/div[2]/div[3]/span'
+        )[0].text,
+        "pais": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                div[2]/div[2]/div[5]/span'
+        )[0].text
+    }
+
+    return empresa_data</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div><h3 id="views">Views</h3>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.views"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.views.analysis" class="doc doc-heading">
+          <code class="highlight language-python">analysis(request, pk)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>View function for analyzing details of a company.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>request</code></b>
+                  (<code><span title="django.http.HttpRequest">HttpRequest</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The HTTP request object.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>pk</code></b>
+                  (<code>int</code>)
+              –
+              <div class="doc-md-description">
+                <p>The primary key of the company.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>HttpResponse</code></b>(                <code><span title="django.http.HttpResponse">HttpResponse</span></code>
+)            –
+            <div class="doc-md-description">
+              <p>The HTTP response object.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def analysis(request: HttpRequest, pk: int) -&gt; HttpResponse:
+    """
+    View function for analyzing details of a company.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        pk (int): The primary key of the company.
+
+    Returns:
+        HttpResponse: The HTTP response object.
+    """
+
+    # Fetch the company information from the database
+    empresa: Empresas = Empresas.objects.get(cnpj_basico=pk)
+
+    # Fetch related establishments from the database
+    estabelecimentos: QuerySet = \
+        Estabelecimentos.objects.filter(cnpj_basico_id=pk)
+
+    # Perform web scraping using Econodata API
+    scrapping: dict = econodata_scrapping(pk)
+
+    # Calculate the reliability score for the company
+    confiability: str = confiability_score(pk)
+
+    # Prepare the context data for rendering the template
+    context: dict = {
+        'empresa': empresa,
+        'estabelecimentos': estabelecimentos,
+        'scrapping': scrapping,
+        'confiability': confiability,
+    }
+
+    # Update the search history if the user is authenticated
+    if request.user.is_authenticated:
+        request.user.account.search_history.append(empresa.cnpj_basico)
+        request.user.account.save()
+
+    # Render the details template with the context data
+    return render(request, 'details.html', context)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.views.comparison" class="doc doc-heading">
+          <code class="highlight language-python">comparison(request, pk1, pk2)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Compare two companies based on their primary keys.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>request</code></b>
+                  (<code><span title="django.http.HttpRequest">HttpRequest</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The HTTP request object.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>pk1</code></b>
+                  (<code>int</code>)
+              –
+              <div class="doc-md-description">
+                <p>The primary key of the first company.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>pk2</code></b>
+                  (<code>int</code>)
+              –
+              <div class="doc-md-description">
+                <p>The primary key of the second company.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>HttpResponse</code></b>(                <code><span title="django.http.HttpResponse">HttpResponse</span></code>
+)            –
+            <div class="doc-md-description">
+              <p>The HTTP response object.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def comparison(request: HttpRequest, pk1: int, pk2: int) -&gt; HttpResponse:
+    """
+    Compare two companies based on their primary keys.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        pk1 (int): The primary key of the first company.
+        pk2 (int): The primary key of the second company.
+
+    Returns:
+        HttpResponse: The HTTP response object.
+    """
+    # Fetch the information of the first selected company
+    first_empresa: Empresas | None = \
+        Empresas.objects.filter(cnpj_basico=pk1).first()
+
+    # Fetch the information of the second selected company
+    second_empresa: Empresas | None = \
+        Empresas.objects.filter(cnpj_basico=pk2).first()
+
+    # Fetch web scraping data for the first company
+    first_empresa_scrapping: dict = econodata_scrapping(pk1)
+
+    # Fetch web scraping data for the second company
+    second_empresa_scrapping: dict = econodata_scrapping(pk2)
+
+    # Calculate reliability score for the first company
+    first_empresa_confiability = confiability_score(pk1)
+
+    # Calculate reliability score for the second company
+    second_empresa_confiability = confiability_score(pk2)
+
+    # Prepare the context data for rendering the template
+    context: dict = {
+        'first_empresa': first_empresa,
+        'second_empresa': second_empresa,
+        'first_empresa_scrapping': first_empresa_scrapping,
+        'second_empresa_scrapping': second_empresa_scrapping,
+        'first_empresa_confiability': first_empresa_confiability,
+        'second_empresa_confiability': second_empresa_confiability,
+    }
+
+    # Render the comparison template with the context data
+    return render(request, 'comparison.html', context)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.views.home" class="doc doc-heading">
+          <code class="highlight language-python">home(request)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Display a random selection of 10 companies on the home page.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>request</code></b>
+                  (<code><span title="django.http.HttpRequest">HttpRequest</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The HTTP request object.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>HttpResponse</code></b>(                <code><span title="django.http.HttpResponse">HttpResponse</span></code>
+)            –
+            <div class="doc-md-description">
+              <p>The HTTP response object.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def home(request: HttpRequest) -&gt; HttpResponse:
+    """
+    Display a random selection of 10 companies on the home page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response object.
+    """
+    # Retrieve a random selection of 10 companies from the database
+    empresas: QuerySet = Empresas.objects.order_by('?')[:10]
+
+    # Prepare the context data for rendering the template
+    context: dict = {
+        'empresas': empresas,
+    }
+
+    # Render the home template with the context data
+    return render(request, 'home.html', context)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.views.profile" class="doc doc-heading">
+          <code class="highlight language-python">profile(response)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Display user profile information, including search history.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>response</code></b>
+                  (<code><span title="django.http.HttpRequest">HttpRequest</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The HTTP request object.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>HttpResponse</code></b>(                <code><span title="django.http.HttpResponse">HttpResponse</span></code>
+)            –
+            <div class="doc-md-description">
+              <p>The HTTP response object.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def profile(response: HttpRequest) -&gt; HttpResponse:
+    """
+    Display user profile information, including search history.
+
+    Args:
+        response (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response object.
+    """
+    # Check if the user is authenticated
+    if response.user.is_authenticated:
+        # Retrieve the search history from the user's account
+        search_history: list = response.user.account.search_history
+
+        # Fetch companies based on search history
+        empresas = Empresas.objects.filter(cnpj_basico__in=search_history)
+
+        # Sort companies based on the order in the search history
+        empresas = sorted(empresas,
+                          key=lambda empresa:
+                          -search_history.index(empresa.cnpj_basico))
+    else:
+        # If the user is not authenticated, set empresas to an empty list
+        empresas = []
+
+    # Prepare the context data for rendering the template
+    context: dict = {"empresas": empresas}
+
+    # Render the profile template with the context data
+    return render(response, "profile.html", context)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.views.register" class="doc doc-heading">
+          <code class="highlight language-python">register(response)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Handle user registration.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>response</code></b>
+                  (<code><span title="django.http.HttpRequest">HttpRequest</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The HTTP request object.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>HttpResponse</code></b>(                <code><span title="django.http.HttpResponse">HttpResponse</span></code>
+)            –
+            <div class="doc-md-description">
+              <p>The HTTP response object.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def register(response: HttpRequest) -&gt; HttpResponse:
+    """
+    Handle user registration.
+
+    Args:
+        response (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response object.
+    """
+    # Check if the form is submitted via POST method
+    if response.method == "POST":
+        # Create a UserRegistrationForm instance with the submitted data
+        form: UserRegistrationForm = UserRegistrationForm(response.POST)
+
+        # Check if the form is valid
+        if form.is_valid():
+            # Save the user registration data
+            form.save()
+            # Redirect to the login page after successful registration
+            return redirect("/accounts/login")
+    else:
+        # Create a new instance of UserRegistrationForm
+        form: UserRegistrationForm = UserRegistrationForm()
+
+    # Prepare the context data for rendering the template
+    context: dict = {"form": form}
+
+    # Render the registration template with the context data
+    return render(response, "registration/register.html", context)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.views.search_compare" class="doc doc-heading">
+          <code class="highlight language-python">search_compare(request, pk)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Allow users to compare a selected company
+with others based on a search query.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>request</code></b>
+                  (<code><span title="django.http.HttpRequest">HttpRequest</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The HTTP request object.</p>
+              </div>
+            </li>
+            <li>
+              <b><code>pk</code></b>
+                  (<code>int</code>)
+              –
+              <div class="doc-md-description">
+                <p>The primary key of the selected company.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>HttpResponse</code></b>(                <code><span title="django.http.HttpResponse">HttpResponse</span></code>
+)            –
+            <div class="doc-md-description">
+              <p>The HTTP response object.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def search_compare(request: HttpRequest, pk: int) -&gt; HttpResponse:
+    """
+    Allow users to compare a selected company
+    with others based on a search query.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+        pk (int): The primary key of the selected company.
+
+    Returns:
+        HttpResponse: The HTTP response object.
+    """
+    # Fetch the information of the first selected company
+    first_empresa: Empresas | None = \
+        Empresas.objects.filter(cnpj_basico=pk).first()
+
+    # Prepare the context data for rendering the template
+    context: dict = {'first_empresa': first_empresa}
+
+    # Check if a search query is provided
+    if request.GET.get('q'):
+        # Extract the search query from the request parameters
+        query: str | None = request.GET.get('q')
+
+        # Perform case-insensitive search on cnpj_basico and razao_social
+        empresas_list: QuerySet = Empresas.objects.filter(
+            Q(cnpj_basico__icontains=query) |
+            Q(razao_social__icontains=query)
+        )
+
+        # Update the context based on the search query
+        context['empresas_list'] = empresas_list
+
+    # Render the search_compare template with the context data
+    return render(request, 'search_compare.html', context)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h4 id="cnpj.views.search_results" class="doc doc-heading">
+          <code class="highlight language-python">search_results(request)</code>
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Display search results based on the given query.</p>
+
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+      <th class="field-name">Parameters:</th>
+      <td class="field-body">
+        <ul class="first simple">
+            <li>
+              <b><code>request</code></b>
+                  (<code><span title="django.http.HttpRequest">HttpRequest</span></code>)
+              –
+              <div class="doc-md-description">
+                <p>The HTTP request object.</p>
+              </div>
+            </li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<table class="field-list">
+  <colgroup>
+    <col class="field-name" />
+    <col class="field-body" />
+  </colgroup>
+  <tbody valign="top">
+    <tr class="field">
+    <th class="field-name">Returns:</th>
+    <td class="field-body">
+      <ul class="first simple">
+          <li>
+<b><code>HttpResponse</code></b>(                <code><span title="django.http.HttpResponse">HttpResponse</span></code>
+)            –
+            <div class="doc-md-description">
+              <p>The HTTP response object.</p>
+            </div>
+          </li>
+      </ul>
+    </td>
+    </tr>
+  </tbody>
+</table>
+          <details class="quote">
+            <summary>Source code in <code>cnpj/views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def search_results(request: HttpRequest) -&gt; HttpResponse:
+    """
+    Display search results based on the given query.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: The HTTP response object.
+    """
+    # Extract the search query from the request parameters
+    query: str = request.GET.get('q', '')
+
+    # Perform case-insensitive search on cnpj_basico and razao_social fields
+    empresas_list: QuerySet = Empresas.objects.filter(
+        Q(cnpj_basico__icontains=query) | Q(razao_social__icontains=query)
+    )
+
+    # Prepare the context data for rendering the template
+    context = {
+        'empresas_list': empresas_list,
+    }
+
+    # Render the search results template with the context data
+    return render(request, 'search_results.html', context)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = ".";</script>
+    <script src="js/theme_extra.js"></script>
+    <script src="js/theme.js"></script>
+      <script src="search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.5.3
+Build Date UTC : 2023-12-10 19:08:29.504674+00:00
+-->
