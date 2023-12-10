@@ -20,20 +20,38 @@ from .utils import (
     confiability_score
 )
 
-
 # Create home view
 def home(request):
-    empresas = Empresas.objects.order_by('?')[:10]
-    context = {
+    empresas: QuerySet = Empresas.objects.order_by('?')[:10]
+    context: dict= {
         'empresas': empresas,
     }
 
     return render(request, 'home.html', context)
 
 
+"""
 def search_results(request):
-    query = request.GET.get('q')
-    empresas_list = Empresas.objects.filter( Q(cnpj_basico__icontains=query) | Q(razao_social__icontains=query) )
+
+    query = request.GET.get('q', '')
+    empresas_list = Empresas.objects.filter(Q(cnpj_basico__icontains=query))
+
+    context = {
+        'empresas_list': empresas_list,
+    }
+    
+    return render(request, 'search_results.html', context)
+"""
+
+def search_results(request: HttpRequest) -> HttpResponse:
+    """
+    Display search results based on the given query.
+    """
+    query: str = request.GET.get('q', '')
+    empresas_list: QuerySet = Empresas.objects.filter(
+        Q(cnpj_basico__icontains=query) | 
+        Q(razao_social__icontains=query)
+    )
     context = {
         'empresas_list': empresas_list,
     }
@@ -44,10 +62,8 @@ def search_results(request):
 def analysis(request, pk):
     empresa = Empresas.objects.get(cnpj_basico=pk)
     estabelecimentos = Estabelecimentos.objects.filter(cnpj_basico_id=pk)
-    scrapping = econodata_scrapping(pk)
-    confiability = confiability_score(pk)
 
-    context = {
+    context: dict= {
         'empresa': empresa,
         'estabelecimentos': estabelecimentos,
         'scrapping': scrapping,
@@ -60,52 +76,76 @@ def analysis(request, pk):
     
     return render(request, 'details.html', context)
 
-
+"""
 def register(response):
 
+    form = UserRegistrationForm(response.POST)
+
+    return render(response, "registration/register.html", {"form": form})
+"""
+
+def register(response: HttpRequest) -> HttpResponse:
+    """
+    Handle user registration.
+    """
     if response.method == "POST":
-        form = RegisterForm(response.POST)
+        form: Form = UserRegistrationForm(response.POST)
 
         if form.is_valid():
             form.save()
             return redirect("/accounts/login")
     else:
-        form = RegisterForm()
+        form: Form = UserRegistrationForm()
 
-    return render(response, "registration/register.html", {"form":form})
+    return render(response, "registration/register.html", {"form": form})
 
 
+"""
 def profile(response):
-    context = {}
 
     if response.user.is_authenticated:
         search_history = response.user.account.search_history
         empresas = Empresas.objects.filter(cnpj_basico__in=search_history)
-        # Sort the list by the most recent search
-        empresas = sorted(empresas, key=lambda x: -search_history.index(x.cnpj_basico))
         
     return render(response, "profile.html", {"empresas":empresas})
 
-
 def search_compare(request, pk):
-    first_empresa = Empresas.objects.filter(cnpj_basico=pk)[0]
-    context = {
+
+    first_empresa = Empresas.objects.filter(cnpj_basico=pk).first()
+
+    context= {
+        'first_empresa': first_empresa,
+    }
+
+    query= request.GET.get('q')
+    empresas_list= Empresas.objects.filter(Q(cnpj_basico__icontains=query))
+    context['empresas_list'] = empresas_list
+    
+    return render(request, 'search_compare.html', context)
+"""
+
+def search_compare(request: HttpRequest, pk: int) -> HttpResponse:
+    """
+    Allow users to compare a selected company with others based on a search query.
+    """
+    first_empresa: Empresas = Empresas.objects.filter(cnpj_basico=pk).first()
+    context: dict= {
         'first_empresa': first_empresa,
     }
 
     if request.GET.get('q'):
-        query = request.GET.get('q')
-        empresas_list = Empresas.objects.filter( Q(cnpj_basico__icontains=query) | Q(razao_social__icontains=query) )
+        query: str = request.GET.get('q')
+        empresas_list: QuerySet = Empresas.objects.filter(
+            Q(cnpj_basico__icontains=query) | 
+            Q(razao_social__icontains=query)
+        )
         context['empresas_list'] = empresas_list
     
     return render(request, 'search_compare.html', context)
 
-
 def comparision(request, pk, pk2):
     first_empresa = Empresas.objects.filter(cnpj_basico=pk)[0]
     second_empresa = Empresas.objects.filter(cnpj_basico=pk2)[0]
-    first_empresa_scrapping = econodata_scrapping(pk)
-    second_empresa_scrapping = econodata_scrapping(pk2)
     context = {
         'first_empresa': first_empresa,
         'second_empresa': second_empresa,
@@ -114,7 +154,3 @@ def comparision(request, pk, pk2):
     }
 
     return render(request, 'comparision.html', context)
-
-
-
-
