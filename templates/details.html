@@ -61,6 +61,7 @@
                     {% endfor %}
                     {% elif scrapping %}
                     <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>CNPJ Completo:</strong> {{ scrapping.cnpj_completo }}</li>
                         <li class="list-group-item"><strong>Nome Fantasia:</strong> {{ scrapping.nome_fantasia }}</li>
                         <li class="list-group-item"><strong>Atividade Econômica:</strong> {{ scrapping.atividade_economica }}</li>
                         <li class="list-group-item"><strong>Porte:</strong> {{ scrapping.porte }}</li>

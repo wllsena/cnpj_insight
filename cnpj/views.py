@@ -68,6 +68,7 @@ def econodata_scrapping(cnpj_base):
     # find element with id="__nuxt"
 
     dados_empresa = {
+        "cnpj_completo": dom.xpath('//*[@id="receita-section"]/div[2]/div[2]/div[1]/div/div[2]/p')[0].text,
         "nome_fantasia": dom.xpath('//*[@id="__nuxt"]/div/div[1]/div/div[1]/div/div/div[3]/div[2]/h1')[0].text,
         "atividade_economica": dom.xpath('//*[@id="detalhes-section"]/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div/div[1]/u/a')[0].text,
         "porte": dom.xpath('//*[@id="detalhes-section"]/div[2]/div[2]/div[3]/div[2]/div[2]/p')[0].text,
