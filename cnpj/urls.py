@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import home, search_results, analysis, register, profile, search_compare, comparison
+from .views import (home, search_results, analysis,
+                    register, profile, search_compare,
+                    comparison)
 
 urlpatterns = [
     path("", home, name="home"),

@@ -20,7 +20,8 @@ class EmpresasDocument(Document):
     class Index:
         """Index class for EmpresasDocument.
 
-        This class includes the name of the index in Elasticsearch and its settings.
+        This class includes the name of the index 
+        in Elasticsearch and its settings.
         """
 
         name: str = "empresas"
@@ -29,8 +30,9 @@ class EmpresasDocument(Document):
     class Django:
         """Django class for EmpresasDocument.
 
-        This class includes the model that the document represents and the fields
-        that will be included in the document.
+        This class includes the model that the document
+        represents and the fields that will be included
+        in the document.
         """
 
         model: type = Empresas
