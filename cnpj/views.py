@@ -1,10 +1,11 @@
 from django.db.models import Q, QuerySet
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-
+from django.test import RequestFactory
 from .forms import UserRegistrationForm
 from .models import Empresas, Estabelecimentos
 from .utils import econodata_scrapping, confiability_score
+from django.http import Http404
 
 
 """
@@ -21,7 +22,7 @@ def home(request) :
 """
 
 
-def home(request: HttpRequest) -> HttpResponse:
+def home(request) -> HttpResponse:
     """
     Display a random selection of 10 companies on the home page.
 
@@ -100,7 +101,7 @@ def analysis(request, pk):
 """
 
 
-def analysis(request: HttpRequest, pk: int) -> HttpResponse:
+def analysis(request, pk: int) -> HttpResponse:
     """
     View function for analyzing details of a company.
 
@@ -246,7 +247,7 @@ def search_compare(request, pk):
 """
 
 
-def search_compare(request: HttpRequest, pk: int) -> HttpResponse:
+def search_compare(request, pk) -> HttpResponse:
     """
     Allow users to compare a selected company
     with others based on a search query.

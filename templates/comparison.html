@@ -41,7 +41,7 @@
             {% else %}
             <h2>Confiabilidade: <div class="confidence-circle green text-center">Alta</div></h2> 
             {% endif %}
-            <a href="{% url 'search_compare' first_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ first_empresa.razao_social }} com outra empresa.</a>
+            <a href="{% url 'search_compare' pk=first_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ first_empresa.razao_social }} com outra empresa.</a>
         
         </div>
         <div class="col-md-6 mt-5 mb-3">
@@ -82,7 +82,7 @@
             <h2>Confiabilidade: <div class="confidence-circle green text-center">Alta</div></h2> 
             {% endif %}
             
-            <a href="{% url 'search_compare' second_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ second_empresa.razao_social }} com outra empresa.</a>    
+            <a href="{% url 'search_compare' pk=second_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ second_empresa.razao_social }} com outra empresa.</a>    
             
         </div>
     </div>
