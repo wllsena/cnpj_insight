@@ -14,3 +14,9 @@ sudo docker-compose -f docker-compose.yml up --build
 ```
 
 Access: http://localhost:8000
+
+## Stop
+
+```bash
+sudo docker-compose down -v
+```
