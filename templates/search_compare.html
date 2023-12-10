@@ -8,6 +8,7 @@
     Make a container with bootstrap and a centralized input query (just like google)
     {% endcomment %}
     <div class="container">
+        {% if first_empresa %}
         <div class="row">
             <div class="col-md-12 mt-5 mb-5">
                 <h1 class="text-center mt-3">Comparar com {{ first_empresa.razao_social }}</h1>
@@ -58,5 +59,12 @@
             {% endif %}
         </div>
     </div>
+    {% else %}
+    <div class="row">
+        <div class="col-md-12 mt-5 mb-5">
+            <h1 class="text-center mt-3">Empresa selecionada não encontrada.</h1>
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

@@ -76,19 +76,14 @@ class TestViews(TestCase):
         non_existing_pk = 12345678
 
         # Use reverse with kwargs to create the URL
-        url = reverse('search_compare', args=[non_existing_pk] )
-        # url = "/compare/12345/"
+        url = reverse('search_compare', kwargs={"pk": non_existing_pk})
 
-        print(url)
-        try:
-            response = client.get(url)
-            self.assertEquals(response.status_code, 200)
-            self.assertTemplateUsed(response, 'search_compare.html')
-            self.assertTemplateUsed(response, 'base.html')
-            self.assertTemplateUsed(response, 'navbar.html')
-            self.assertTemplateUsed(response, 'footer.html')
-        except NoReverseMatch:
-            print("NoReverseMatch")
+        response = client.get(url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search_compare.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')
 
     def test_comparison_GET(self):
         client = Client()
@@ -96,11 +91,11 @@ class TestViews(TestCase):
         non_existing_pk1 = 12345678
         non_existing_pk2 = 87654321
 
-        with self.assertRaises(Empresas.DoesNotExist):
-            response = client.get(reverse('comparison', kwargs={'pk1': non_existing_pk1, 'pk2': non_existing_pk2}))
-            self.assertEquals(response.status_code, 200)
-            self.assertTemplateUsed(response, 'comparison.html')
-            self.assertTemplateUsed(response, 'base.html')
-            self.assertTemplateUsed(response, 'navbar.html')
-            self.assertTemplateUsed(response, 'footer.html')
-            
+        response = client.get(reverse('comparison',
+                                        kwargs={'pk1': non_existing_pk1,
+                                                'pk2': non_existing_pk2}))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'comparison.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')

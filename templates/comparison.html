@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
 
-{% block title %} Comparação das empresas {{ first_empresa.razao_social }} e {{ second_empresa.razao_social }} {% endblock %}
+{% block title %}
+{% if first_empresa.razao_social and second_empresa.razao_social %}
+Comparação das empresas {{ first_empresa.razao_social }} e {{ second_empresa.razao_social }}
+{% else %}
+Uma das empresas selecionadas não foi encontrada.
+{% endif %}
+{% endblock %}
 
 {% block content %}
 
 <div class="container">
+    {% if first_empresa.razao_social and second_empresa.razao_social %}
     <div class="row">
         <div class="col-md-6 mt-5 mb-3">
             <h2> Análise da empresa: {{ first_empresa.razao_social }} </h2>
@@ -87,7 +94,14 @@
         </div>
     </div>
     <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
+    {% else %}
+    <div class="row">
+        <div class="col-md-12 mt-5 mb-3">
+            <h2> Uma das empresas selecionadas não foi encontrada. </h2>
+            <a href="{% url 'home' %}" class="btn btn-primary">Voltar</a>
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
-```

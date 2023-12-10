@@ -264,7 +264,13 @@ def search_compare(request, pk) -> HttpResponse:
         Empresas.objects.filter(cnpj_basico=pk).first()
 
     # Prepare the context data for rendering the template
+    # if first_empresa is not None:
+        # Prepare the context data for rendering the template
     context: dict = {'first_empresa': first_empresa}
+    # else:
+    #     # If the first_empresa is None, set context to an empty dictionary
+    #     solver_empresa = Empresas.objects.order_by('?').first()
+    #     context: dict = {'first_empresa': solver_empresa}
 
     # Check if a search query is provided
     if request.GET.get('q'):
@@ -320,28 +326,32 @@ def comparison(request: HttpRequest, pk1: int, pk2: int) -> HttpResponse:
     # Fetch the information of the second selected company
     second_empresa: Empresas | None = \
         Empresas.objects.filter(cnpj_basico=pk2).first()
+        
+    if first_empresa and second_empresa:
 
-    # Fetch web scraping data for the first company
-    first_empresa_scrapping: dict = econodata_scrapping(pk1)
+        # Fetch web scraping data for the first company
+        first_empresa_scrapping: dict = econodata_scrapping(pk1)
 
-    # Fetch web scraping data for the second company
-    second_empresa_scrapping: dict = econodata_scrapping(pk2)
+        # Fetch web scraping data for the second company
+        second_empresa_scrapping: dict = econodata_scrapping(pk2)
 
-    # Calculate reliability score for the first company
-    first_empresa_confiability = confiability_score(pk1)
+        # Calculate reliability score for the first company
+        first_empresa_confiability = confiability_score(pk1)
 
-    # Calculate reliability score for the second company
-    second_empresa_confiability = confiability_score(pk2)
+        # Calculate reliability score for the second company
+        second_empresa_confiability = confiability_score(pk2)
 
-    # Prepare the context data for rendering the template
-    context: dict = {
-        'first_empresa': first_empresa,
-        'second_empresa': second_empresa,
-        'first_empresa_scrapping': first_empresa_scrapping,
-        'second_empresa_scrapping': second_empresa_scrapping,
-        'first_empresa_confiability': first_empresa_confiability,
-        'second_empresa_confiability': second_empresa_confiability,
-    }
+        # Prepare the context data for rendering the template
+        context: dict = {
+            'first_empresa': first_empresa,
+            'second_empresa': second_empresa,
+            'first_empresa_scrapping': first_empresa_scrapping,
+            'second_empresa_scrapping': second_empresa_scrapping,
+            'first_empresa_confiability': first_empresa_confiability,
+            'second_empresa_confiability': second_empresa_confiability,
+        }
+    else:
+        context: dict = {}
 
     # Render the comparison template with the context data
     return render(request, 'comparison.html', context)
