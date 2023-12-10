@@ -1,0 +1,21 @@
+@startuml 09-SearchHistoryFunctionality
+left to right direction
+skinparam packageStyle rectangle
+
+actor System
+
+rectangle "Search History Functionality" {
+  System -- (Maintain Search History)
+  (Maintain Search History) ..> (Record Searches Automatically) : includes
+  (Maintain Search History) ..> (Store Searches in Data Structure) : includes
+  (Maintain Search History) ..> (Visualize Search History) : includes
+}
+
+note right of (Maintain Search History)
+  This use case allows the system to maintain a
+  log of search queries during a user's session.
+  It ensures that users can revisit their recent
+  searches without having to re-enter them.
+end note
+
+@enduml

@@ -1,0 +1,26 @@
+@startuml 07-DataBackupProcess
+left to right direction
+skinparam packageStyle rectangle
+
+actor "System Administrator" as Admin
+
+rectangle "Data Backup Process" {
+  Admin -- (Perform Regular Data Backup)
+  (Perform Regular Data Backup) ..> (Access Backup Functionality) : includes
+  (Perform Regular Data Backup) ..> (Initiate Backup Process) : includes
+  (Perform Regular Data Backup) ..> (Select Backup Options) : includes
+  (Perform Regular Data Backup) ..> (Execute Data Copy) : includes
+}
+
+note right of (Perform Regular Data Backup)
+  Enables system administrators to
+  perform regular backups to ensure
+  data security and recovery in case
+  of system failures.
+end note
+
+note right of (Execute Data Copy)
+  A new backup is created and stored
+  in a secure location.
+end note
+@enduml

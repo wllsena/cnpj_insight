@@ -1,0 +1,29 @@
+@startuml 02-CompanyInformationSystem
+left to right direction
+skinparam packageStyle rectangle
+
+actor User
+
+rectangle "Company Information System" {
+  User -- (Visualization of Company Details)
+  (Visualization of Company Details) ..> (Perform Search) : includes
+  (Visualization of Company Details) ..> (View Results List) : includes
+  (Visualization of Company Details) ..> (Select Company) : includes
+  (Visualization of Company Details) ..> (Display Company Details) : extends
+}
+
+note right of (Visualization of Company Details)
+  Allows users to view detailed
+  information and reliability index
+  of a specific company after
+  performing a search.
+end note
+
+note right of (Display Company Details)
+  The system displays detailed
+  information such as name,
+  address, opening date, and other
+  relevant information.
+end note
+
+@enduml

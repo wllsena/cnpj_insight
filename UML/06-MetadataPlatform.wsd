@@ -1,0 +1,28 @@
+@startuml 06-MetadataPlatform
+left to right direction
+skinparam packageStyle rectangle
+
+actor "System Administrator" as Admin
+
+rectangle "Metadata Platform" {
+  Admin -- (Observations and Data Management)
+  (Observations and Data Management) ..> (Login to Metadata Platform) : includes
+  (Observations and Data Management) ..> (Access Models) : includes
+  (Observations and Data Management) ..> (View Information) : includes
+  (Observations and Data Management) ..> (Modify Data and Metadata) : includes
+  (Observations and Data Management) ..> (Save Changes) : includes
+}
+
+note right of (Observations and Data Management)
+  Activity performed by the System
+  Administrator for managing data and
+  model metadata.
+end note
+
+note right of (Save Changes)
+  Any changes made by the
+  administrator are saved and reflected
+  in the system.
+end note
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml 01-BusinessSearchSystem
+left to right direction
+skinparam packageStyle rectangle
+
+actor User
+
+rectangle "Company Search System" {
+  User -- (Search by Companies)
+  (Search by Companies) ..> (Enter CNPJ or Corporate Name) : includes
+  (Search by Companies) ..> (Click Search Button) : includes
+  (Search by Companies) ..> (View Company Information) : extends
+}
+
+note right of (Search by Companies)
+  Allows users to perform
+  basic searches for company
+  information using CNPJ or
+  corporate name.
+end note
+
+note right of (View Company Information)
+  The system displays search
+  results based on the provided
+  criteria. Search slowness or
+  incorrect data entry can
+  impact user experience.
+end note
+
+@enduml
