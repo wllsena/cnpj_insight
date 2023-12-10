@@ -1,0 +1,10 @@
+site_name: "CNPJ Insight"
+site_url: "https://wllsena.github.io/cnpj_insight/"
+
+theme:
+  name: "readthedocs"
+
+plugins:
+- search
+- autorefs
+- mkdocstrings

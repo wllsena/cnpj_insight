@@ -1,4 +1,5 @@
-django-bootstrap-form
+beautifulsoup4
+django-bootstrap-form 
 django-bootstrap-v5
 django-dbbackup
 django-crontab
@@ -14,6 +15,9 @@ psycopg2-binary
 elasticsearch
 flake8
 gunicorn
+lxml
+numpy
 python-decouple
+pylint-django
 setuptools
 tqdm

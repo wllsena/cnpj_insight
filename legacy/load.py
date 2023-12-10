@@ -1,10 +1,9 @@
 import csv
 from glob import glob
 from os import path
-from typing import Type
+from typing import Any, List, Tuple, Type
 
 from django.db.models import Model
-
 from tqdm import tqdm
 
 from .models import (
@@ -27,20 +26,25 @@ from .structure import (
     SOCIO_COLUMNS,
 )
 
-#
-
 
 def load_base(
     dataset_path: str,
     model: Type[Model],
-    columns: list[tuple[str, type]],
+    columns: List[Tuple[str, Type[Any]]],
 ) -> None:
+    """Load base data into the model.
+
+    Args:
+        dataset_path (str): Path to the dataset.
+        model (Type[Model]): Django model.
+        columns (List[Tuple[str, Type[Any]]]): List of columns.
+    """
     files = sorted(glob(dataset_path))
 
-    for file_ in files:
-        print(f"load {dataset_path}, file {file_}")
+    for file in files:
+        print(f"Loading {dataset_path}, file {file}")
 
-        with open(file_, "r", encoding="latin1") as csv_file:
+        with open(file, "r", encoding="latin1") as csv_file:
             reader = csv.reader(csv_file, delimiter=";")
 
             for row in tqdm(reader):
@@ -56,14 +60,21 @@ def load_base(
 def load_estabelecimentos(
     dataset_path: str,
     model: Type[Model],
-    columns: list[tuple[str, type]],
+    columns: List[Tuple[str, Type[Any]]],
 ) -> None:
+    """Load establishment data into the model.
+
+    Args:
+        dataset_path (str): Path to the dataset.
+        model (Type[Model]): Django model.
+        columns (List[Tuple[str, Type[Any]]]): List of columns.
+    """
     files = sorted(glob(dataset_path))
 
-    for file_ in files:
-        print(f"load {dataset_path}, file {file_}")
+    for file in files:
+        print(f"Loading {dataset_path}, file {file}")
 
-        with open(file_, "r", encoding="latin1") as csv_file:
+        with open(file, "r", encoding="latin1") as csv_file:
             reader = csv.reader(csv_file, delimiter=";")
 
             for row in tqdm(reader):
@@ -100,6 +111,11 @@ def load_estabelecimentos(
 
 
 def load_dataset(dataset_path: str) -> None:
+    """Load dataset into the models.
+
+    Args:
+        dataset_path (str): Path to the dataset.
+    """
     load_base(path.join(dataset_path, "*PAIS*"), Paises, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*MUNIC"), Municipios, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*QUALS*"), Qualificacoes, BASE_COLUMNS)
@@ -107,11 +123,6 @@ def load_dataset(dataset_path: str) -> None:
     load_base(path.join(dataset_path, "*CNAE*"), CNAEs, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*MOTI*"), Motivos, BASE_COLUMNS)
     load_base(path.join(dataset_path, "*EMPRE*"), Empresas, EMPRESA_COLUMNS)
-    load_estabelecimentos(
-        path.join(dataset_path, "*ESTABELE*"), Estabelecimentos, ESTABELECIMENTO_COLUMNS
-    )
+    load_estabelecimentos(path.join(dataset_path, "*ESTABELE*"), Estabelecimentos, ESTABELECIMENTO_COLUMNS)
     load_base(path.join(dataset_path, "*SIMPLES*"), Simples, SIMPLES_COLUMNS)
     load_base(path.join(dataset_path, "*SOCIO*"), Socios, SOCIO_COLUMNS)
-
-
-#
