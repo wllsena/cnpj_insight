@@ -1,0 +1,24 @@
+digraph "packages_cnpj" {
+rankdir=BT
+charset="utf-8"
+"cnpj" [color="black", label=<cnpj>, shape="box", style="solid"];
+"cnpj.admin" [color="black", label=<cnpj.admin>, shape="box", style="solid"];
+"cnpj.apps" [color="black", label=<cnpj.apps>, shape="box", style="solid"];
+"cnpj.cron" [color="black", label=<cnpj.cron>, shape="box", style="solid"];
+"cnpj.documents" [color="black", label=<cnpj.documents>, shape="box", style="solid"];
+"cnpj.forms" [color="black", label=<cnpj.forms>, shape="box", style="solid"];
+"cnpj.models" [color="black", label=<cnpj.models>, shape="box", style="solid"];
+"cnpj.structure" [color="black", label=<cnpj.structure>, shape="box", style="solid"];
+"cnpj.tests" [color="black", label=<cnpj.tests>, shape="box", style="solid"];
+"cnpj.urls" [color="black", label=<cnpj.urls>, shape="box", style="solid"];
+"cnpj.utils" [color="black", label=<cnpj.utils>, shape="box", style="solid"];
+"cnpj.views" [color="black", label=<cnpj.views>, shape="box", style="solid"];
+"cnpj.admin" -> "cnpj.models" [arrowhead="open", arrowtail="none"];
+"cnpj.documents" -> "cnpj.models" [arrowhead="open", arrowtail="none"];
+"cnpj.structure" -> "cnpj.models" [arrowhead="open", arrowtail="none"];
+"cnpj.urls" -> "cnpj.views" [arrowhead="open", arrowtail="none"];
+"cnpj.utils" -> "cnpj.models" [arrowhead="open", arrowtail="none"];
+"cnpj.views" -> "cnpj.forms" [arrowhead="open", arrowtail="none"];
+"cnpj.views" -> "cnpj.models" [arrowhead="open", arrowtail="none"];
+"cnpj.views" -> "cnpj.utils" [arrowhead="open", arrowtail="none"];
+}
