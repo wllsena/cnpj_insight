@@ -21,6 +21,8 @@ setuptools = "^69.0.2"
 tqdm = "^4.66.1"
 django-bootstrap-v5 = "^1.0.11"
 django-bootstrap-form = "^3.4"
+mkdocs = "^1.5.3"
+mkdocstrings = {version = "^0.24.0", extras = ["python"]}
 
 [build-system]
 requires = ["poetry-core"]
