@@ -1,0 +1,52 @@
+\documentclass{article}
+
+\usepackage{graphicx}
+\usepackage[brazil]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{mathpazo}
+\usepackage[margin=2cm]{geometry}
+\usepackage{minted}
+\usepackage{lmodern}
+
+\title{CNPJ Insight - Relatório}
+\author{Dávila Merieles \and Eduardo Adame \and Kayo Yokoyama \and Lucas Braga}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Introdução}
+
+O projeto CNPJ Insight tem como objetivo analisar os dados de empresas brasileiras disponibilizados pela Receita Federal. 
+
+\section{Descrição do projeto}
+
+\subsection{Estórias de usuário}
+
+\subsection{Casos de uso}
+
+\subsection{Diagrama de classes}
+
+\subsection{Diagrama de pacote}
+
+\subsection{Diagrama de sequência}
+
+\subsection{Diagrama de componentes}
+
+\section{Coleta de dados}
+
+Os dados foram coletados através do site da Receita Federal, no endereço \url{https://dados.gov.br/dados/conjuntos-dados/cadastro-nacional-da-pessoa-juridica---cnpj}.
+
+\section{Como executar}
+
+Para executar o projeto, é necessário ter instalado o \texttt{docker} e o \texttt{docker-compose}. Para executar o projeto, basta executar o comando \texttt{docker-compose -f docker-compose.prod.yml up --build}, que irá construir e executar os containers necessários para o projeto. 
+
+\section{Cobertura de testes}
+
+\section{Documentação}
+
+\section{Conclusão}
+
+\end{document}
