@@ -1,56 +1,56 @@
-from typing import Any, Callable, Type
-
+from typing import Any, Callable, Optional, Type, Union
 from django.db.models import Model
 
-from .models import CNAEs, Empresas, Motivos, Municipios, Naturezas, Paises, Qualificacoes
+from .models import (
+    CNAEs, Empresas, Motivos, Municipios, Naturezas, Paises, Qualificacoes
+)
 
-#
 
-
-def integer(value: Any, _: bool = False) -> int | None:
+def integer(value: Any, _: bool = False) -> Optional[int]:
+    """Convert value to integer if possible, else return None."""
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
-    else:
-        return int(value)
+    return int(value)
 
 
-def float_(value: Any, _: bool = False) -> float | None:
+def float_(value: Any, _: bool = False) -> Optional[float]:
+    """Convert value to float if possible, else return None."""
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
-    else:
-        return float(value.replace(",", "."))
+    return float(value.replace(",", "."))
 
 
-def text(value: Any, _: bool = False) -> str | None:
+def text(value: Any, _: bool = False) -> Optional[str]:
+    """Convert value to string if possible, else return None."""
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
-    else:
-        return value.strip()
+    return value.strip()
 
 
-def char(value: Any, _: bool = False) -> str | None:
+def char(value: Any, _: bool = False) -> Optional[str]:
+    """Convert value to string if possible, else return None."""
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
-    else:
-        return value.strip()
+    return value.strip()
 
 
-def boolean(value: Any, _: bool = False) -> bool | None:
+def boolean(value: Any, _: bool = False) -> Optional[bool]:
+    """Convert value to boolean if possible, else return None."""
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
-    else:
-        return value.strip().lower() in ["s", "sim", "y", "yes", "t", "true", "1"]
+    return value.strip().lower() in ["s", "sim", "y", "yes", "t", "true", "1"]
 
 
-def date(value: Any, _: bool = False) -> str | None:
+def date(value: Any, _: bool = False) -> Optional[str]:
+    """Convert value to date string if possible, else return None."""
     if value is None or value.strip().lower() in ["", "null", "none", "0", "00000000"]:
         return None
-    else:
-        return value.strip()
+    return value.strip()
 
 
-def foreign_key(model: Type[Model], key: str) -> Callable[[Any], Model | int | None]:
-    def get(value: Any, return_pk: bool = False) -> Model | int | None:
+def foreign_key(model: Type[Model], key: str) -> Callable[[Any], Optional[Union[Model, int]]]:
+    """Return a function that gets or creates a model instance."""
+    def get(value: Any, return_pk: bool = False) -> Optional[Union[Model, int]]:
         if value is None or value.strip().lower() in ["", "null", "none"]:
             return None
 
