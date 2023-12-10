@@ -1,5 +1,6 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import RegisterForm
+from .forms import UserRegistrationForm
 from django.db.models import Q
 from .models import (
     CNAEs,
@@ -19,6 +20,9 @@ from .utils import (
     econodata_scrapping,
     confiability_score
 )
+
+from django.contrib.auth.models import User
+from django.forms import Form
 
 # Create home view
 def home(request):
@@ -100,7 +104,7 @@ def register(response: HttpRequest) -> HttpResponse:
     return render(response, "registration/register.html", {"form": form})
 
 
-"""
+
 def profile(response):
 
     if response.user.is_authenticated:
@@ -122,7 +126,7 @@ def search_compare(request, pk):
     context['empresas_list'] = empresas_list
     
     return render(request, 'search_compare.html', context)
-"""
+
 
 def search_compare(request: HttpRequest, pk: int) -> HttpResponse:
     """
@@ -143,7 +147,7 @@ def search_compare(request: HttpRequest, pk: int) -> HttpResponse:
     
     return render(request, 'search_compare.html', context)
 
-def comparision(request, pk, pk2):
+def comparison(request, pk, pk2):
     first_empresa = Empresas.objects.filter(cnpj_basico=pk)[0]
     second_empresa = Empresas.objects.filter(cnpj_basico=pk2)[0]
     context = {
