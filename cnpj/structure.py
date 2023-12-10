@@ -5,58 +5,79 @@ from .models import (
     CNAEs, Empresas, Motivos, Municipios, Naturezas, Paises, Qualificacoes
 )
 
+# Helper functions for data conversion
+
 
 def integer(value: Any, _: bool = False) -> Optional[int]:
     """Convert value to integer if possible, else return None."""
+
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
+
     return int(value)
 
 
 def float_(value: Any, _: bool = False) -> Optional[float]:
     """Convert value to float if possible, else return None."""
+
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
+
     return float(value.replace(",", "."))
 
 
 def text(value: Any, _: bool = False) -> Optional[str]:
     """Convert value to string if possible, else return None."""
+
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
+
     return value.strip()
 
 
 def char(value: Any, _: bool = False) -> Optional[str]:
     """Convert value to string if possible, else return None."""
+
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
+
     return value.strip()
 
 
 def boolean(value: Any, _: bool = False) -> Optional[bool]:
     """Convert value to boolean if possible, else return None."""
+
     if value is None or value.strip().lower() in ["", "null", "none"]:
         return None
+
     return value.strip().lower() in ["s", "sim", "y", "yes", "t", "true", "1"]
 
 
 def date(value: Any, _: bool = False) -> Optional[str]:
     """Convert value to date string if possible, else return None."""
-    if value is None or value.strip().lower() in ["", "null", "none", "0", "00000000"]:
+
+    if value is None or value.strip().lower() in\
+            ["", "null", "none", "0", "00000000"]:
+
         return None
     return value.strip()
 
 
-def foreign_key(model: Type[Model], key: str) -> Callable[[Any], Optional[Union[Model, int]]]:
+def foreign_key(model: Type[Model], key: str) ->\
+     Callable[[Any], Optional[Union[Model, int]]]:
+
     """Return a function that gets or creates a model instance."""
-    def get(value: Any, return_pk: bool = False) -> Optional[Union[Model, int]]:
+
+    def get(value: Any,
+            return_pk: bool = False) -> Optional[Union[Model, int]]:
+
         if value is None or value.strip().lower() in ["", "null", "none"]:
             return None
 
         if return_pk:
             return int(value)
 
+        # Get or create a model instance using the provided key
         instance, _ = model.objects.get_or_create(**{key: value})
 
         return instance

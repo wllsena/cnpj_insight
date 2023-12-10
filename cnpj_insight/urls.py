@@ -23,5 +23,3 @@ urlpatterns = [
     path("", include("cnpj.urls")),
     path('accounts/', include('django.contrib.auth.urls')),
 ]
-
-
