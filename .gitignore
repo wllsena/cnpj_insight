@@ -1,3 +1,4 @@
+*.pem
 *.pyc
 *~
 *__pycache__*
@@ -5,5 +6,7 @@
 *.DS_Store*
 cnpj/dataset/*
 cnpj/clean_dataset/*
+cnpj/migrations
+*.dump
 .vscode/*
 __init__*

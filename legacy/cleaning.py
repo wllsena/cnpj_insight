@@ -81,6 +81,10 @@ conn.commit()
 cur.execute("SELECT COUNT(*) FROM cnpj_estabelecimentos")
 print(cur.fetchall())
 
+
+# Get rid of all the numbers in the values of cnpj_basico in cnpj_empresas
+
+
 # cur.execute("SELECT cep FROM cnpj_estabelecimentos LIMIT 1")
 # print(cur.fetchall())
 

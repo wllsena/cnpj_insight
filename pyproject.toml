@@ -1,59 +1,38 @@
 [tool.poetry]
-name = "cnpj_insight"
-description = ""
+name = "cnpj-insight"
 version = "0.1.0"
-authors = ["William Sena <wllsena@protonmail.com>"]
-readme = "README.org"
-license = ""
+description = ""
+authors = ["Eduardo Adame <eadamesalles@gmail.com>"]
+readme = "README.md"
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.12"
+python = "^3.11"
+beautifulsoup4 = "^4.12.2"
+django-bootstrap-form = "^3.4"
+django-bootstrap-v5 = "^1.0.11"
+django-dbbackup = "^4.0.2"
+django-crontab = "^0.7.1"
+django-cors-headers = "^4.3.1"
 django-elasticsearch-dsl = "^8.0"
 django-elasticsearch-dsl-drf = "^0.22.5"
 django-extensions = "^3.2.3"
 django-stubs = {extras = ["compatible-mypy"], version = "^4.2.7"}
-django = "4.1"
+django = "4.2.3"
 djangorestframework = "^3.14.0"
 djangorestframework-stubs = {extras = ["compatible-mypy"], version = "^3.14.5"}
-elasticsearch = "^8.11.0"
+psycopg2-binary = "^2.9.9"
+elasticsearch = "^8.11.1"
+flake8 = "^6.1.0"
+gunicorn = "^21.2.0"
+lxml = "^4.9.3"
+numpy = "^1.26.2"
 python-decouple = "^3.8"
+pylint-django = "^2.5.5"
 setuptools = "^69.0.2"
 tqdm = "^4.66.1"
-django-bootstrap-v5 = "^1.0.11"
-django-bootstrap-form = "^3.4"
+
+
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[tool.yapf]
-based_on_style = "pep8"
-column_limit = 100
-
-[tool.black]
-line-length = 100
-
-[tool.prettier]
-line_length = 100
-
-[tool.flake8]
-max-line-length = 100
-ignore = ["C0114", "C0115", "C0116", "R0903"]
-
-[tool.pylint]
-max-line-length = 100
-disable = ["C0114", "C0115", "C0116", "R0903"]
-
-[tool.isort]
-line_length = 100
-default_section = "THIRDPARTY"
-known_first_party = "scalascrap"
-known_django = "django"
-sections = ["FUTURE", "STDLIB", "DJANGO", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
-
-[tool.mypy]
-plugins = ["mypy_django_plugin.main", "mypy_drf_plugin.main"]
-ignore_missing_imports = true
-
-[tool.django-stubs]
-django_settings_module = "scalascrap.settings"

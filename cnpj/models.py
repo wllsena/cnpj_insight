@@ -17,13 +17,15 @@ from django.db.models import (
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
-from typing import Optional, List
+from typing import Optional
+
 
 RAZAO_SOCIAL_LENGTH = 150
 SOCIO_LENGTH = 150
 UF_LENGTH = 2
 CPNJ_CPF_SOCIO_LENGTH = 14
 REPRESENTANTE_LEGAL_LENGTH = 11
+
 
 class Paises(Model):
     """Model representing countries."""
@@ -62,7 +64,9 @@ class Naturezas(Model):
 
 
 class CNAEs(Model):
-    """Model representing CNAEs (National Classification of Economic Activities)."""
+    """Model representing CNAEs (National Classification
+    of Economic Activities).
+    """
     codigo = PositiveIntegerField(primary_key=True)
     descricao = TextField(null=True, default=None)
 
@@ -82,9 +86,13 @@ class Motivos(Model):
 class Empresas(Model):
     """Model representing companies."""
     cnpj_basico = PositiveBigIntegerField(primary_key=True)
-    razao_social = CharField(max_length=RAZAO_SOCIAL_LENGTH, null=True, default=None, db_index=True)
-    natureza_juridica = ForeignKey(Naturezas, related_name="empresas", on_delete=PROTECT)
-    qualificacao_resposavel = ForeignKey(Qualificacoes, related_name="empresas", on_delete=PROTECT)
+    razao_social = CharField(max_length=RAZAO_SOCIAL_LENGTH,
+                             null=True, default=None, db_index=True)
+    natureza_juridica = ForeignKey(Naturezas, related_name="empresas",
+                                   on_delete=PROTECT)
+    qualificacao_resposavel = ForeignKey(Qualificacoes,
+                                         related_name="empresas",
+                                         on_delete=PROTECT)
     capital_social = FloatField()
     porte_empresa = PositiveSmallIntegerField(null=True, default=None)
     ente_federativo_responsavel = TextField(null=True, default=None)
@@ -110,10 +118,12 @@ class Estabelecimentos(Model):
     )
     nome_cidade_exterior = TextField(null=True, default=None)
     pais = ForeignKey(
-        Paises, null=True, default=None, related_name="estabelecimentos", on_delete=PROTECT
+        Paises, null=True, default=None, related_name="estabelecimentos",
+        on_delete=PROTECT
     )
     data_inicio_atividade = DateField(null=True, default=None)
-    cnae_fiscal_principal = ForeignKey(CNAEs, related_name="estabelecimentos", on_delete=PROTECT)
+    cnae_fiscal_principal = ForeignKey(CNAEs, related_name="estabelecimentos",
+                                       on_delete=PROTECT)
     cnae_fiscal_secundaria = TextField(null=True, default=None)
     tipo_logradouro = TextField(null=True, default=None)
     logradouro = TextField(null=True, default=None)
@@ -122,7 +132,8 @@ class Estabelecimentos(Model):
     bairro = TextField(null=True, default=None)
     cep = TextField(null=True, default=None)
     uf = CharField(max_length=UF_LENGTH)
-    municipio = ForeignKey(Municipios, related_name="estabelecimentos", on_delete=PROTECT)
+    municipio = ForeignKey(Municipios, related_name="estabelecimentos",
+                           on_delete=PROTECT)
     ddd1 = TextField(null=True, default=None)
     telefone1 = TextField(null=True, default=None)
     ddd2 = TextField(null=True, default=None)
@@ -140,7 +151,8 @@ class Estabelecimentos(Model):
 
 class Simples(Model):
     """Model representing Simples."""
-    cnpj_basico = ForeignKey(Empresas, related_name="simples", primary_key=True, on_delete=PROTECT)
+    cnpj_basico = ForeignKey(Empresas, related_name="simples",
+                             primary_key=True, on_delete=PROTECT)
     opcao_simples = BooleanField()
     data_opcao_simples = DateField(null=True, default=None)
     data_exclusao_simples = DateField(null=True, default=None)
@@ -154,14 +166,20 @@ class Simples(Model):
 
 class Socios(Model):
     """Model representing partners."""
-    cnpj_basico = ForeignKey(Empresas, related_name="socios", on_delete=PROTECT)
+    cnpj_basico = ForeignKey(Empresas, related_name="socios",
+                             on_delete=PROTECT)
     identificador_socio = PositiveSmallIntegerField()
-    nome_socio = CharField(max_length=SOCIO_LENGTH, null=True, default=None, db_index=True)
-    cnpj_cpf_socio = CharField(max_length=CPNJ_CPF_SOCIO_LENGTH, null=True, default=None)
-    qualificacao_socio = ForeignKey(Qualificacoes, related_name="socios", on_delete=PROTECT)
+    nome_socio = CharField(max_length=SOCIO_LENGTH, null=True, default=None,
+                           db_index=True)
+    cnpj_cpf_socio = CharField(max_length=CPNJ_CPF_SOCIO_LENGTH, null=True,
+                               default=None)
+    qualificacao_socio = ForeignKey(Qualificacoes, related_name="socios",
+                                    on_delete=PROTECT)
     data_entrada_sociedade = DateField()
-    pais = ForeignKey(Paises, null=True, default=None, related_name="socios", on_delete=PROTECT)
-    representante_legal = CharField(max_length=REPRESENTANTE_LEGAL_LENGTH, null=True, default=None)
+    pais = ForeignKey(Paises, null=True, default=None, related_name="socios",
+                      on_delete=PROTECT)
+    representante_legal = CharField(max_length=REPRESENTANTE_LEGAL_LENGTH,
+                                    null=True, default=None)
     nome_representante = TextField(null=True, default=None)
     qualificacao_representante_legal = ForeignKey(
         Qualificacoes,
@@ -184,16 +202,14 @@ class Socios(Model):
     def __str__(self) -> str:
         return f"{self.cnpj_basico}({self.nome_socio})"
 
+
 class Account(Model):
     """
     Model representing a user account.
     """
     user: OneToOneField[User] = OneToOneField(User, on_delete=CASCADE)
-    search_history: JSONField[List[str]] = JSONField(null=True, default=list)
-    favorite_list: JSONField[List[str]] = JSONField(null=True, default=list)
-
-    def __str__(self) -> str:
-        return self.user.username
+    search_history: JSONField = JSONField(null=True, default=list)
+    favorite_list: JSONField = JSONField(null=True, default=list)
 
     class Meta:
         """
@@ -203,9 +219,11 @@ class Account(Model):
         """
         verbose_name = 'Conta'
         verbose_name_plural = 'Contas'
-        
+
+
 @receiver(post_save, sender=User)
-def create_user_account(sender: Model, instance: User, created: bool, **kwargs: Optional[dict]) -> None:
+def create_user_account(sender: Model, instance: User, created: bool,
+                        **kwargs: Optional[dict]) -> None:
     """
     Create a user account when a new user is created.
     """
