@@ -12,7 +12,7 @@ then
 fi
 
 echo "Collect static files"
-python manage.py flush --no-input
-python manage.py migrate --run-syncdb
+# python manage.py flush --no-input
+# python manage.py migrate --run-syncdb
 
 exec "$@"

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "dbbackup",
     "django_crontab",
     "corsheaders",
+    "django_elasticsearch_dsl",
 ]
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
