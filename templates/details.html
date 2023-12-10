@@ -4,6 +4,36 @@
 
 {% block content %} 
 
+<style>
+    .confidence-circle {
+        background-color:#fff; 
+        display: inline-block;
+        padding: 10px;
+        border-radius:50%;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        margin: 5px;
+        /*make so that it only has border and not full area*/
+        box-sizing: border-box;
+    }
+
+    .red {
+        border:2.5px solid red;
+        color: black;
+    }
+
+    .yellow {
+        border:2.5px solid orange;
+        color: black;
+    }
+
+    .green {
+        border:2.5px solid green;
+        color: black;
+    }
+</style>
+
 <div class="container">
     <h1 class="text-center mt-5 mb-5">{{ empresa.razao_social }}</h1>
     <div class="row mb-5">
@@ -20,6 +50,17 @@
                     <li class="list-group-item"><strong>Ente Federativo Responsável:</strong> {{ empresa.ente_federativo_responsavel }}</li>
                     <li class="list-group-item"><strong>Razão Social Limpa:</strong> {{ empresa.razao_social_limpa }}</li>
                 </ul>
+                <br>
+
+                {% if confiability == "Baixo" %}
+                <h2>Confiabilidade: <div class="confidence-circle red text-center">Baixa</div></h2> 
+                {% elif confiability == "Médio" %}
+                <h2>Confiabilidade: <div class="confidence-circle yellow text-center">Média</div></h2> 
+                {% else %}
+                <h2>Confiabilidade: <div class="confidence-circle green text-center">Alta</div></h2> 
+                {% endif %}
+
+
                 <a href="{% url 'search_compare' empresa.cnpj_basico %}" class="btn btn-primary mt-3 mb-3 "> Comparar com outra empresa</a>
             </div>
             <button class="btn btn-primary" onclick="window.print()">Imprimir</button>

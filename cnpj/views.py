@@ -17,6 +17,8 @@ import requests
 from bs4 import BeautifulSoup
 from lxml import etree 
 import numpy as np
+import datetime
+import re
 
 
 def calcular_dv_cnpj(cnpj_base):
@@ -86,6 +88,77 @@ def econodata_scrapping(cnpj_base):
 
     return dados_empresa
 
+# Function to make a confiability score for a company
+def confiability_score(cnpj_base):
+    dados_empresa_econo = econodata_scrapping(cnpj_base)
+    dados_empresa_gov = Empresas.objects.filter(cnpj_basico=cnpj_base).values()
+
+    # Get todays date
+    hoje = datetime.date.today()
+
+    # Get the company date of creation
+    data_abertura = dados_empresa_econo['data_abertura']
+    data_abertura = datetime.datetime.strptime(data_abertura, '%d/%m/%Y').date()
+
+    # Make data_abertura subtracted by hoje in days
+    grau_1 = (hoje - data_abertura).days
+
+    capital = dados_empresa_gov[0]['capital_social']
+
+    porte = dados_empresa_gov[0]['porte_empresa']
+
+    # Get the number of employees
+    n_funcionarios = dados_empresa_econo['n_funcionarios']
+    n_funcionarios = re.findall(r'\d+', n_funcionarios)
+    n_funcionarios = max(n_funcionarios)
+
+    # Make a score based on the company age
+    if grau_1 <= 365:
+        grau_1 = 1
+    elif grau_1 <= 365*3:
+        grau_1 = 2
+    elif grau_1 <= 365*5:
+        grau_1 = 3
+    elif grau_1 <= 365*10:
+        grau_1 = 4
+    else:
+        grau_1 = 5
+
+    # Make a score based on the number of employees
+    if int(n_funcionarios) <= 10:
+        grau_2 = 1
+    elif int(n_funcionarios) <= 100:
+        grau_2 = 2
+    elif int(n_funcionarios) <= 1000:
+        grau_2 = 3
+    elif int(n_funcionarios) <= 5000:
+        grau_2 = 4
+    else:
+        grau_2 = 5
+
+    # Make a score based on the company capital
+    if capital <= 100:
+        grau_3 = 1
+    elif capital <= 1000:
+        grau_3 = 2
+    elif capital <= 10000:
+        grau_3 = 3
+    elif capital <= 100000:
+        grau_3 = 4
+    else:
+        grau_3 = 5
+
+    score = (grau_1 + grau_2 + grau_3 + porte)/4
+
+    if score < 2:
+        score = "Baixo"
+    elif score < 3.5:
+        score = "Médio"
+    else:
+        score = "Alto"
+
+    return score
+
 
 # Create home view
 def home(request):
@@ -111,11 +184,13 @@ def analysis(request, pk):
     empresa = Empresas.objects.get(cnpj_basico=pk)
     estabelecimentos = Estabelecimentos.objects.filter(cnpj_basico_id=pk)
     scrapping = econodata_scrapping(pk)
+    confiability = confiability_score(pk)
 
     context = {
         'empresa': empresa,
         'estabelecimentos': estabelecimentos,
         'scrapping': scrapping,
+        'confiability': confiability,
     }
 
     if request.user.is_authenticated:
