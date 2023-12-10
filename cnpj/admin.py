@@ -3,7 +3,12 @@ from django.contrib import admin
 from django.contrib.auth.models import User
 from django.contrib.auth.admin import UserAdmin
 from django.db.models import Model
-from .models import Paises, Municipios, Qualificacoes, Naturezas, CNAEs, Estabelecimentos, Motivos, Account
+from .models import (
+    Paises, Municipios, Qualificacoes,
+    Naturezas, CNAEs, Estabelecimentos,
+    Motivos, Account
+)
+
 
 @admin.register(Paises)
 class PaisesAdmin(admin.ModelAdmin):
@@ -64,7 +69,8 @@ class CNAEsAdmin(admin.ModelAdmin):
 class EstabelecimentosAdmin(admin.ModelAdmin):
     """Admin interface for Estabelecimentos model."""
 
-    list_display: Tuple[str, str, str] = ('cnpj_basico_id', 'nome_fantasia', 'municipio')
+    list_display: Tuple[str, str, str] = ('cnpj_basico_id', 'nome_fantasia',
+                                          'municipio')
     list_per_page: int = 10
 
 

@@ -6,6 +6,7 @@ from lxml import etree
 from .models import Empresas
 from bs4 import BeautifulSoup
 
+
 """
 Versão 0
 def calcular_dv_cnpj(cnpj_base):
@@ -43,6 +44,7 @@ def calcular_dv_cnpj(cnpj_base):
     # Retorna o CNPJ completo com os dois dígitos verificadores
     return result
 """
+
 
 def calculate_dv_cnpj(cnpj_base) -> str:
     """
@@ -119,7 +121,10 @@ def econodata_scrapping(cnpj_base: int) -> dict:
     """
     cnpj_completo = calculate_dv_cnpj(cnpj_base)
 
-    website = requests.get(f"https://www.econodata.com.br/consulta-empresa/{cnpj_completo}")
+    website = requests.get(
+        f"https://www.econodata.com.br/consulta-empresa/{cnpj_completo}",
+        timeout=10
+        )
 
     soup = BeautifulSoup(website.content, 'html.parser')
 
@@ -128,20 +133,48 @@ def econodata_scrapping(cnpj_base: int) -> dict:
     # find element with id="__nuxt"
 
     empresa_data = {
-        "cnpj_completo": dom.xpath('//*[@id="receita-section"]/div[2]/div[2]/div[1]/div/div[2]/p')[0].text,
-        "nome_fantasia": dom.xpath('//*[@id="__nuxt"]/div/div[1]/div/div[1]/div/div/div[3]/div[2]/h1')[0].text,
-        "atividade_economica": dom.xpath('//*[@id="detalhes-section"]/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div/div[1]/u/a')[0].text,
-        "porte": dom.xpath('//*[@id="detalhes-section"]/div[2]/div[2]/div[3]/div[2]/div[2]/p')[0].text,
-        "cnae": dom.xpath('//*[@id="detalhes-section"]/div[2]/div[2]/div[2]/div[2]/div[2]/div/div/u/a')[0].text,
-        "n_funcionarios": dom.xpath('//*[@id="detalhes-section"]/div[2]/div[2]/div[4]/div[2]/div[2]/p')[0].text,
-        "data_abertura": dom.xpath('//*[@id="receita-section"]/div[2]/div[2]/div[4]/div/div[2]/p')[0].text,
-        "situacao": dom.xpath('//*[@id="receita-section"]/div[2]/div[2]/div[6]/div/div[2]/p')[0].text,
-        "natureza": dom.xpath('//*[@id="receita-section"]/div[2]/div[2]/div[5]/div/div[2]/p')[0].text,
-        "cep": dom.xpath('//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[4]/span')[0].text,
-        "rua": dom.xpath('//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[1]/span')[0].text,
-        "bairro": dom.xpath('//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[2]/span')[0].text,
-        "cidade": dom.xpath('//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[3]/span')[0].text,
-        "pais": dom.xpath('//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[5]/span')[0].text
+        "cnpj_completo": dom.xpath(
+            '//*[@id="receita-section"]/div[2]/div[2]/div[1]/div/div[2]/p'
+        )[0].text,
+        "nome_fantasia": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[1]/div/div/div[3]/div[2]/h1'
+        )[0].text,
+        "atividade_economica": dom.xpath(
+            '//*[@id="detalhes-section"]/div[2]/div[2]/div[1]/div[2]/div[2]/div/div/div/div[1]/u/a'
+        )[0].text,
+        "porte": dom.xpath(
+            '//*[@id="detalhes-section"]/div[2]/div[2]/div[3]/div[2]/div[2]/p'
+        )[0].text,
+        "cnae": dom.xpath(
+            '//*[@id="detalhes-section"]/div[2]/div[2]/div[2]/div[2]/div[2]/div/div/u/a'
+        )[0].text,
+        "n_funcionarios": dom.xpath(
+            '//*[@id="detalhes-section"]/div[2]/div[2]/div[4]/div[2]/div[2]/p'
+        )[0].text,
+        "data_abertura": dom.xpath(
+            '//*[@id="receita-section"]/div[2]/div[2]/div[4]/div/div[2]/p'
+        )[0].text,
+        "situacao": dom.xpath(
+            '//*[@id="receita-section"]/div[2]/div[2]/div[6]/div/div[2]/p'
+        )[0].text,
+        "natureza": dom.xpath(
+            '//*[@id="receita-section"]/div[2]/div[2]/div[5]/div/div[2]/p'
+        )[0].text,
+        "cep": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[4]/span'
+        )[0].text,
+        "rua": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[1]/span'
+        )[0].text,
+        "bairro": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[2]/span'
+        )[0].text,
+        "cidade": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[3]/span'
+        )[0].text,
+        "pais": dom.xpath(
+            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[2]/div[2]/div[5]/span'
+        )[0].text
     }
 
     return empresa_data

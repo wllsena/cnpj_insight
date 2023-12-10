@@ -60,6 +60,12 @@ Access: [http://localhost:8000](http://localhost:8000)
     options:
         heading_level: 4
 
+### Utils
+
+::: cnpj.utils
+    options:
+        heading_level: 4
+
 ### Views
 
 ::: cnpj.views

@@ -7,7 +7,7 @@ django_elasticsearch_dsl
 django-elasticsearch-dsl-drf
 django-extensions
 django-stubs[compatible-mypy]
-django
+Django==4.2.3
 djangorestframework
 djangorestframework-stubs[compatible-mypy]
 elasticsearch
@@ -15,5 +15,6 @@ flake8
 lxml
 numpy
 python-decouple
+pylint-django
 setuptools
 tqdm

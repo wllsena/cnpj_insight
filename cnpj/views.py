@@ -1,6 +1,5 @@
 from django.forms import Form
 from django.db.models import Q, QuerySet
-from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 
@@ -14,7 +13,7 @@ def home(request: HttpRequest) -> HttpResponse:
     Display a random selection of 10 companies on the home page.
     """
     empresas: QuerySet = Empresas.objects.order_by('?')[:10]
-    context: dict= {
+    context: dict = {
         'empresas': empresas,
     }
 
@@ -122,8 +121,9 @@ def profile(response: HttpRequest) -> HttpResponse:
     if response.user.is_authenticated:
         search_history: list = response.user.account.search_history
         empresas = Empresas.objects.filter(cnpj_basico__in=search_history)
+        empresas = sorted(empresas, key=lambda empresa: -search_history.index(empresa.cnpj_basico))
         
-    return render(response, "profile.html", {"empresas":empresas})
+    return render(response, "profile.html", {"empresas": empresas})
 
 
 """
@@ -148,14 +148,14 @@ def search_compare(request: HttpRequest, pk: int) -> HttpResponse:
     Allow users to compare a selected company with others based on a search query.
     """
     first_empresa: Empresas | None = Empresas.objects.filter(cnpj_basico=pk).first()
-    context: dict= {
+    context: dict = {
         'first_empresa': first_empresa,
     }
 
     if request.GET.get('q'):
         query: str | None = request.GET.get('q')
         empresas_list: QuerySet = Empresas.objects.filter(
-            Q(cnpj_basico__icontains=query) | 
+            Q(cnpj_basico__icontains=query) |
             Q(razao_social__icontains=query)
         )
         context['empresas_list'] = empresas_list

@@ -1,5 +1,6 @@
 from django.core.management import call_command
 
+
 def backup():
     """Backup the database."""
     try:
