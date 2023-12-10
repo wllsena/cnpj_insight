@@ -5,7 +5,7 @@
 {% block content %} 
 
 <div class="container">
-    <h1 class="text-center mt-5 mb-5">Detalhes da empresa: {{ empresa.razao_social }}</h1>
+    <h1 class="text-center mt-5 mb-5">{{ empresa.razao_social }}</h1>
     <div class="row mb-5">
         <div class="col-md-6">
             <h2>Dados da Empresa</h2>
@@ -26,7 +26,7 @@
         </div>
         
         <div class="col-md-6">
-            <h2>Estabelecimentos</h2>
+            <h2>Dados complementares</h2>
                 <div class="details">
                     {% if estabelecimentos%}
                     {% for estabelecimento in estabelecimentos %}
@@ -59,8 +59,24 @@
                         <li class="list-group-item"><strong>Data Situação Especial:</strong> {{ estabelecimento.data_situacao_especial }}</li>
                     </ul>
                     {% endfor %}
+                    {% elif scrapping %}
+                    <ul class="list-group mb-3">
+                        <li class="list-group-item"><strong>Nome Fantasia:</strong> {{ scrapping.nome_fantasia }}</li>
+                        <li class="list-group-item"><strong>Atividade Econômica:</strong> {{ scrapping.atividade_economica }}</li>
+                        <li class="list-group-item"><strong>Porte:</strong> {{ scrapping.porte }}</li>
+                        <li class="list-group-item"><strong>CNAE:</strong> {{ scrapping.cnae }}</li>
+                        <li class="list-group-item"><strong>N. de funcionários:</strong> {{ scrapping.n_funcionarios }}</li>
+                        <li class="list-group-item"><strong>Data de Abertura:</strong> {{ scrapping.data_abertura }}</li>
+                        <li class="list-group-item"><strong>Situação Cadastral:</strong> {{ scrapping.situacao }}</li>
+                        <li class="list-group-item"><strong>Natureza Jurídica:</strong> {{ scrapping.natureza }}</li>
+                        <li class="list-group-item"><strong>CEP:</strong> {{ scrapping.cep }}</li>
+                        <li class="list-group-item"><strong>Rua:</strong> {{ scrapping.rua }}</li>
+                        <li class="list-group-item"><strong>Bairro:</strong> {{ scrapping.bairro }}</li>
+                        <li class="list-group-item"><strong>Cidade:</strong> {{ scrapping.cidade }}</li>
+                        <li class="list-group-item"><strong>País:</strong> {{ scrapping.pais }}</li>                        
+                    </ul>
                     {% else %}
-                    <p>Não há estabelecimentos cadastrados para esta empresa nesse banco de dados.</p>
+                    <p>Não há dados cadastrados para esta empresa nos bancos de dados procurados.</p>
                     {% endif %}
                 </div>
             </div>

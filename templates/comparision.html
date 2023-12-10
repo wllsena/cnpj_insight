@@ -11,41 +11,67 @@
 
             <h3> Dados da empresa </h3>
 
-            <ul>
-                <li><strong>CNPJ Completo:</strong> {{ first_empresa.cnpj_basico }}</li>
-                <li><strong>Razão Social:</strong> {{ first_empresa.razao_social }}</li>
-                <li><strong>Natureza Jurídica:</strong> {{ first_empresa.natureza_juridica.descricao }}</li>
-                <li><strong>Qualificação do Responsável:</strong> {{ first_empresa.qualificacao_responsavel.descricao }}</li>
-                <li><strong>Capital Social:</strong> {{ first_empresa.capital_social }}</li>
-                <li><strong>Porte da Empresa:</strong> {{ first_empresa.porte_empresa }}</li>
-                <li><strong>Ente Federativo Responsável:</strong> {{ first_empresa.ente_federativo_responsavel }}</li>
-                <li><strong>Razão Social Limpa:</strong> {{ first_empresa.razao_social_limpa }}</li>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>CNPJ Completo:</strong> {{ first_empresa.cnpj_basico }}</li>
+                <li class="list-group-item"><strong>Razão Social:</strong> {{ first_empresa.razao_social }}</li>
+                <li class="list-group-item"><strong>Natureza Jurídica:</strong> {{ first_empresa.natureza_juridica.descricao }}</li>
+                <li class="list-group-item"><strong>Qualificação do Responsável:</strong> {{ first_empresa.qualificacao_responsavel.descricao }}</li>
+                <li class="list-group-item"><strong>Capital Social:</strong> {{ first_empresa.capital_social }}</li>
+                <li class="list-group-item"><strong>Porte da Empresa:</strong> {{ first_empresa.porte_empresa }}</li>
+                <li class="list-group-item"><strong>Ente Federativo Responsável:</strong> {{ first_empresa.ente_federativo_responsavel }}</li>
+                <li class="list-group-item"><strong>Razão Social Limpa:</strong> {{ first_empresa.razao_social_limpa }}</li>
+                <li class="list-group-item"><strong>Nome Fantasia:</strong> {{ first_empresa_scrapping.nome_fantasia }}</li>
+                <li class="list-group-item"><strong>Atividade Econômica:</strong> {{ first_empresa_scrapping.atividade_economica }}</li>
+                <li class="list-group-item"><strong>Porte:</strong> {{ first_empresa_scrapping.porte }}</li>
+                <li class="list-group-item"><strong>CNAE:</strong> {{ first_empresa_scrapping.cnae }}</li>
+                <li class="list-group-item"><strong>N. de funcionários:</strong> {{ first_empresa_scrapping.n_funcionarios }}</li>
+                <li class="list-group-item"><strong>Data de Abertura:</strong> {{ first_empresa_scrapping.data_abertura }}</li>
+                <li class="list-group-item"><strong>Situação Cadastral:</strong> {{ first_empresa_scrapping.situacao }}</li>
+                <li class="list-group-item"><strong>Natureza Jurídica:</strong> {{ first_empresa_scrapping.natureza }}</li>
+                <li class="list-group-item"><strong>CEP:</strong> {{ first_empresa_scrapping.cep }}</li>
+                <li class="list-group-item"><strong>Rua:</strong> {{ first_empresa_scrapping.rua }}</li>
+                <li class="list-group-item"><strong>Bairro:</strong> {{ first_empresa_scrapping.bairro }}</li>
+                <li class="list-group-item"><strong>Cidade:</strong> {{ first_empresa_scrapping.cidade }}</li>
+                <li class="list-group-item"><strong>País:</strong> {{ first_empresa_scrapping.pais }}</li>  
             </ul>
-
             <a href="{% url 'search_compare' first_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ first_empresa.razao_social }} com outra empresa.</a>
+        
         </div>
-            <div class="col-md-6 mt-5 mb-3">
+        <div class="col-md-6 mt-5 mb-3">
 
             <h2> Análise da empresa: {{ second_empresa.razao_social }} </h2>
 
             <h3> Dados da empresa </h3>
 
-            <ul>
-                <li><strong>CNPJ Completo:</strong> {{ second_empresa.cnpj_basico }}</li>
-                <li><strong>Razão Social:</strong> {{ second_empresa.razao_social }}</li>
-                <li><strong>Natureza Jurídica:</strong> {{ second_empresa.natureza_juridica.descricao }}</li>
-                <li><strong>Qualificação do Responsável:</strong> {{ second_empresa.qualificacao_responsavel.descricao }}</li>
-                <li><strong>Capital Social:</strong> {{ second_empresa.capital_social }}</li>
-                <li><strong>Porte da Empresa:</strong> {{ second_empresa.porte_empresa }}</li>
-                <li><strong>Ente Federativo Responsável:</strong> {{ second_empresa.ente_federativo_responsavel }}</li>
-                <li><strong>Razão Social Limpa:</strong> {{ second_empresa.razao_social_limpa }}</li>
+            <ul class="list-group mb-3">
+                <li class="list-group-item"><strong>CNPJ Completo:</strong> {{ second_empresa.cnpj_basico }}</li>
+                <li class="list-group-item"><strong>Razão Social:</strong> {{ second_empresa.razao_social }}</li>
+                <li class="list-group-item"><strong>Natureza Jurídica:</strong> {{ second_empresa.natureza_juridica.descricao }}</li>
+                <li class="list-group-item"><strong>Qualificação do Responsável:</strong> {{ second_empresa.qualificacao_responsavel.descricao }}</li>
+                <li class="list-group-item"><strong>Capital Social:</strong> {{ second_empresa.capital_social }}</li>
+                <li class="list-group-item"><strong>Porte da Empresa:</strong> {{ second_empresa.porte_empresa }}</li>
+                <li class="list-group-item"><strong>Ente Federativo Responsável:</strong> {{ second_empresa.ente_federativo_responsavel }}</li>
+                <li class="list-group-item"><strong>Razão Social Limpa:</strong> {{ second_empresa.razao_social_limpa }}</li>
+                <li class="list-group-item"><strong>Nome Fantasia:</strong> {{ second_empresa_scrapping.nome_fantasia }}</li>
+                <li class="list-group-item"><strong>Atividade Econômica:</strong> {{ second_empresa_scrapping.atividade_economica }}</li>
+                <li class="list-group-item"><strong>Porte:</strong> {{ second_empresa_scrapping.porte }}</li>
+                <li class="list-group-item"><strong>CNAE:</strong> {{ second_empresa_scrapping.cnae }}</li>
+                <li class="list-group-item"><strong>N. de funcionários:</strong> {{ second_empresa_scrapping.n_funcionarios }}</li>
+                <li class="list-group-item"><strong>Data de Abertura:</strong> {{ second_empresa_scrapping.data_abertura }}</li>
+                <li class="list-group-item"><strong>Situação Cadastral:</strong> {{ second_empresa_scrapping.situacao }}</li>
+                <li class="list-group-item"><strong>Natureza Jurídica:</strong> {{ second_empresa_scrapping.natureza }}</li>
+                <li class="list-group-item"><strong>CEP:</strong> {{ second_empresa_scrapping.cep }}</li>
+                <li class="list-group-item"><strong>Rua:</strong> {{ second_empresa_scrapping.rua }}</li>
+                <li class="list-group-item"><strong>Bairro:</strong> {{ second_empresa_scrapping.bairro }}</li>
+                <li class="list-group-item"><strong>Cidade:</strong> {{ second_empresa_scrapping.cidade }}</li>
+                <li class="list-group-item"><strong>País:</strong> {{ second_empresa_scrapping.pais }}</li>                        
             </ul>
             
-            <a href="{% url 'search_compare' second_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ second_empresa.razao_social }} com outra empresa.</a>
+            <a href="{% url 'search_compare' second_empresa.cnpj_basico %}" class="btn btn-primary">Comparar {{ second_empresa.razao_social }} com outra empresa.</a>    
             
         </div>
-        <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
-</div>
+    </div>
+    <button class="btn btn-primary" onclick="window.print()">Imprimir</button>
 </div>
 
 {% endblock %}
