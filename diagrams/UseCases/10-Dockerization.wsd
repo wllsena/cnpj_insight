@@ -1,0 +1,25 @@
+@startuml 10-Dockerization
+left to right direction
+skinparam packageStyle rectangle
+
+actor "System Administrator" as Admin
+'actor System'
+
+rectangle "Dockerization and Deployment" {
+  Admin -- (Start Dockerization Process)
+  (Start Dockerization Process) ..> (Package Application in Docker Containers) : includes
+  (Start Dockerization Process) ..> (Build Containers Locally or in Build Environment) : includes
+  (Start Dockerization Process) ..> (Store Containers in Registry) : includes
+  (Start Dockerization Process) ..> (Deploy Containers on Servers) : includes
+  (Start Dockerization Process) ..> (Start Application in Containers) : includes
+}
+
+note right of (Start Dockerization Process)
+  This use case describes the process
+  of packaging the application into
+  Docker containers and deploying
+  it to ensure a scalable and consistent
+  deployment.
+end note
+
+@enduml

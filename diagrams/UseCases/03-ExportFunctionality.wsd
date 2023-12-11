@@ -1,0 +1,33 @@
+@startuml 03-ExportFunctionality
+left to right direction
+skinparam packageStyle rectangle
+
+actor User
+
+rectangle "Export Functionality" {
+  User -- (Export Page)
+  (Export Page) ..> (Perform Search and Access Details) : includes
+  (Export Page) ..> (Find Export Option) : includes
+  (Export Page) ..> (Select Export Format) : includes
+  (Export Page) ..> (Generate Exported File) : extends
+  (Export Page) ..> (Download File to Local Device) : extends
+}
+
+note right of (Export Page)
+  Allows users to export a detailed
+  information page of a company to a
+  file format, such as PDF.
+end note
+
+note right of (Generate Exported File)
+  The system generates an exported
+  file with detailed company
+  information.
+end note
+
+note right of (Download File to Local Device)
+  The user downloads the exported
+  file to their local device.
+end note
+
+@enduml

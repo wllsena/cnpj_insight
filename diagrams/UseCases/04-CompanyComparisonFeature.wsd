@@ -1,0 +1,29 @@
+@startuml 04-CompanyComparisonFeature
+left to right direction
+skinparam packageStyle rectangle
+
+actor User
+
+rectangle "Company Comparison Feature" {
+  User -- (Compare Companies)
+  (Compare Companies) ..> (Perform Search) : includes
+  (Compare Companies) ..> (View Search Results) : includes
+  (Compare Companies) ..> (Select First Company) : includes
+  (Compare Companies) ..> (Choose to Compare with Another Company) : includes
+  (Compare Companies) ..> (Select Second Company) : includes
+  (Compare Companies) ..> (View Comparative Information) : extends
+}
+
+note right of (Compare Companies)
+  Enables users to compare
+  detailed information between two
+  companies to facilitate decision-making.
+end note
+
+note right of (View Comparative Information)
+  The system presents the
+  information of companies side by side
+  for comparison.
+end note
+
+@enduml

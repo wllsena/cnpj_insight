@@ -1,0 +1,27 @@
+@startuml 05-TrustworthinessScoreGeneration
+left to right direction
+skinparam packageStyle rectangle
+
+actor System
+
+rectangle "Trustworthiness Score Generation" {
+  System -- (Generate Trustworthiness Information)
+  (Generate Trustworthiness Information) ..> (Analyze Data) : includes
+  (Generate Trustworthiness Information) ..> (Calculate Trustworthiness Score) : includes
+  (Generate Trustworthiness Information) ..> (Assign Trustworthiness Level) : includes
+  (Generate Trustworthiness Information) ..> (Display Trustworthiness Score with Company Details) : extends
+}
+
+note right of (Generate Trustworthiness Information)
+  Generates a reliability score for
+  each company using available
+  data in the database.
+end note
+
+note right of (Display Trustworthiness Score with Company Details)
+  The calculated trustworthiness
+  score is displayed alongside
+  other company details.
+end note
+
+@enduml
