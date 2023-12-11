@@ -46,7 +46,6 @@ def calcular_dv_cnpj(cnpj_base):
     return result
 """
 
-
 def calculate_dv_cnpj(cnpj_base: int) -> str:
     """
     Calculates the verification digits (DV) for a given CNPJ base.
