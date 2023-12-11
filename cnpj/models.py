@@ -17,6 +17,8 @@ from django.db.models import (
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.db import models
+from abc import ABC, abstractmethod
 from typing import Optional
 
 
@@ -25,6 +27,17 @@ SOCIO_LENGTH = 150
 UF_LENGTH = 2
 CPNJ_CPF_SOCIO_LENGTH = 14
 REPRESENTANTE_LEGAL_LENGTH = 11
+
+
+# Template for some models
+class BaseModel(ABC):
+    """Abstract base class representing common structure for models."""
+    codigo = models.PositiveIntegerField(primary_key=True)
+    descricao = models.TextField(null=True, default=None)
+
+    @abstractmethod
+    def __str__(self) -> str:
+        return f"{self.codigo}"
 
 
 class Paises(Model):
