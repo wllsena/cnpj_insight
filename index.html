@@ -109,6 +109,8 @@
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Account">Account</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.BaseModel">BaseModel</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.CNAEs">CNAEs</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#cnpj.models.Empresas">Empresas</a>
@@ -1221,6 +1223,57 @@ verbose_name_plural: Human readable plural name for the model.</p>
   </div>
 
 </div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.models.BaseModel" class="doc doc-heading">
+          <code>BaseModel</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="abc.ABC">ABC</span></code></p>
+
+  
+      <p>Abstract base class representing common structure for models.</p>
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/models.py</code></summary>
+              <pre class="highlight"><code class="language-python">class BaseModel(ABC):
+    """Abstract base class representing common structure for models."""
+    codigo = models.PositiveIntegerField(primary_key=True)
+    descricao = models.TextField(null=True, default=None)
+
+    @abstractmethod
+    def __str__(self) -&gt; str:
+        return f"{self.codigo}"</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
 
 
 
@@ -4310,5 +4363,5 @@ TOTAL                         568    168    70%
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2023-12-11 00:04:43.688305+00:00
+Build Date UTC : 2023-12-11 01:17:42.809420+00:00
 -->
