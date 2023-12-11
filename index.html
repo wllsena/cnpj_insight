@@ -49,6 +49,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#development">Development</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stop">Stop</a>
+    </li>
         </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#api-reference">API Reference</a>
@@ -153,7 +155,13 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#tests">Tests</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#cnpj.tests">tests</a>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.tests.test_urls">test_urls</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.tests.test_urls.TestUrls">TestUrls</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.tests.test_views">test_views</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#cnpj.tests.test_views.TestViews">TestViews</a>
     </li>
         </ul>
     </li>
@@ -191,6 +199,8 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#coverage">Coverage</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -219,14 +229,23 @@
               
                 <h1 id="welcome-to-the-cnpj-insight-project">Welcome to the CNPJ Insight project!</h1>
 <h2 id="how-to-run">How to run</h2>
+<p>If you want to run locally, you can download the SQLite database in <a href="https://drive.google.com/file/d/1Rpl5RAMi0dN9nUSKiFoBFUoAU5mxIRbJ/view?usp=sharing">this drive</a>, otherwise, you can check out the cloud-deployed version in <a href="http://20.195.169.122:8000/">http://20.195.169.122:8000/</a>.</p>
+<p>Just let the database file in the root folder of the project. If you want to start a new database, you can migrate.</p>
 <h3 id="production">Production</h3>
-<pre><code class="language-bash">sudo docker-compose -f docker-compose.prod.yml up --build
+<pre><code class="language-bash">docker-compose -f docker-compose.prod.yml up --build
 </code></pre>
-<p>Access: <a href="http://localhost:1337">http://localhost:1337</a></p>
+<p>Access: http://localhost:1337</p>
 <h3 id="development">Development</h3>
-<pre><code class="language-bash">sudo docker-compose -f docker-compose.yml up --build
+<pre><code class="language-bash">docker-compose -f docker-compose.yml up --build
 </code></pre>
-<p>Access: <a href="http://localhost:8000">http://localhost:8000</a></p>
+<p>Access: http://localhost:8000</p>
+<p>In order to run the tests you need to run the following command:</p>
+<pre><code class="language-bash">docker-compose -f docker-compose.yml run --rm web python manage.py test
+</code></pre>
+<p>If you have any problems with the docker-compose, try to using the branch <code>dockerless</code>.</p>
+<h3 id="stop">Stop</h3>
+<pre><code class="language-bash">docker-compose down -v
+</code></pre>
 <h2 id="api-reference">API Reference</h2>
 <h3 id="admin">Admin</h3>
 
@@ -2150,7 +2169,7 @@ def create_user_account(sender: Model, instance: User, created: bool,
 
 
 
-<a id="cnpj.tests"></a>
+<a id="cnpj.tests.test_urls"></a>
   <div class="doc doc-contents first">
 
   
@@ -2163,6 +2182,798 @@ def create_user_account(sender: Model, instance: User, created: bool,
 
 
 
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.tests.test_urls.TestUrls" class="doc doc-heading">
+          <code>TestUrls</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.test.SimpleTestCase">SimpleTestCase</span></code></p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/tests/test_urls.py</code></summary>
+              <pre class="highlight"><code class="language-python">class TestUrls(SimpleTestCase):
+    def test_home_url_resolves(self):
+        """
+        Test if the home URL resolves to the correct view function.
+        """
+        url = reverse("home")
+        self.assertEquals(resolve(url).func, home)
+
+    def test_search_results_url_resolves(self):
+        """
+        Test if the search_results URL resolves to the correct view function.
+        """
+        url = reverse("search_results")
+        self.assertEquals(resolve(url).func, search_results)
+
+    def test_analysis_url_resolves(self):
+        """
+        Test if the analysis URL with an argument resolves to the correct view function.
+        """
+        url = reverse("analysis", args=[1])
+        self.assertEquals(resolve(url).func, analysis)
+
+    def test_register_url_resolves(self):
+        """
+        Test if the register URL resolves to the correct view function.
+        """
+        url = reverse("register")
+        self.assertEquals(resolve(url).func, register)
+
+    def test_profile_url_resolves(self):
+        """
+        Test if the profile URL resolves to the correct view function.
+        """
+        url = reverse("profile")
+        self.assertEquals(resolve(url).func, profile)
+
+    def test_search_compare_url_resolves(self):
+        """
+        Test if the search_compare URL with an argument resolves to the correct view function.
+        """
+        url = reverse("search_compare", args=[1])
+        self.assertEquals(resolve(url).func, search_compare)
+
+    def test_comparison_url_resolves(self):
+        """
+        Test if the comparison URL with two arguments resolves to the correct view function.
+        """
+        url = reverse("comparison", args=[1, 2])
+        self.assertEquals(resolve(url).func, comparison)</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_urls.TestUrls.test_analysis_url_resolves" class="doc doc-heading">
+          <code class="highlight language-python">test_analysis_url_resolves()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test if the analysis URL with an argument resolves to the correct view function.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_urls.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_analysis_url_resolves(self):
+    """
+    Test if the analysis URL with an argument resolves to the correct view function.
+    """
+    url = reverse("analysis", args=[1])
+    self.assertEquals(resolve(url).func, analysis)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_urls.TestUrls.test_comparison_url_resolves" class="doc doc-heading">
+          <code class="highlight language-python">test_comparison_url_resolves()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test if the comparison URL with two arguments resolves to the correct view function.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_urls.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_comparison_url_resolves(self):
+    """
+    Test if the comparison URL with two arguments resolves to the correct view function.
+    """
+    url = reverse("comparison", args=[1, 2])
+    self.assertEquals(resolve(url).func, comparison)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_urls.TestUrls.test_home_url_resolves" class="doc doc-heading">
+          <code class="highlight language-python">test_home_url_resolves()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test if the home URL resolves to the correct view function.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_urls.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_home_url_resolves(self):
+    """
+    Test if the home URL resolves to the correct view function.
+    """
+    url = reverse("home")
+    self.assertEquals(resolve(url).func, home)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_urls.TestUrls.test_profile_url_resolves" class="doc doc-heading">
+          <code class="highlight language-python">test_profile_url_resolves()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test if the profile URL resolves to the correct view function.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_urls.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_profile_url_resolves(self):
+    """
+    Test if the profile URL resolves to the correct view function.
+    """
+    url = reverse("profile")
+    self.assertEquals(resolve(url).func, profile)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_urls.TestUrls.test_register_url_resolves" class="doc doc-heading">
+          <code class="highlight language-python">test_register_url_resolves()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test if the register URL resolves to the correct view function.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_urls.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_register_url_resolves(self):
+    """
+    Test if the register URL resolves to the correct view function.
+    """
+    url = reverse("register")
+    self.assertEquals(resolve(url).func, register)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_urls.TestUrls.test_search_compare_url_resolves" class="doc doc-heading">
+          <code class="highlight language-python">test_search_compare_url_resolves()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test if the search_compare URL with an argument resolves to the correct view function.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_urls.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_search_compare_url_resolves(self):
+    """
+    Test if the search_compare URL with an argument resolves to the correct view function.
+    """
+    url = reverse("search_compare", args=[1])
+    self.assertEquals(resolve(url).func, search_compare)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_urls.TestUrls.test_search_results_url_resolves" class="doc doc-heading">
+          <code class="highlight language-python">test_search_results_url_resolves()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test if the search_results URL resolves to the correct view function.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_urls.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_search_results_url_resolves(self):
+    """
+    Test if the search_results URL resolves to the correct view function.
+    """
+    url = reverse("search_results")
+    self.assertEquals(resolve(url).func, search_results)</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<a id="cnpj.tests.test_views"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-class">
+
+
+
+
+<h4 id="cnpj.tests.test_views.TestViews" class="doc doc-heading">
+          <code>TestViews</code>
+
+
+</h4>
+
+
+  <div class="doc doc-contents ">
+          <p class="doc doc-class-bases">
+            Bases: <code><span title="django.test.TestCase">TestCase</span></code></p>
+
+
+            <details class="quote">
+              <summary>Source code in <code>cnpj/tests/test_views.py</code></summary>
+              <pre class="highlight"><code class="language-python">class TestViews(TestCase):
+
+    def test_home_GET(self):
+        """
+        Test the GET request for the home view.
+
+        This test verifies that the home view returns a response with a status code of 200.
+        It also checks that the correct templates are used: 'home.html', 'base.html', 'navbar.html', and 'footer.html'.
+        """
+        client = Client()
+
+        response = client.get(reverse('home'))
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'home.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')
+
+    def test_search_results_GET(self):
+        """
+        Test the GET request for the search results view.
+
+        This test verifies that the search results view returns a response with a status code of 200.
+        It also checks that the correct templates are used: 'search_results.html', 'base.html', 'navbar.html', and 'footer.html'.
+        """
+        client = Client()
+
+        response = client.get(reverse('search_results'))
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search_results.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')
+
+    def test_analysis_GET(self):
+        """
+        Test the GET request for the analysis view.
+
+        This test verifies that the analysis view returns a response with a status code of 200.
+        It also checks that the correct templates are used: 'details.html', 'base.html', 'navbar.html', and 'footer.html'.
+        """
+        client = Client()
+
+        non_existing_pk = 999
+
+        response = client.get(reverse('analysis', args=[non_existing_pk]))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'details.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')
+
+    def test_register_GET(self):
+        """
+        Test the GET request for the register view.
+
+        This test verifies that the register view returns a response with a status code of 200.
+        It also checks that the correct templates are used: 'registration/register.html', 'base.html', 'navbar.html', and 'footer.html'.
+        """
+        client = Client()
+
+        response = client.get(reverse('register'))
+
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'registration/register.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')
+
+    def test_profile_GET(self):
+        """
+        Test the GET request for the profile view.
+
+        This test verifies that the profile view returns a response with a status code of 200.
+        It also checks that the correct templates are used: 'profile.html', 'base.html', 'navbar.html', and 'footer.html'.
+        """
+        client = Client()
+
+        # Use reverse without any arguments since 'profile' URL pattern doesn't take any
+        response = client.get(reverse('profile'))
+
+        # Check that the response status code is 200
+        self.assertEquals(response.status_code, 200)
+
+        self.assertTemplateUsed(response, 'profile.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')
+
+    def test_search_compare_GET(self):
+        """
+        Test the GET request for the search compare view.
+
+        This test verifies that the search compare view returns a response with a status code of 200.
+        It also checks that the correct templates are used: 'search_compare.html', 'base.html', 'navbar.html', and 'footer.html'.
+        """
+        client = Client()
+
+        non_existing_pk = 12345678
+
+        # Use reverse with kwargs to create the URL
+        url = reverse('search_compare', kwargs={"pk": non_existing_pk})
+
+        response = client.get(url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'search_compare.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')
+
+    def test_comparison_GET(self):
+        """
+        Test the GET request for the comparison view.
+
+        This test verifies that the comparison view returns a response with a status code of 200.
+        It also checks that the correct templates are used: 'comparison.html', 'base.html', 'navbar.html', and 'footer.html'.
+        """
+        client = Client()
+
+        non_existing_pk1 = 12345678
+        non_existing_pk2 = 87654321
+
+        response = client.get(reverse('comparison',
+                                        kwargs={'pk1': non_existing_pk1,
+                                                'pk2': non_existing_pk2}))
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'comparison.html')
+        self.assertTemplateUsed(response, 'base.html')
+        self.assertTemplateUsed(response, 'navbar.html')
+        self.assertTemplateUsed(response, 'footer.html')</code></pre>
+            </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_views.TestViews.test_analysis_GET" class="doc doc-heading">
+          <code class="highlight language-python">test_analysis_GET()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the GET request for the analysis view.</p>
+<p>This test verifies that the analysis view returns a response with a status code of 200.
+It also checks that the correct templates are used: 'details.html', 'base.html', 'navbar.html', and 'footer.html'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_analysis_GET(self):
+    """
+    Test the GET request for the analysis view.
+
+    This test verifies that the analysis view returns a response with a status code of 200.
+    It also checks that the correct templates are used: 'details.html', 'base.html', 'navbar.html', and 'footer.html'.
+    """
+    client = Client()
+
+    non_existing_pk = 999
+
+    response = client.get(reverse('analysis', args=[non_existing_pk]))
+    self.assertEquals(response.status_code, 200)
+    self.assertTemplateUsed(response, 'details.html')
+    self.assertTemplateUsed(response, 'base.html')
+    self.assertTemplateUsed(response, 'navbar.html')
+    self.assertTemplateUsed(response, 'footer.html')</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_views.TestViews.test_comparison_GET" class="doc doc-heading">
+          <code class="highlight language-python">test_comparison_GET()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the GET request for the comparison view.</p>
+<p>This test verifies that the comparison view returns a response with a status code of 200.
+It also checks that the correct templates are used: 'comparison.html', 'base.html', 'navbar.html', and 'footer.html'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_comparison_GET(self):
+    """
+    Test the GET request for the comparison view.
+
+    This test verifies that the comparison view returns a response with a status code of 200.
+    It also checks that the correct templates are used: 'comparison.html', 'base.html', 'navbar.html', and 'footer.html'.
+    """
+    client = Client()
+
+    non_existing_pk1 = 12345678
+    non_existing_pk2 = 87654321
+
+    response = client.get(reverse('comparison',
+                                    kwargs={'pk1': non_existing_pk1,
+                                            'pk2': non_existing_pk2}))
+    self.assertEquals(response.status_code, 200)
+    self.assertTemplateUsed(response, 'comparison.html')
+    self.assertTemplateUsed(response, 'base.html')
+    self.assertTemplateUsed(response, 'navbar.html')
+    self.assertTemplateUsed(response, 'footer.html')</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_views.TestViews.test_home_GET" class="doc doc-heading">
+          <code class="highlight language-python">test_home_GET()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the GET request for the home view.</p>
+<p>This test verifies that the home view returns a response with a status code of 200.
+It also checks that the correct templates are used: 'home.html', 'base.html', 'navbar.html', and 'footer.html'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_home_GET(self):
+    """
+    Test the GET request for the home view.
+
+    This test verifies that the home view returns a response with a status code of 200.
+    It also checks that the correct templates are used: 'home.html', 'base.html', 'navbar.html', and 'footer.html'.
+    """
+    client = Client()
+
+    response = client.get(reverse('home'))
+
+    self.assertEquals(response.status_code, 200)
+    self.assertTemplateUsed(response, 'home.html')
+    self.assertTemplateUsed(response, 'base.html')
+    self.assertTemplateUsed(response, 'navbar.html')
+    self.assertTemplateUsed(response, 'footer.html')</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_views.TestViews.test_profile_GET" class="doc doc-heading">
+          <code class="highlight language-python">test_profile_GET()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the GET request for the profile view.</p>
+<p>This test verifies that the profile view returns a response with a status code of 200.
+It also checks that the correct templates are used: 'profile.html', 'base.html', 'navbar.html', and 'footer.html'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_profile_GET(self):
+    """
+    Test the GET request for the profile view.
+
+    This test verifies that the profile view returns a response with a status code of 200.
+    It also checks that the correct templates are used: 'profile.html', 'base.html', 'navbar.html', and 'footer.html'.
+    """
+    client = Client()
+
+    # Use reverse without any arguments since 'profile' URL pattern doesn't take any
+    response = client.get(reverse('profile'))
+
+    # Check that the response status code is 200
+    self.assertEquals(response.status_code, 200)
+
+    self.assertTemplateUsed(response, 'profile.html')
+    self.assertTemplateUsed(response, 'base.html')
+    self.assertTemplateUsed(response, 'navbar.html')
+    self.assertTemplateUsed(response, 'footer.html')</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_views.TestViews.test_register_GET" class="doc doc-heading">
+          <code class="highlight language-python">test_register_GET()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the GET request for the register view.</p>
+<p>This test verifies that the register view returns a response with a status code of 200.
+It also checks that the correct templates are used: 'registration/register.html', 'base.html', 'navbar.html', and 'footer.html'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_register_GET(self):
+    """
+    Test the GET request for the register view.
+
+    This test verifies that the register view returns a response with a status code of 200.
+    It also checks that the correct templates are used: 'registration/register.html', 'base.html', 'navbar.html', and 'footer.html'.
+    """
+    client = Client()
+
+    response = client.get(reverse('register'))
+
+    self.assertEquals(response.status_code, 200)
+    self.assertTemplateUsed(response, 'registration/register.html')
+    self.assertTemplateUsed(response, 'base.html')
+    self.assertTemplateUsed(response, 'navbar.html')
+    self.assertTemplateUsed(response, 'footer.html')</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_views.TestViews.test_search_compare_GET" class="doc doc-heading">
+          <code class="highlight language-python">test_search_compare_GET()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the GET request for the search compare view.</p>
+<p>This test verifies that the search compare view returns a response with a status code of 200.
+It also checks that the correct templates are used: 'search_compare.html', 'base.html', 'navbar.html', and 'footer.html'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_search_compare_GET(self):
+    """
+    Test the GET request for the search compare view.
+
+    This test verifies that the search compare view returns a response with a status code of 200.
+    It also checks that the correct templates are used: 'search_compare.html', 'base.html', 'navbar.html', and 'footer.html'.
+    """
+    client = Client()
+
+    non_existing_pk = 12345678
+
+    # Use reverse with kwargs to create the URL
+    url = reverse('search_compare', kwargs={"pk": non_existing_pk})
+
+    response = client.get(url)
+    self.assertEquals(response.status_code, 200)
+    self.assertTemplateUsed(response, 'search_compare.html')
+    self.assertTemplateUsed(response, 'base.html')
+    self.assertTemplateUsed(response, 'navbar.html')
+    self.assertTemplateUsed(response, 'footer.html')</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h5 id="cnpj.tests.test_views.TestViews.test_search_results_GET" class="doc doc-heading">
+          <code class="highlight language-python">test_search_results_GET()</code>
+
+</h5>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Test the GET request for the search results view.</p>
+<p>This test verifies that the search results view returns a response with a status code of 200.
+It also checks that the correct templates are used: 'search_results.html', 'base.html', 'navbar.html', and 'footer.html'.</p>
+
+          <details class="quote">
+            <summary>Source code in <code>cnpj/tests/test_views.py</code></summary>
+            <pre class="highlight"><code class="language-python">def test_search_results_GET(self):
+    """
+    Test the GET request for the search results view.
+
+    This test verifies that the search results view returns a response with a status code of 200.
+    It also checks that the correct templates are used: 'search_results.html', 'base.html', 'navbar.html', and 'footer.html'.
+    """
+    client = Client()
+
+    response = client.get(reverse('search_results'))
+
+    self.assertEquals(response.status_code, 200)
+    self.assertTemplateUsed(response, 'search_results.html')
+    self.assertTemplateUsed(response, 'base.html')
+    self.assertTemplateUsed(response, 'navbar.html')
+    self.assertTemplateUsed(response, 'footer.html')</code></pre>
+          </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
 
 
 
@@ -2344,6 +3155,9 @@ str: The reliability score of the company, categorized as
     empresa_data_econo: dict = econodata_scrapping(cnpj_base)
     empresa_data_gov: Union[dict, None] = \
         Empresas.objects.filter(cnpj_basico=cnpj_base).values().first()
+
+    if empresa_data_gov is None:
+        return "Baixo"
 
     # Get today's date
     today: datetime.date = datetime.date.today()
@@ -2533,60 +3347,75 @@ str: The reliability score of the company, categorized as
     soup = BeautifulSoup(website.content, 'html.parser')
 
     dom = etree.HTML(str(soup), parser=etree.HTMLParser(encoding='utf-8'))
-
-    # find element with id="__nuxt"
-
-    empresa_data = {
-        "cnpj_completo": dom.xpath(
-            '//*[@id="receita-section"]/div[2]/div[2]/div[1]/div/div[2]/p'
-        )[0].text,
-        "nome_fantasia": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[1]/div/div/div[3]/div[2]/h1'
-        )[0].text,
-        "atividade_economica": dom.xpath(
-            '//*[@id="detalhes-section"]/div[2]/div[2]/div[1]/div[2]/\
-                div[2]/div/div/div/div[1]/u/a'
-        )[0].text,
-        "porte": dom.xpath(
-            '//*[@id="detalhes-section"]/div[2]/div[2]/div[3]/div[2]/div[2]/p'
-        )[0].text,
-        "cnae": dom.xpath(
-            '//*[@id="detalhes-section"]/div[2]/div[2]/div[2]/div[2]/\
-                div[2]/div/div/u/a'
-        )[0].text,
-        "n_funcionarios": dom.xpath(
-            '//*[@id="detalhes-section"]/div[2]/div[2]/div[4]/div[2]/div[2]/p'
-        )[0].text,
-        "data_abertura": dom.xpath(
-            '//*[@id="receita-section"]/div[2]/div[2]/div[4]/div/div[2]/p'
-        )[0].text,
-        "situacao": dom.xpath(
-            '//*[@id="receita-section"]/div[2]/div[2]/div[6]/div/div[2]/p'
-        )[0].text,
-        "natureza": dom.xpath(
-            '//*[@id="receita-section"]/div[2]/div[2]/div[5]/div/div[2]/p'
-        )[0].text,
-        "cep": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[4]/span'
-        )[0].text,
-        "rua": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[1]/span'
-        )[0].text,
-        "bairro": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[2]/span'
-        )[0].text,
-        "cidade": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[3]/span'
-        )[0].text,
-        "pais": dom.xpath(
-            '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
-                div[2]/div[2]/div[5]/span'
-        )[0].text
-    }
+    try:
+        empresa_data = {
+            "cnpj_completo": dom.xpath(
+                '//*[@id="receita-section"]/div[2]/div[2]/div[1]/div/div[2]/p'
+            )[0].text,
+            "nome_fantasia": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[1]/div/div/div[3]/div[2]/h1'
+            )[0].text,
+            "atividade_economica": dom.xpath(
+                '//*[@id="detalhes-section"]/div[2]/div[2]/div[1]/div[2]/\
+                    div[2]/div/div/div/div[1]/u/a'
+            )[0].text,
+            "porte": dom.xpath(
+                '//*[@id="detalhes-section"]/div[2]/div[2]/div[3]/div[2]/div[2]/p'
+            )[0].text,
+            "cnae": dom.xpath(
+                '//*[@id="detalhes-section"]/div[2]/div[2]/div[2]/div[2]/\
+                    div[2]/div/div/u/a'
+            )[0].text,
+            "n_funcionarios": dom.xpath(
+                '//*[@id="detalhes-section"]/div[2]/div[2]/div[4]/div[2]/div[2]/p'
+            )[0].text,
+            "data_abertura": dom.xpath(
+                '//*[@id="receita-section"]/div[2]/div[2]/div[4]/div/div[2]/p'
+            )[0].text,
+            "situacao": dom.xpath(
+                '//*[@id="receita-section"]/div[2]/div[2]/div[6]/div/div[2]/p'
+            )[0].text,
+            "natureza": dom.xpath(
+                '//*[@id="receita-section"]/div[2]/div[2]/div[5]/div/div[2]/p'
+            )[0].text,
+            "cep": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[4]/span'
+            )[0].text,
+            "rua": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[1]/span'
+            )[0].text,
+            "bairro": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[2]/span'
+            )[0].text,
+            "cidade": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[3]/span'
+            )[0].text,
+            "pais": dom.xpath(
+                '//*[@id="__nuxt"]/div/div[1]/div/div[2]/div[2]/div/div[1]/\
+                    div[2]/div[2]/div[5]/span'
+            )[0].text
+        }
+    except IndexError:
+        empresa_data = {
+            "cnpj_completo": None,
+            "nome_fantasia": None,
+            "atividade_economica": None,
+            "porte": None,
+            "cnae": None,
+            "n_funcionarios": None,
+            "data_abertura": None,
+            "situacao": None,
+            "natureza": None,
+            "cep": None,
+            "rua": None,
+            "bairro": None,
+            "cidade": None,
+            "pais": None,
+        }
 
     return empresa_data</code></pre>
           </details>
@@ -2697,7 +3526,7 @@ str: The reliability score of the company, categorized as
 </table>
           <details class="quote">
             <summary>Source code in <code>cnpj/views.py</code></summary>
-            <pre class="highlight"><code class="language-python">def analysis(request: HttpRequest, pk: int) -&gt; HttpResponse:
+            <pre class="highlight"><code class="language-python">def analysis(request, pk: int) -&gt; HttpResponse:
     """
     View function for analyzing details of a company.
 
@@ -2710,7 +3539,11 @@ str: The reliability score of the company, categorized as
     """
 
     # Fetch the company information from the database
-    empresa: Empresas = Empresas.objects.get(cnpj_basico=pk)
+    empresa: Empresas | None = \
+        Empresas.objects.filter(cnpj_basico=pk).first()
+
+    if empresa is None:
+        return render(request, 'details.html', {})
 
     # Fetch related establishments from the database
     estabelecimentos: QuerySet = \
@@ -2845,27 +3678,31 @@ str: The reliability score of the company, categorized as
     second_empresa: Empresas | None = \
         Empresas.objects.filter(cnpj_basico=pk2).first()
 
-    # Fetch web scraping data for the first company
-    first_empresa_scrapping: dict = econodata_scrapping(pk1)
+    if first_empresa and second_empresa:
 
-    # Fetch web scraping data for the second company
-    second_empresa_scrapping: dict = econodata_scrapping(pk2)
+        # Fetch web scraping data for the first company
+        first_empresa_scrapping: dict = econodata_scrapping(pk1)
 
-    # Calculate reliability score for the first company
-    first_empresa_confiability = confiability_score(pk1)
+        # Fetch web scraping data for the second company
+        second_empresa_scrapping: dict = econodata_scrapping(pk2)
 
-    # Calculate reliability score for the second company
-    second_empresa_confiability = confiability_score(pk2)
+        # Calculate reliability score for the first company
+        first_empresa_confiability = confiability_score(pk1)
 
-    # Prepare the context data for rendering the template
-    context: dict = {
-        'first_empresa': first_empresa,
-        'second_empresa': second_empresa,
-        'first_empresa_scrapping': first_empresa_scrapping,
-        'second_empresa_scrapping': second_empresa_scrapping,
-        'first_empresa_confiability': first_empresa_confiability,
-        'second_empresa_confiability': second_empresa_confiability,
-    }
+        # Calculate reliability score for the second company
+        second_empresa_confiability = confiability_score(pk2)
+
+        # Prepare the context data for rendering the template
+        context: dict = {
+            'first_empresa': first_empresa,
+            'second_empresa': second_empresa,
+            'first_empresa_scrapping': first_empresa_scrapping,
+            'second_empresa_scrapping': second_empresa_scrapping,
+            'first_empresa_confiability': first_empresa_confiability,
+            'second_empresa_confiability': second_empresa_confiability,
+        }
+    else:
+        context: dict = {}
 
     # Render the comparison template with the context data
     return render(request, 'comparison.html', context)</code></pre>
@@ -2941,7 +3778,7 @@ str: The reliability score of the company, categorized as
 </table>
           <details class="quote">
             <summary>Source code in <code>cnpj/views.py</code></summary>
-            <pre class="highlight"><code class="language-python">def home(request: HttpRequest) -&gt; HttpResponse:
+            <pre class="highlight"><code class="language-python">def home(request) -&gt; HttpResponse:
     """
     Display a random selection of 10 companies on the home page.
 
@@ -3247,7 +4084,7 @@ with others based on a search query.</p>
 </table>
           <details class="quote">
             <summary>Source code in <code>cnpj/views.py</code></summary>
-            <pre class="highlight"><code class="language-python">def search_compare(request: HttpRequest, pk: int) -&gt; HttpResponse:
+            <pre class="highlight"><code class="language-python">def search_compare(request, pk) -&gt; HttpResponse:
     """
     Allow users to compare a selected company
     with others based on a search query.
@@ -3264,7 +4101,13 @@ with others based on a search query.</p>
         Empresas.objects.filter(cnpj_basico=pk).first()
 
     # Prepare the context data for rendering the template
+    # if first_empresa is not None:
+        # Prepare the context data for rendering the template
     context: dict = {'first_empresa': first_empresa}
+    # else:
+    #     # If the first_empresa is None, set context to an empty dictionary
+    #     solver_empresa = Empresas.objects.order_by('?').first()
+    #     context: dict = {'first_empresa': solver_empresa}
 
     # Check if a search query is provided
     if request.GET.get('q'):
@@ -3390,7 +4233,40 @@ with others based on a search query.</p>
 
   </div>
 
-</div>
+</div><h2 id="coverage">Coverage</h2>
+<p>See in detail the coverage in <a href="https://github.com/wllsena/cnpj_insight/blob/main/coverage_report.pdf">coverage_report.pdf</a>.</p>
+<pre><code>Name                        Stmts   Miss  Cover   Missing
+---------------------------------------------------------
+cnpj/__init__.py                0      0   100%
+cnpj/admin.py                  60      0   100%
+cnpj/apps.py                    4      0   100%
+cnpj/cron.py                    6      6     0%   1-9
+cnpj/documents.py              15      0   100%
+cnpj/forms.py                   8      0   100%
+cnpj/models.py                124     12    90%   36, 45, 54, 63, 74, 83, 104, 149, 164, 203, 230-231
+cnpj/structure.py              41     41     0%   1-142
+cnpj/tests/__init__.py          0      0   100%
+cnpj/tests/test_forms.py        0      0   100%
+cnpj/tests/test_models.py       0      0   100%
+cnpj/tests/test_urls.py        25      0   100%
+cnpj/tests/test_views.py       69      0   100%
+cnpj/urls.py                    3      0   100%
+cnpj/utils.py                  83     71    14%   61-90, 117-197, 212-286
+cnpj/views.py                  72     23    68%   124-147, 173-180, 216-222, 282-291, 337-349
+cnpj_insight/__init__.py        0      0   100%
+cnpj_insight/asgi.py            9      9     0%   10-34
+cnpj_insight/settings.py       29      0   100%
+cnpj_insight/urls.py            4      0   100%
+cnpj_insight/wsgi.py            4      4     0%   10-14
+manage.py                      12      2    83%   12-13
+media/__init__.py               0      0   100%
+static/__init__.py              0      0   100%
+staticfiles/__init__.py         0      0   100%
+templates/__init__.py           0      0   100%
+---------------------------------------------------------
+TOTAL                         568    168    70%
+
+</code></pre>
               
             </div>
           </div><footer>
@@ -3434,5 +4310,5 @@ with others based on a search query.</p>
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2023-12-10 19:08:29.504674+00:00
+Build Date UTC : 2023-12-11 00:04:43.688305+00:00
 -->
